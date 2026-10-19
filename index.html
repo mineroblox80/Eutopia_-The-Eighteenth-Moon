@@ -32,6 +32,9 @@ h1{font-size:clamp(1.8rem,8vw,2.6rem);line-height:1.1;font-weight:400;margin:0 0
 .bars{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin:8px 0}.bar{display:flex;flex-direction:column;align-items:flex-start;font:600 .62rem system-ui,sans-serif;letter-spacing:.1em;color:var(--mut);gap:2px;text-align:left}.bar i{width:100%;height:6px;border-radius:4px;background:#ffffff1a;position:relative;overflow:hidden}.bar i::after{content:"";position:absolute;inset:0;width:var(--w);background:linear-gradient(90deg,#9bdcff,#e9d5a2);transform-origin:left;animation:fillb 1.6s .7s both}
 .fwp{position:fixed;width:4px;height:4px;border-radius:50%;z-index:9;pointer-events:none;animation:fwb 1.3s ease-out forwards}
 .lv .ln{font:italic 400 1rem/1.4 Georgia,serif;letter-spacing:0;color:var(--gold);max-width:92%;margin:8px auto}@media(orientation:landscape) and (max-height:520px){.lv .ln{font-size:.8rem;margin:2px auto}}
+#tm{margin-right:12px;color:var(--gold);font:600 .72rem system-ui,sans-serif;letter-spacing:.12em;font-variant-numeric:tabular-nums;opacity:.9}#tm.fin{color:#fff;text-shadow:0 0 8px var(--gold)}
+.hud{white-space:nowrap}.hud>span:first-child{display:flex;min-width:0;align-items:center}#loc{overflow:hidden;text-overflow:ellipsis}
+@media(orientation:portrait){.art{flex:0 0 auto;height:clamp(130px,26vh,240px);min-height:0}#rt{display:flex;flex-direction:column;flex:1;min-height:0;overflow-y:auto;gap:8px;padding-top:14px}.box{margin-top:0;min-height:0;flex:none}#tx{max-height:none}.ch{margin:0 0 4px}.b{padding:10px 14px;min-height:42px}#app.mp .art{flex:1;height:auto;min-height:240px}#app.mp #rt,#app.wide #rt{flex:none;overflow:visible}#app.wide .art{flex:1;height:auto;min-height:150px}#app.wide .art.paper{flex:none;height:60vh;min-height:0}}
 @keyframes spin{to{transform:rotate(360deg)}}@keyframes pop{from{transform:scale(.6);opacity:0}}@keyframes fillb{from{transform:scaleX(0)}}@keyframes fwb{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
 .pz{width:100%;padding:8px;display:flex;flex-direction:column;gap:8px;align-items:center}.pz .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}.pzb{padding:8px;min-height:38px;text-align:center}.code{font:700 1.8rem/1 monospace;letter-spacing:.35em;color:var(--gold);text-shadow:0 0 14px var(--gold)}.code.sm{font:italic 1rem/1.5 Georgia,serif;letter-spacing:0;text-align:center}.st2{font-size:2.2rem;background:#12203f;border:1px solid var(--line);border-radius:14px;padding:6px;opacity:.55;cursor:pointer}.st2.on{opacity:1;transform:scale(1.08);box-shadow:0 0 22px #fff8}
 .dl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px;white-space:normal}.dl button{background:#34567e;color:#fff;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-size:.9rem;cursor:pointer}
@@ -77,13 +80,13 @@ const $=s=>document.querySelector(s),K="eutopia18_v2",TOTAL=18,RM=matchMedia("(p
 const GIFT="Happy birthday, Anuva. This chest holds one more surprise — ask Mahmud for it.";
 /* ✏️ EDIT: the reward for finding every secret */
 const WISH="ONE (1) ROYAL WISH, redeemable any time. Terms and conditions are suspiciously vague.";
-const def=()=>({node:"lib",items:[],found:[],line:"",st:"",done:false,began:false,at:"lib",g:0,gs:0,mute:false,all:false,moon:false});
+const def=()=>({node:"lib",items:[],found:[],line:"",st:"",done:false,began:false,at:"lib",g:0,gs:0,mute:false,all:false,moon:false,t:0,fin:0});
 let S=load(),au=null,mu=null,tm=null,tt=null,lines=[],li=0,typing=false,full="",cb=null,nc=0;
 function load(){try{return{...def(),...JSON.parse(localStorage.getItem(K))}}catch(e){return def()}}
 function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
 const has=k=>S.found.includes(k)||S.items.includes(k);
 function ac(){try{au=au||new(window.AudioContext||window.webkitAudioContext)();au.resume()}catch(e){}}
-function tone(f,t=0,d=.4,v=.04){if(S.mute||!au)return;try{const n=au.currentTime+t,o=au.createOscillator(),g=au.createGain();o.frequency.value=f;g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(v,n+.04);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g);g.connect(au.destination);o.start(n);o.stop(n+d+.05)}catch(e){}}
+function tone(f,t=0,d=.4,v=.04){if(S.mute||!au)return;try{const n=au.currentTime+t,o=au.createOscillator(),g=au.createGain();o.frequency.value=f;g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(Math.min(v*3,.25),n+.04);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g);g.connect(au.destination);o.start(n);o.stop(n+d+.05)}catch(e){}}
 const P=[262,294,330,392,440,523];
 function music(){clearInterval(mu);mu=setInterval(()=>{tone(P[Math.random()*6|0]/2,0,2.2,.025);if(Math.random()<.5)tone(P[Math.random()*6|0],.7,1.6,.018)},2300)}
 document.addEventListener("pointerdown",()=>{if(!au){ac();music()}});
@@ -91,18 +94,23 @@ function toast(m){const e=$("#toast");e.textContent=m;e.classList.add("on");clea
 for(let i=0;i<60;i++){const s=document.createElement("i");s.className="sd";s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${-Math.random()*4}s;animation-duration:${2.5+Math.random()*4}s`;$("#sky").appendChild(s)}
 for(let i=0;i<9;i++){const f=document.createElement("i");f.className="fy";f.style.cssText=`left:${Math.random()*100}%;animation-duration:${14+Math.random()*14}s;animation-delay:${-Math.random()*20}s`;$("#sky").appendChild(f)}
 [["4s",11],["13s",17]].forEach(([d,t])=>{const s=document.createElement("i");s.className="sh";s.style.cssText=`animation-delay:${d};animation-duration:${t}s`;$("#sky").appendChild(s)});
-$("#app").innerHTML=`<div class="hud"><span id="loc"></span><span><span id="hs"></span> <button class="sm" id="bm" aria-label="Toggle sound"></button></span></div><div id="art" class="art"></div><div id="rt"><div id="box" class="box"><div class="nm" id="nm"></div><div id="tx"></div><i id="ar">▼</i></div><div id="ch" class="ch"></div></div>`;
+$("#app").innerHTML=`<div class="hud"><span><b id="tm" hidden></b><span id="loc"></span></span><span><span id="hs"></span> <button class="sm" id="bm" aria-label="Toggle sound"></button></span></div><div id="art" class="art"></div><div id="rt"><div id="box" class="box"><div class="nm" id="nm"></div><div id="tx"></div><i id="ar">▼</i></div><div id="ch" class="ch"></div></div>`;
 const ch=$("#ch");
 function hud(){$("#hs").textContent=(S.l?"🧸 ":"")+(has("okey")?"🔑 ":"")+(has("lantern")?"🏮 ":"")+(has("key")?"🗝️ ":"")+"✦ "+S.found.length+"/"+TOTAL;$("#bm").textContent=S.mute?"🔇":"🔊"}
 $("#bm").onclick=()=>{S.mute=!S.mute;save();hud()};
-function art(bg,sym){const a=$("#art");a.className="art "+bg;a.innerHTML=sym?`<span class="sym" aria-hidden="true">${sym}</span>`:"";$("#tint").dataset.t=bg;$("#box").hidden=false;$("#app").classList.remove("wide");hud();return a}
+function art(bg,sym){const a=$("#art");a.className="art "+bg;a.innerHTML=sym?`<span class="sym" aria-hidden="true">${sym}</span>`:"";$("#tint").dataset.t=bg;$("#box").hidden=false;$("#app").classList.remove("wide","mp");hud();return a}
 function end(){clearTimeout(tm);$("#tx").textContent=full;typing=false;if(li>=lines.length){const c=cb;cb=null;if(c)c()}else $("#ar").style.opacity=1}
 function nxt(){if(li>=lines.length)return;const[w,t]=lines[li++],n=$("#nm");n.textContent=w;n.style.display=w?"":"none";n.classList.toggle("pl",w==="Anuva");n.classList.toggle("lb",w==="Labiba");$("#tx").classList.toggle("nar",!w);full=emo(t);typing=true;$("#ar").style.opacity=0;clearTimeout(tm);if(RM){end();return}let i=0;const cs=Array.from(full);const tick=()=>{i++;$("#tx").textContent=cs.slice(0,i).join("")+"▌";if(i>=cs.length){end();return}const c=cs[i-1];if(i%3===0)tone(820+Math.random()*160,0,.04,.008);tm=setTimeout(tick,/[.!?…”]/.test(c)?340:/[,;:—]/.test(c)?170:36)};tick()}
 function say(L,c){lines=L;li=0;cb=c||null;nxt()}
 $("#box").onclick=()=>{if(typing)end();else nxt()};
 function btn(t,f,p){const b=document.createElement("button");b.className="b"+(p?" p":"");b.textContent=t;b.onclick=f;ch.appendChild(b)}
-function find(id){if(has(id))return;S.found.push(id);save();hud();tone(660,0,.3);tone(880,.1,.3);tone(1174,.2,.4);if(S.found.length>=TOTAL&&!S.all){S.all=true;save();tone(1046,.5,1);toast("✦ Every secret found! Something has appeared on the map…")}else toast("✦ Secret discovered! "+S.found.length+"/"+TOTAL)}
-function show(id){(F[id]||scene)(id)}
+function find(id){if(has(id))return;S.found.push(id);save();hud();tone(660,0,.3);tone(880,.1,.3);tone(1174,.2,.4);if(S.found.length>=TOTAL&&!S.all){S.all=true;S.fin=S.t;save();tone(1046,.5,1);toast("✦ Every secret found! Something has appeared on the map…")}else toast("✦ Secret discovered! "+S.found.length+"/"+TOTAL)}
+let last=Date.now(),run=false,tc=0;
+function tmFmt(ms){const s=Math.floor((ms||0)/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),c=s%60,p=x=>String(x).padStart(2,"0");return(h?h+":"+p(m):p(m))+":"+p(c)}
+function tmShow(){$("#tm").textContent="☾ "+tmFmt(S.all?S.fin:S.t)}
+function tmSync(){const h=["lvl","stars","letter","post"].includes(S.node),e=$("#tm");run=!!S.began&&!h&&!S.all;e.hidden=h;e.classList.toggle("fin",!!S.all);tmShow()}
+setInterval(()=>{const n=Date.now();if(S.all)run=false;if(run)S.t=(S.t||0)+Math.min(n-last,2000);last=n;if(!$("#tm").hidden)tmShow();if(run&&++tc%10===0)save()},500);
+function show(id){(F[id]||scene)(id);tmSync()}
 const BM={t:"Back to the map",next:"map"};
 function scene(id){const n=N[id];S.node=id;save();art(n.bg,n.sym);$("#loc").textContent=n.loc;ch.innerHTML="";say(typeof n.L==="function"?n.L():n.L,()=>choices(n))}
 function choices(n){ch.innerHTML="";const cs=(typeof n.c==="function"?n.c():n.c)||[];if(!cs.length){btn("Continue ▸",()=>show(n.next),1);return}cs.filter(c=>!c.if||c.if()).forEach(c=>btn(c.t,()=>pick(c,n)))}
@@ -177,16 +185,16 @@ function fade(f){const d=document.createElement("div");d.style.cssText="position
 function fw(n){if(RM)return;const C=["#ffe9a8","#9bdcff","#ffb3d9","#fff"];for(let b=0;b<n;b++)setTimeout(()=>{if(!$(".lv"))return;const x=10+Math.random()*80,y=10+Math.random()*45,c=C[b%4];tone(900+Math.random()*500,0,.2,.02);for(let i=0;i<16;i++){const p=document.createElement("i"),a=i/16*6.283,r=60+Math.random()*50;p.className="fwp";p.style.cssText=`left:${x}vw;top:${y}vh;background:${c};box-shadow:0 0 6px ${c};--dx:${Math.cos(a)*r}px;--dy:${Math.sin(a)*r}px`;document.body.appendChild(p);setTimeout(()=>p.remove(),1500)}},500+b*650)}
 const F={
 moon(){S.node="moon";S.moon=true;save();const a=art("obs","🌕");$("#loc").textContent="The Eighteenth Moon";ch.innerHTML="";tone(523,0,.5);tone(659,.2,.5);tone(784,.4,.5);tone(1046,.6,1);confetti(40);
- say([["","The moon above Eutopia brightens. Every secret you found rises from the map and settles into its glow."],[M,"“I hid them in places you’d walk past. I told myself you’d find two, maybe three.”"],[M,"“Of course you found every single one. You notice everything. It’s one of the most annoying things about you.”"],["Anuva","“You hid eighteen secrets and expected me to find two? Insulting.”"],[M,"“So. The kingdom owes you a reward, and I am, regrettably, the kingdom.”"]],()=>{a.innerHTML=`<div class="lv"><h2>✦ ROYAL DECREE ✦</h2><p>ANUVA · KEEPER OF EVERY SECRET</p><p style="color:var(--gold)">${WISH}</p><p style="color:var(--mut);font-weight:400">(Screenshot this and show Mahmud.)</p></div>`;confetti(30);$("#box").hidden=true;$("#app").classList.add("wide");btn("Back to the map ▸",()=>show("map"),1)})},
+ say([["","The moon above Eutopia brightens. Every secret you found rises from the map and settles into its glow."],[M,"“I hid them in places you’d walk past. I told myself you’d find two, maybe three.”"],[M,"“Of course you found every single one. You notice everything. It’s one of the most annoying things about you.”"],["Anuva","“You hid eighteen secrets and expected me to find two? Insulting.”"],[M,"“So. The kingdom owes you a reward, and I am, regrettably, the kingdom.”"]],()=>{a.innerHTML=`<div class="lv"><h2>✦ ROYAL DECREE ✦</h2><p>ANUVA · KEEPER OF EVERY SECRET</p><p>COMPLETED IN ☾ ${tmFmt(S.fin||S.t)}</p><p style="color:var(--gold)">${WISH}</p><p style="color:var(--mut);font-weight:400">(Screenshot this and show Mahmud.)</p></div>`;confetti(30);$("#box").hidden=true;$("#app").classList.add("wide");btn("Back to the map ▸",()=>show("map"),1)})},
 title(){art("map","");$("#loc").textContent="";const a=$("#art");a.innerHTML=`<div><div class="moon"></div><h1>Eutopia:<br>The Eighteenth Moon</h1><p class="mu">A Forgotten Star. An Unwritten Fate.</p></div>`;ch.innerHTML="";
  say([["","To the one person the prophecy forgot to explain."],[M,"“Before you ask, no, I did not write the prophecy. I have terrible handwriting and excellent alibis.”"]],()=>{
  if(S.began){btn("▶ Continue",()=>{ac();show(S.node)},1);btn("New game",function(){if(nc++){const m=S.mute;S=def();S.mute=m;S.began=true;save();show("lib")}else{this.textContent="Tap again — this erases your progress";}})}
  else btn("▶ Press Start",()=>{ac();S.began=true;save();show("lib")},1)})},
-map(){S.node="map";save();const a=art("map","");$("#loc").textContent="Eutopia";ch.innerHTML="";
+map(){S.node="map";save();const a=art("map","");$("#app").classList.add("mp");$("#loc").textContent="Eutopia";ch.innerHTML="";
  a.innerHTML='<svg class="pent" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 20L82 42L70 77L30 77L18 42Z M50 20L70 77L18 42L82 42L30 77Z"/></svg>'+Object.entries(LOC).filter(([k])=>k!=="moon"||S.all).map(([k,l])=>`<button class="pin" data-k="${k}" aria-label="${l.n}">${lk(k)?"🔒":l.e}<small>${l.n}${S.done&&left(k)?" ✦"+left(k):""}</small></button>`.replace('class="pin"',`class="pin" style="left:${l.x}%;top:${l.y}%"`)).join("")+`<span id="hero" style="left:${LOC[S.at].x}%;top:${LOC[S.at].y}%">🧝‍♀️</span>`;
  a.querySelectorAll(".pin").forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(lk(k)){toast(k==="obs"?"The gate is sealed by a silver lock. Someone in the castle keeps every key…":k==="off"?"The Advisor’s door is sealed. It opens once the story is told.":"Follow the silver dust to the Moon Garden first.");return}S.at=k;const h=$("#hero");h.style.left=LOC[k].x+"%";h.style.top=LOC[k].y+"%";tone(440,0,.15);setTimeout(()=>show(LOC[k].node),RM?0:650)});
  say([["",quest()]])},
-game(){S.node="obs";const a=art("obs","");ch.innerHTML="";let k=1;
+game(){S.node="obs";const a=art("obs","");$("#app").classList.add("mp");ch.innerHTML="";let k=1;
  say([["","Five lights flicker in the telescope’s lens. Tap them in the order the sky once shone: 1 to 5."]]);
  [[16,28],[42,14],[56,50],[78,24],[84,68]].forEach((p,i)=>{const b=document.createElement("button");b.className="st";b.style.cssText=`left:${p[0]}%;top:${p[1]}%`;b.innerHTML=`✧<small>${i+1}</small>`;b.onclick=()=>{if(i+1===k){b.classList.add("on");tone(400+k*90,0,.4);if(++k>5)win()}else{k=1;a.querySelectorAll(".st").forEach(x=>x.classList.remove("on"));b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),300);toast("The lights fade. Begin again at 1.")}};a.appendChild(b)});
  btn("Skip puzzle",win);
@@ -197,7 +205,7 @@ lvl(){S.done=true;S.node="lvl";save();const a=art("obs","");$("#box").hidden=tru
  a.innerHTML=`<div class="rays"></div><div class="lv"><h2>✦ LEVEL UP! ✦</h2><p>ANUVA · LV 17 → LV 18</p><div class="bars"><div class="bar">CHAOS 99<i style="--w:99%"></i></div><div class="bar">SARCASM 87<i style="--w:87%"></i></div><div class="bar">HEART 100<i style="--w:100%"></i></div><div class="bar">DESTINY &amp; HORMONES MAX<i style="--w:100%"></i></div></div><p style="color:var(--gold)">NEW TITLE: REWRITER OF PROPHECIES</p><p style="color:var(--mut);font-weight:400">(Screenshot this one.)</p></div>`;
  if(!RM)for(let i=0;i<26;i++){const s=document.createElement("span");s.className="cf";s.textContent="✦";s.style.cssText=`left:${Math.random()*100}%;animation-delay:${Math.random()*1.5}s;animation-duration:${3+Math.random()*3}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),7000)}
  {const q=document.createElement("p");q.className="ln";q.textContent="Your prophecy: “"+S.line+"”";const l=a.querySelector(".lv");l.insertBefore(q,l.querySelector(".bars"))}fw(9);btn("Look up ▸",()=>show("stars"),1)},
-stars(){S.node="stars";save();const a=art("obs","");ch.innerHTML="";
+stars(){S.node="stars";save();const a=art("obs","");$("#app").classList.add("mp");ch.innerHTML="";
  const D=[["hers",14,22,M,"Your line, written in the stars: “"+S.line+"”"],["chaos",40,12,"","Royal record #17: Anuva has challenged common sense to a duel. Common sense has requested a transfer."],["destiny",70,22,"","“It’s all about destiny and hormones.” A phrase that made at least one royal advisor reconsider his career."],["talks",84,50,"","Some of the best conversations start late at night and somehow end up about absolutely nothing. They still matter."],["bilashi",20,60,"","“Bilashi.” Some names become special because of who you give them to."],["flirt",50,50,M,"“You make a remarkably ordinary night difficult to forget.” … “A factual observation. Don’t make it weird.”"],["future",72,80,"","Eighteen isn’t a deadline for becoming a finished person. It’s another page, and you’re allowed to write it slowly."]];
  D.forEach(d=>{const b=document.createElement("button");b.className="st"+(has(d[0])?" found":"");b.style.cssText=`left:${d[1]}%;top:${d[2]}%`;b.textContent=has(d[0])?"✦":"✧";b.setAttribute("aria-label","Star message");b.onclick=()=>{find(d[0]);b.className="st found";b.textContent="✦";say([[d[3],d[4]]])};a.appendChild(b)});
  say([["The new inscription","“Let the stars suggest, but never command. Let the pages remember, but never bind. And let every soul become more than the ending written for them.”"],["","Tap the stars to find their messages. Then read the letter waiting for you."]]);
@@ -208,17 +216,19 @@ const LETTER=`Dear Anuva,
 
 Congratulations. You have officially survived seventeen years of questionable decisions, dramatic plot twists, and the occasional disagreement with basic probability. The kingdom is impressed. I am exhausted, but impressed.
 
-Jokes aside, there is a lot more to you than the chaos everyone sees first. You care about people in the little things: what you notice, what you remember, the room you make for someone else’s feelings even when you have plenty of your own. You can be dramatic, stubborn, and able to turn an ordinary conversation into an event requiring witnesses. You are also thoughtful, funny, and far more caring than you give yourself credit for.
+Jokes aside, there is a lot more to you than the chaos everyone sees first. You care about people in the little things. what you notice, what you remember, the room you make for someone else’s feelings even when you have plenty of your own. You can be dramatic, delusional, and able to turn an ordinary conversation into an event requiring witnesses. You are also thoughtful, funny, and far more caring than you give yourself credit for.
 
 Somewhere between the late-night conversations, ridiculous arguments, mutual roasting, and the legendary scientific theory that everything is about “destiny and hormones,” you became someone whose conversations I genuinely value. Even when it’s complete nonsense. Especially then. And yes, Bilashi, that includes when you’re being spectacularly unreasonable. Don’t look so pleased with yourself. This is a limited-time royal compliment.
 
-Now you’re eighteen, and everyone will act as if you should have life figured out by Tuesday. You don’t have to. You’re allowed to change your mind, begin again, take the long way around, outgrow what no longer fits, and write a future that looks nothing like the one people expected. Never let anyone convince you that your story is already decided. Not a prophecy, not the world, and certainly not a very suspicious royal advisor.
+Now you’re eighteen, and everyone will act as if you should have act like an old women or something like that. You don’t have to. You’re allowed to change your mind, start again, take the long way around, outgrow what no longer fits, and write a future that looks nothing like the one people expected. Never let anyone convince you that your story is already decided. Not a prophecy, your destiny, not the world. Destiny is something you wrote yourself. God just knew what you are going to write.
 
-You owe me no response. No decree, no emotional speech, not even a sarcastic review of my handwriting. This is a gift, not a question.
+You owe me no response. This is a gift, not a question. But still I'll wait.
 
-Happy eighteenth birthday, Anuva. And please, for the sake of the kingdom, try not to declare war on any more furniture this year.
+you know, I've a weird desire of waiting for things that will never be mine :)
 
-P.S. Labiba asked me to tell you she was right to guard your door and will happily do it again. She also asked me to remind you that she is watching me. I am aware.
+Happy eighteenth birthday, Anuva.
+
+
 
 Warmly (but don’t tell anyone),
 Mahmud
