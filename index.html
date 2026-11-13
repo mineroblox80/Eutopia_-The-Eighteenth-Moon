@@ -71,6 +71,42 @@ input{width:100%;padding:13px;border-radius:10px;border:1px solid var(--line);ba
 #toast{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:#1b2b4c;border:1px solid var(--line);padding:8px 14px;border-radius:10px;font:.85rem system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s;z-index:20}#toast.on{opacity:1}
 @media(orientation:landscape) and (min-width:640px){#app{max-width:1280px;display:grid;grid-template-columns:.9fr 1.1fr;grid-template-rows:auto minmax(0,1fr);column-gap:18px;padding:6px max(18px,env(safe-area-inset-right)) 8px max(18px,env(safe-area-inset-left))}.hud{grid-column:1/-1}.art{grid-column:1;grid-row:2;min-height:0}#rt{grid-column:2;grid-row:2;min-height:0;display:flex;flex-direction:column;gap:8px;overflow-y:auto;padding-top:14px}.box{margin-top:0;min-height:0;flex:none}#tx{max-height:42vh}.ch{margin:0;gap:6px}.b{padding:7px 14px;min-height:38px;font-size:15.5px}.paper{height:auto}.pg{max-width:780px;margin:0 auto}#app.wide .art{grid-column:1/-1;grid-row:2}#app.wide #rt{grid-column:1/-1;grid-row:3;padding-top:0}}
 @media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
+.art .sym{position:relative;z-index:2}
+.stg{position:absolute;inset:0;pointer-events:none;overflow:hidden;animation:sgin 1.2s both}
+.stg i{position:absolute;display:block}
+@keyframes sgin{from{opacity:0}}
+.beam{top:-10%;left:30%;width:40%;height:120%;background:linear-gradient(#bfe0ff55,transparent 80%);transform-origin:50% 0;filter:blur(6px);animation:sway 9s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
+.mote{bottom:-6px;width:3px;height:3px;border-radius:50%;background:var(--c,#dff0ff);box-shadow:0 0 6px var(--c,#dff0ff);opacity:0;animation:mote linear infinite}
+.gar .mote{--c:#ffe9a8}.off .mote{--c:#ffd890}.lab .mote{--c:#9ff5dc}
+@keyframes mote{10%{opacity:.8}to{transform:translate(18px,-60vh);opacity:0}}
+.rd{top:-20px;width:1.5px;height:14px;background:linear-gradient(transparent,#9fdcff);opacity:.4;animation:rain linear infinite}
+.s-heavy .rd{opacity:1;filter:brightness(1.7)}
+@keyframes rain{to{transform:translateY(100vh)}}
+.pt{top:-14px;font-size:13px;animation:pet linear infinite}
+@keyframes pet{to{transform:translate(40px,100vh) rotate(360deg)}}
+.ring{left:50%;top:50%;width:75%;aspect-ratio:1;border:1px dashed #9bdcff44;border-radius:50%;transform:translate(-50%,-50%);animation:rg 40s linear infinite}
+@keyframes rg{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.cdl{width:70px;height:70px;border-radius:50%;background:radial-gradient(#ffd89080,transparent 70%);animation:flk 1.6s ease-in-out infinite alternate}
+@keyframes flk{from{opacity:.4;transform:scale(.85)}to{opacity:1;transform:scale(1.15)}}
+.pls{left:50%;top:50%;width:40%;aspect-ratio:1;border-radius:50%;border:2px solid #6fe0c066;animation:pls 3.6s ease-out infinite}
+@keyframes pls{from{transform:translate(-50%,-50%) scale(.3);opacity:1}to{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
+.fl{inset:0;background:#e8f4ff;opacity:0}.s-f .fl{animation:flsh .9s}
+@keyframes flsh{20%{opacity:.7}to{opacity:0}}
+.wv{top:0;bottom:0;left:-40%;width:40%;background:linear-gradient(90deg,transparent,#9bdcff55,transparent);opacity:0}.s-w .wv{animation:wvm 1.6s ease-in-out}
+@keyframes wvm{from{opacity:1;transform:none}to{opacity:1;transform:translateX(350%)}}
+.ss2{top:12%;left:-10%;width:90px;height:2px;background:linear-gradient(90deg,transparent,#fff);opacity:0}.s-ss .ss2{animation:ssh 1.2s ease-in}
+@keyframes ssh{from{transform:translate(0,0) rotate(25deg);opacity:1}to{transform:translate(520px,240px) rotate(25deg);opacity:0}}
+.av{position:absolute;bottom:6px;font-size:1.7rem;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .5s,filter .4s}
+.av span{display:block}.av.m{left:12%}.av.a{right:12%}.av.l{left:calc(50% - 14px)}
+.av.in{opacity:.45;transform:none;filter:grayscale(.6)}
+.av.sp{opacity:1;transform:scale(1.25);filter:drop-shadow(0 0 10px #9bdcff)}.av.a.sp{filter:drop-shadow(0 0 10px #e9d5a2)}
+.s-t .av.sp span{animation:tk .28s ease-in-out infinite alternate}
+@keyframes tk{to{transform:translateY(-5px) rotate(4deg)}}
+.pe{font-size:1.3rem;animation:pe 1.8s ease-out forwards}
+@keyframes pe{to{transform:translateY(-70px) scale(1.4);opacity:0}}
+.cr{bottom:4px;left:-12%;font-size:1.4rem;animation:crn 5s linear forwards}
+@keyframes crn{to{left:110%}}
 </style></head><body>
 <div id="sky" aria-hidden="true"></div><div id="tint" aria-hidden="true"></div><div id="app"></div><div id="toast" role="status"></div>
 <script>
@@ -142,17 +178,12 @@ conf:{bg:"obs",sym:"☾",loc:"The Royal Observatory",L:[["Anuva","“Well? I’m
  {t:"“You don’t get to choose for me either.”",st:"free",say:[[M,"“No. I don’t.”"],[M,"“The court doesn’t get to write your life. Neither does the prophecy. And neither do I.”"],["","For the first time all evening, he almost smiles."]],next:"fin"},
  {t:"“Then why did you stay?”",st:"why",say:[[M,"“Because you deserved the chance to choose. And because, for all your talent for turning a quiet evening into an international incident, I wanted to be here when you did.”"],[M,"“Don’t make me repeat that. I have a reputation to maintain.”"]],next:"fin"},
  {t:"Stay quiet for a moment",st:"calm",say:[["","Neither of you speaks. The stars keep shining. The kingdom does not collapse because you take a moment to think."]],next:"fin"}]},
-labroom:{bg:"lab",sym:"🧸",loc:"Labiba’s Room",L:()=>S.lb?[["","Labiba’s room: a fortress of pillows, snacks, and seventeen locks. A spoon leans by the door, ready for emergencies."],["Labiba","“Don’t touch the third lock. It’s emotionally complicated.”"]]:[["","The tower door is barricaded from the inside. A sign reads: “DO NOT KNOCK. (Unless you are Anuva. Prove it.)”"],["Labiba","“Password?”"],["Anuva","“Labi, it’s me.”"],["Labiba","“That is exactly what an impostor would say.”"],[M,"“I’ll vouch for her. She has the same stubborn knock.”"],["Labiba","“…Mahmud is here too? Why is he always wherever the trouble is?”"]],
- c:()=>S.lb?[{t:"Read the diary on the shelf",if:()=>!has("diary"),s:"diary",say:[["","Labiba’s diary: “Day 412. Survived. The cat looked at me. Mahmud was nearby, so I felt slightly safer. Do not tell him.”"],["Anuva","“Ha. Noted.”"]]},{t:"Poke the pillow fort",if:()=>!has("pillow"),s:"pillow",say:[["","Under the third pillow sits a tiny sign: “IF FOUND, I AM NOT HERE.”"],["Labiba","“That was meant to be private.”"]]},BM]:[{t:"“Remember when you hid in my wardrobe during the thunderstorm?”",say:[["Labiba","“…Only the real Anuva knows about the wardrobe.”"],["","Seven locks click open, one after another."]],f:"lb",next:"labin"},{t:"Slide a chocolate square under the door",say:[["Labiba","“…Chocolate. Acceptable.”"],["","The door unlocks for exactly four seconds. You slip inside."]],f:"lb",next:"labin"},{t:"“Mahmud, say something reassuring.”",say:[[M,"“Labiba, the kingdom has not collapsed.”"],["Labiba","“That is exactly what someone says right before it collapses.”"]]},BM]},
-labin:{bg:"lab",sym:"🧸",loc:"Labiba’s Room",L:[["","Inside: a pillow fortress, a cooking pot worn as a helmet, and Labiba holding a spoon like a sword."],["Labiba","“State your business. Quickly. I have already survived three crises today.”"],["Anuva","“The Book of Fate opened. A star is missing, and the prophecy mentions my birthday.”"],["Labiba","“I KNEW IT. I told the pillows something terrible was coming. Nobody listens to the pillows.”"],[M,"“Evening, Labiba. Apologies for the dramatic entrance. Your sister insisted.”"],["Labiba","“Why is your face pink, Mahmud?”"],[M,"“It’s warm. Your fort has no ventilation.”"],["Anuva","“It’s the pillows. Everything’s warm in here.”"],["Labiba","“…Mhm.”"],["Anuva","“Labi. The Observatory key. Please.”"],["Labiba","“I keep it in the safest place in the castle: under my pillow, in a box, inside a drawer, inside a room I don’t go into.”"]],
- c:[{t:"“Please, Labi. I’m scared too.”",say:[["Labiba","“…You are? Then it IS serious.”"],["","She pulls a key from inside her sock. You decide not to ask."]],item:"okey",f:"l",next:"labgo"},{t:"“Come with us. I’ll protect you.”",say:[["Labiba","“Protect me from what? Be specific.”"],["Anuva","“…Everything.”"],["Labiba","“Acceptable.”"]],item:"okey",f:"l",next:"labgo"},{t:"“Give me the key, or I tell Mum about the cookies.”",say:[["Labiba","“You MONSTER.”"],["","The key arrives in an envelope marked “UNDER PROTEST.”"]],item:"okey",f:"l",next:"labgo"}]},
-labgo:{bg:"lab",sym:"🧸",loc:"Labiba’s Room",next:"map",L:[["","✦ Labiba joins your party! ✦"],["Labiba","“I’m coming. If the sky falls, I want to be standing next to someone louder than me.”"],["Labiba","“I’ll walk behind Mahmud. He’s taller. Better shield.”"],[M,"“I’m honored. And slightly concerned.”"],["Anuva","“Let’s go before she changes her mind.”"]],c:[]},
 labroom:{bg:'lab',sym:'🧸',loc:'Labiba’s Room',L:()=>S.lb?[['','Labiba’s tower room: wooden swords on the walls, a blanket fort, and a castle map covered in tiny stickers marking every danger she has defeated.'],['Labiba','“If anything bothers you, big sis, tell me. I’ll handle it.”']]:[['','The tower door is blocked by a chair, a broom, and one very determined guard with a wooden sword. A sign reads: “ROYAL SISTER PATROL. HALT.”'],['Labiba','“Halt! State your name and your intentions!”'],['Anuva','“Labi, it’s me.”'],['Labiba','“Big sis?! You’re late! I’ve been guarding this door for hours. Nothing got past me. Not even a moth.”'],['Labiba','“Wait. Is that Mahmud behind you? What are his intentions?”']],
  c:()=>S.lb?[{t:'Try the secret knock panel',if:()=>!has('pillow'),p:'knock'},{t:'Open the locked diary',if:()=>!has('diary'),p:'diary'},{t:'Reread the diary',if:()=>has('diary'),say:PZ.diary.win},BM]:[{t:'“Reporting for duty, Captain Labiba.”',say:[['Labiba','“At ease, soldier.”'],['','She salutes, then drops the sword and hugs you anyway.']],f:'lb',next:'labin'},{t:'Hug her',say:[['Labiba','“You were gone so long I almost came looking. With the sword.”'],['Anuva','“I know. I missed you too.”']],f:'lb',next:'labin'},{t:'“Mahmud, tell her you come in peace.”',say:[[M,'“I come in peace.”'],['Labiba','“State your intentions toward my sister.”'],[M,'“…Strictly professional.”'],['Labiba','“Hm. Your ears are red.”']]},BM]},
 labin:{bg:'lab',sym:'🧸',loc:'Labiba’s Room',L:[['','Inside: a blanket fort, a wall of wooden swords, and a castle map covered in tiny stickers.'],['Labiba','“Report, big sis. Who do I need to fight?”'],['Anuva','“The Book of Fate opened. A star is missing, and the prophecy mentions my birthday.”'],['Labiba','“Then the prophecy is messing with my sister. I’ll deal with it personally.”'],[M,'“Evening, Labiba. Apologies for the dramatic entrance.”'],['Labiba','“Mahmud. Why is your face red?”'],[M,'“It’s warm. This tower has no ventilation.”'],['Anuva','“It’s the blankets. Everything’s warm in here.”'],['Labiba','“Mhm. I’m watching you two.”'],['Anuva','“Labi. The Observatory key. Please.”'],['Labiba','“Of course. I keep every key in the castle. A guard has to be prepared.”']],
  c:[{t:'“I’ll need it. Will you come with me?”',say:[['Labiba','“Try and stop me.”']],item:'okey',f:'l',next:'labgo'},{t:'“Thanks, Labi. I’m a little scared.”',say:[['Labiba','“Then I’m going first. Nobody scares my sister while I’m around.”'],['','She squeezes your hand and doesn’t let go for the next three corridors.']],item:'okey',f:'l',next:'labgo'},{t:'“Give me the key, or I tickle you.”',say:[['Labiba','“You wouldn’t dare!”'],['','The key arrives after four seconds of heroic laughing, from both of you.']],item:'okey',f:'l',next:'labgo'}]},
 labgo:{bg:'lab',sym:'🧸',loc:'Labiba’s Room',next:'map',L:[['','✦ Labiba joins your party! ✦'],['Labiba','“Stay behind me, big sis. I’ll take the front.”'],['Labiba','“And you, Mahmud. Walk on her other side. If something jumps out, you’re the shield.”'],[M,'“I’m honored. And slightly concerned.”'],['Anuva','“Let’s go before she challenges the staircase.”']],c:[]},
-post:{bg:"lib",sym:"⌘",loc:"The Royal Library",next:"map",L:[["Royal Clerk","“Your Highness, the Book of Fate has been rewritten. Seventeen royal ceremonies, three diplomatic appointments, and next Thursday’s weather were all determined by the old prophecy. They are no longer guaranteed.”"],[M,"“Wonderful. Anuva has liberated the kingdom from destiny.”"],[M,"“And condemned me to administration.”"],["Anuva","“Welcome to freedom. Enjoy your paperwork.”"],["Labiba","“I dont know why but my gutt feeling says, this two idiots like each other, i just cant prove it.”"],["Anuva","“LABIBA.”"],[M,"“…I’ll go get more paperwork.”"],["","Neither of them looks at the other. Both of them are smiling at the floor."],["","The story ends. Eutopia remains. The stars are no longer instructions. They are possibilities."],["","A little corner of Eutopia, made by Mahmud for Anuva. ✦"]],c:[]}
+post:{bg:"lib",sym:"⌘",loc:"The Royal Library",next:"map",L:[["Royal Clerk","“Your Highness, the Book of Fate has been rewritten. Seventeen royal ceremonies, three diplomatic appointments, and next Thursday’s weather were all determined by the old prophecy. They are no longer guaranteed.”"],[M,"“Wonderful. Anuva has liberated the kingdom from destiny.”"],[M,"“And condemned me to administration.”"],["Anuva","“Welcome to freedom. Enjoy your paperwork.”"],["Labiba","“Also, for the record, everyone knows Mahmud likes Anuva, and Anuva likes Mahmud. I approve. Conditionally. Make her cry and I duel you.”"],["Anuva","“LABIBA.”"],[M,"“…I’ll go get more paperwork.”"],["","Neither of them looks at the other. Both of them are smiling at the floor."],["","The story ends. Eutopia remains. The stars are no longer instructions. They are possibilities."],["","A little corner of Eutopia, made by Mahmud for Anuva. ✦"]],c:[]}
 };
 Object.keys(N).forEach(k=>N[k].id=k);
 const LOC={lib:{x:50,y:20,e:"📚",n:"Library",node:"lib2"},gar:{x:82,y:42,e:"🌸",n:"Garden",node:"garden"},obs:{x:30,y:77,e:"🔭",n:"Observatory",node:"obs"},off:{x:18,y:42,e:"🕯️",n:"Office",node:"office"},moon:{x:50,y:52,e:"🌕",n:"The Moon",node:"moon"},lab:{x:70,y:77,e:"🧸",n:"Labiba",node:"labroom"}};const lk=k=>k==="obs"?!S.l:k==="lab"?!S.g:k==="off"?!S.done:false;const SL={pillow:"lab",diary:"lab",book:"lib",shelves:"lib",rain:"gar",flower:"gar",cat:"gar",blank:"obs",notes:"off",choc:"off",chest:"off",hers:"obs",chaos:"obs",destiny:"obs",talks:"obs",bilashi:"obs",flirt:"obs",future:"obs"};const left=k=>Object.keys(SL).filter(s=>SL[s]===k&&!has(s)).length;
@@ -216,22 +247,54 @@ const LETTER=`Dear Anuva,
 
 Congratulations. You have officially survived seventeen years of questionable decisions, dramatic plot twists, and the occasional disagreement with basic probability. The kingdom is impressed. I am exhausted, but impressed.
 
-Jokes aside, there is a lot more to you than the chaos everyone sees first. You care about people in the little things. what you notice, what you remember, the room you make for someone else’s feelings even when you have plenty of your own. You can be dramatic, delusional, and able to turn an ordinary conversation into an event requiring witnesses. You are also thoughtful, funny, and far more caring than you give yourself credit for.
+Jokes aside, there is a lot more to you than the chaos everyone sees first. You care about people in the little things: what you notice, what you remember, the room you make for someone else’s feelings even when you have plenty of your own. You can be dramatic, delusional, and able to turn an ordinary conversation into an event requiring witnesses. You are also thoughtful, funny, and far more caring than you give yourself credit for.
 
 Somewhere between the late-night conversations, ridiculous arguments, mutual roasting, and the legendary scientific theory that everything is about “destiny and hormones,” you became someone whose conversations I genuinely value. Even when it’s complete nonsense. Especially then. And yes, Bilashi, that includes when you’re being spectacularly unreasonable. Don’t look so pleased with yourself. This is a limited-time royal compliment.
 
-Now you’re eighteen, and everyone will act as if you should have act like an old women or something like that. You don’t have to. You’re allowed to change your mind, start again, take the long way around, outgrow what no longer fits, and write a future that looks nothing like the one people expected. Never let anyone convince you that your story is already decided. Not a prophecy, your destiny, not the world. Destiny is something you wrote yourself. God just knew what you are going to write.
+Now you’re eighteen, and everyone will act as if you should behave like an old woman or something like that. You don’t have to. You’re allowed to change your mind, start again, take the long way around, outgrow what no longer fits, and write a future that looks nothing like the one people expected. Never let anyone convince you that your story is already decided. Not a prophecy, your destiny, not the world. Destiny is something you wrote yourself. God just knew what you are going to write.
 
 You owe me no response. This is a gift, not a question. But still I'll wait.
+
 you know, I've a weird desire of waiting for things that will never be mine :)
 
-I'm genuinely grateful to have you in my life. May Allah bless you with good health, beneficial knowledge, happiness and success. May He guide you towards everything that's good for you and make the years ahead beautiful. A little something from me to remind you that you're appreciated.
+Happy eighteenth birthday, Anuva.
 
 
 
 Warmly (but don’t tell anyone),
 Mahmud
 Royal Advisor of Eutopia`;
+/* ---- animated stage ---- */
+let stg=null;
+const R=(a,b)=>a+Math.random()*(b-a),SP={Mahmud:"m",Anuva:"a",Labiba:"l"};
+function stage(bg){
+ const n=(c,k,f,t="")=>Array.from({length:k},()=>`<i class="${c}" style="${f()}">${t}</i>`).join(""),
+ lf=(a,b)=>`left:${R(0,100)}%;animation-duration:${R(a,b)}s;animation-delay:${-R(0,b)}s`;
+ const h=({
+  lib:`<i class="beam"></i><i class="beam" style="left:4%;width:24%;opacity:.5;animation-delay:-4s"></i>`+n("mote",14,()=>lf(6,13)),
+  gar:n("rd",26,()=>lf(.7,1.3))+n("pt",7,()=>lf(7,12),"🌸")+n("mote",8,()=>lf(8,14)),
+  obs:`<i class="ring"></i><i class="ring" style="width:45%;animation-direction:reverse"></i>`+n("mote",12,()=>lf(8,15)),
+  off:`<i class="cdl" style="left:14%;bottom:12%"></i><i class="cdl" style="right:14%;bottom:20%;animation-delay:-.7s"></i>`+n("mote",8,()=>lf(7,12)),
+  lab:`<i class="pls"></i><i class="pls" style="animation-delay:-1.8s"></i>`+n("mote",10,()=>lf(7,12))
+ })[bg]||"";
+ return `<div class="stg">${h}<i class="fl"></i><i class="wv"></i><i class="ss2"></i><div class="av m" data-k="m"><span>🧙‍♂️</span></div><div class="av a" data-k="a"><span>🧝‍♀️</span></div><div class="av l" data-k="l"><span>👧</span></div></div>`}
+function pop(e,el,x,y){const s=stg;if(!s||RM)return;const r=s.getBoundingClientRect(),q=el&&el.getBoundingClientRect(),i=document.createElement("i");i.className="pe";i.textContent=e;i.style.left=(q?q.left-r.left+q.width/2-10:(x??r.width/2))+"px";i.style.top=(q?q.top-r.top-8:(y??r.height/2))+"px";s.appendChild(i);setTimeout(()=>i.remove(),1900)}
+function burst(a){for(let i=0;i<6;i++)setTimeout(()=>{if(stg)pop(a[i%a.length],null,R(20,80)*stg.clientWidth/100,R(15,70)*stg.clientHeight/100)},i*120)}
+function kick(c){const s=stg;if(!s||RM)return;s.classList.remove(c);void s.offsetWidth;s.classList.add(c);setTimeout(()=>s.classList.remove(c),4000)}
+function catRun(){const s=stg;if(!s||RM)return;const c=document.createElement("i");c.className="cr";c.textContent="🐈";s.appendChild(c);setTimeout(()=>c.remove(),5200)}
+const FX=[[/silver light|blink/i,()=>kick("s-f")],[/opens|floats|shelf/i,()=>kick("s-w")],[/rain/i,()=>kick("s-heavy")],[/prophecy|WHEN THE|EIGHTEENTH|silver dust/i,()=>burst(["ᚠ","ᛟ","ᛉ","☾","✧"])],[/telescope|star|sky|moon/i,()=>kick("s-ss")],[/glow|lantern|flare|key/i,()=>burst(["✦","✧"])],[/cat/i,catRun],[/pink|warm|brushes|smil/i,()=>pop("💗")]];
+function react([w,t]){
+ const k=SP[w];
+ stg.querySelectorAll(".av").forEach(e=>{if(e.dataset.k===k)e.classList.add("in");e.classList.toggle("sp",e.dataset.k===k)});
+ stg.classList.toggle("s-t",!!k&&typing);
+ const el=k&&stg.querySelector(`.av[data-k="${k}"]`),m=emo(t).match(/\p{Extended_Pictographic}/u);
+ if(m)pop(m[0],el||null);
+ if(w==="The Book of Fate"||w==="The new inscription"){kick("s-w");burst(["✧","ᚠ","☾"]);return}
+ for(const[r,f]of FX)if(r.test(t)){f();break}}
+const _art=art;art=function(bg,sym){const a=_art(bg,sym);if(sym&&bg!=="map"&&bg!=="paper"){a.insertAdjacentHTML("afterbegin",stage(bg));stg=a.querySelector(".stg")}else stg=null;return a};
+const _nxt=nxt;nxt=function(){const ok=li<lines.length;_nxt();if(ok&&stg)react(lines[li-1])};
+const _end=end;end=function(){if(stg)stg.classList.remove("s-t");_end()};
+/* ---- end animated stage ---- */
 hud();home();
 })();
 </script></body></html>
