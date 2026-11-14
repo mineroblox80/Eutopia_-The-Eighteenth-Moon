@@ -1,300 +1,650 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080d20"><title>Eutopia: The Eighteenth Moon</title>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d8c69d">
+<meta name="description" content="দৈনিক ধৈর্য — বিলাশী, এক নোয়াখালীর ডেভেলপার এবং এক অনির্মিত অ্যাপকে ঘিরে প্রকাশিত বিশেষ ব্যঙ্গসংখ্যা।">
+<title>দৈনিক ধৈর্য | বিশেষ অপেক্ষা সংখ্যা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#080d20;--ink:#e0edff;--mut:#a7b7d5;--blue:#9bdcff;--gold:#e9d5a2;--line:#9bcfff40;--card:#111c3ae6;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
-*{box-sizing:border-box}[hidden]{display:none!important}
-body{margin:0;height:100%;background:radial-gradient(ellipse at 50% 0,#21345b,transparent 55%),var(--bg);color:var(--ink);font:17px/1.6 Georgia,"Times New Roman",serif;overflow:hidden}
-#sky{position:fixed;inset:0;pointer-events:none}.sd{position:absolute;width:2px;height:2px;border-radius:50%;background:#dcecff;opacity:.5;animation:tw 4s ease-in-out infinite alternate}
-@keyframes tw{to{opacity:1;transform:scale(1.8)}}@keyframes fl{50%{transform:translateY(-8px)}}@keyframes bl{to{opacity:.2}}@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-#app{position:relative;height:100%;max-width:560px;margin:auto;padding:8px 14px 12px;display:flex;flex-direction:column;overflow-y:auto}
-.hud{display:flex;justify-content:space-between;align-items:center;font:600 .7rem system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);padding:2px 0 8px;gap:8px}
-.sm{background:none;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:3px 9px;min-height:32px;font:inherit;cursor:pointer}
-.art{flex:1;min-height:150px;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(155deg,#19284c,#0a1125)}
-.lib{background:repeating-linear-gradient(90deg,#b6d8ff09 0 28px,#070d1b 29px 34px),linear-gradient(#182441,#090f20)}
-.gar{background:radial-gradient(ellipse at 50% 110%,#80d5ff55,transparent 65%),linear-gradient(#111c38,#0b1426)}
-.obs{background:radial-gradient(circle at 50% 10%,#aecfff40,transparent 45%),linear-gradient(#15254a,#090f20)}
-.off{background:radial-gradient(circle at 50% 60%,#e9d5a233,transparent 55%),linear-gradient(#1d1a2e,#0d0c18)}
-.map{background:radial-gradient(ellipse at 50% 50%,#2f4a7a66,transparent 70%),linear-gradient(#12203f,#0a1127)}
-.sym{font-size:4rem;filter:drop-shadow(0 0 16px #8ed6ff);animation:fl 5s ease-in-out infinite}
-.moon{width:84px;height:84px;margin:0 auto 14px;border-radius:50%;background:radial-gradient(circle at 35% 32%,#fff,#d9edff 12%,#a7c9ed 40%,#5b79ac 70%,#334c7a);box-shadow:0 0 40px #9ed8ff55,0 0 100px #6ba8ff25}
-h1{font-size:clamp(1.8rem,8vw,2.6rem);line-height:1.1;font-weight:400;margin:0 0 6px;letter-spacing:-.02em}.mu{color:var(--mut);font-style:italic;margin:0;font-size:.95rem}
-.box{position:relative;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 16px 16px;min-height:120px;cursor:pointer}#tx{max-height:34vh;overflow:auto}#rt{display:contents}.nm.pl{background:#5b3f73;border-color:var(--gold)}.nm.lb{background:#2f6b5e;border-color:#8fe3c9}
-#tx.nar{font:italic .92rem/1.65 system-ui,sans-serif;color:#8fb3d9;border-left:2px solid #4f78a8;padding-left:10px}
-.lab{background:radial-gradient(circle at 50% 70%,#6fe0c022,transparent 55%),linear-gradient(#1a2440,#0c1226)}
-.pent{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.pent path{fill:none;stroke:#9bdcff66;stroke-width:1.5;stroke-dasharray:6 6;vector-effect:non-scaling-stroke}.pent circle{fill:#9bdcff66;animation:pulse2 3s ease-in-out infinite}
-@keyframes pulse2{50%{opacity:.25}}@keyframes aur{to{transform:translateX(8%) scale(1.1);opacity:.55}}@keyframes fy{10%{opacity:.7}to{transform:translate(30px,-105vh);opacity:0}}
-#sky::before{content:"";position:absolute;inset:-20% -10% auto;height:60%;background:radial-gradient(ellipse at 30% 50%,#4ad8c033,transparent 60%),radial-gradient(ellipse at 70% 40%,#8a6be233,transparent 60%);filter:blur(30px);animation:aur 25s ease-in-out infinite alternate}
-#sky::after{content:"";position:absolute;top:12%;right:5%;width:min(11vw,60px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 32%,#fff,#cfe4ff 25%,#7f9fd2 70%);opacity:.4;box-shadow:0 0 40px #9ed8ff44;animation:fl 9s ease-in-out infinite}
-.fy{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:#ffe9a8;box-shadow:0 0 8px #ffe9a8;opacity:0;animation:fy linear infinite}.sh{position:absolute;top:8%;left:-10%;width:80px;height:2px;background:linear-gradient(90deg,transparent,#fff);opacity:0;animation:shoot ease-in infinite}
-#tint{position:fixed;inset:0;pointer-events:none;opacity:.2;background-color:transparent;transition:background-color 1.2s;-webkit-mask-image:linear-gradient(to top,#000,transparent 75%);mask-image:linear-gradient(to top,#000,transparent 75%)}#tint[data-t=gar]{background-color:#3fd0a0}#tint[data-t=lab]{background-color:#58e0c8}#tint[data-t=lib]{background-color:#5b79c0}#tint[data-t=obs]{background-color:#7a6ad0}#tint[data-t=off]{background-color:#e0a060}
-.rays{position:absolute;inset:-60%;background:repeating-conic-gradient(#ffe9a81f 0 10deg,transparent 10deg 20deg);animation:spin 40s linear infinite;-webkit-mask-image:radial-gradient(circle,#000,transparent 65%);mask-image:radial-gradient(circle,#000,transparent 65%)}
-.lv{position:relative;z-index:1;animation:pop 1s cubic-bezier(.2,1.4,.4,1) both}.lv h2{background:linear-gradient(90deg,#e9d5a2,#fff,#e9d5a2);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 4s linear infinite}
-.bars{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin:8px 0}.bar{display:flex;flex-direction:column;align-items:flex-start;font:600 .62rem system-ui,sans-serif;letter-spacing:.1em;color:var(--mut);gap:2px;text-align:left}.bar i{width:100%;height:6px;border-radius:4px;background:#ffffff1a;position:relative;overflow:hidden}.bar i::after{content:"";position:absolute;inset:0;width:var(--w);background:linear-gradient(90deg,#9bdcff,#e9d5a2);transform-origin:left;animation:fillb 1.6s .7s both}
-.fwp{position:fixed;width:4px;height:4px;border-radius:50%;z-index:9;pointer-events:none;animation:fwb 1.3s ease-out forwards}
-.lv .ln{font:italic 400 1rem/1.4 Georgia,serif;letter-spacing:0;color:var(--gold);max-width:92%;margin:8px auto}@media(orientation:landscape) and (max-height:520px){.lv .ln{font-size:.8rem;margin:2px auto}}
-#tm{margin-right:12px;color:var(--gold);font:600 .72rem system-ui,sans-serif;letter-spacing:.12em;font-variant-numeric:tabular-nums;opacity:.9}#tm.fin{color:#fff;text-shadow:0 0 8px var(--gold)}
-.hud{white-space:nowrap}.hud>span:first-child{display:flex;min-width:0;align-items:center}#loc{overflow:hidden;text-overflow:ellipsis}
-@media(orientation:portrait){.art{flex:0 0 auto;height:clamp(130px,26vh,240px);min-height:0}#rt{display:flex;flex-direction:column;flex:1;min-height:0;overflow-y:auto;gap:8px;padding-top:14px}.box{margin-top:0;min-height:0;flex:none}#tx{max-height:none}.ch{margin:0 0 4px}.b{padding:10px 14px;min-height:42px}#app.mp .art{flex:1;height:auto;min-height:240px}#app.mp #rt,#app.wide #rt{flex:none;overflow:visible}#app.wide .art{flex:1;height:auto;min-height:150px}#app.wide .art.paper{flex:none;height:60vh;min-height:0}}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes pop{from{transform:scale(.6);opacity:0}}@keyframes fillb{from{transform:scaleX(0)}}@keyframes fwb{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
-.pz{width:100%;padding:8px;display:flex;flex-direction:column;gap:8px;align-items:center}.pz .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}.pzb{padding:8px;min-height:38px;text-align:center}.code{font:700 1.8rem/1 monospace;letter-spacing:.35em;color:var(--gold);text-shadow:0 0 14px var(--gold)}.code.sm{font:italic 1rem/1.5 Georgia,serif;letter-spacing:0;text-align:center}.st2{font-size:2.2rem;background:#12203f;border:1px solid var(--line);border-radius:14px;padding:6px;opacity:.55;cursor:pointer}.st2.on{opacity:1;transform:scale(1.08);box-shadow:0 0 22px #fff8}
-.dl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px;white-space:normal}.dl button{background:#34567e;color:#fff;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-size:.9rem;cursor:pointer}
-#home{position:fixed;inset:0;z-index:15;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:env(safe-area-inset-top,0px) 16px env(safe-area-inset-bottom,0px);background:radial-gradient(ellipse at 50% 20%,#25406f,transparent 60%),linear-gradient(180deg,#0c1430,#080d20 80%);cursor:pointer;overflow:hidden;transition:opacity .6s}#home.out{opacity:0;pointer-events:none}
-#home .mn{width:clamp(52px,15vh,108px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 32%,#fff,#d9edff 12%,#a7c9ed 40%,#5b79ac 70%,#334c7a);box-shadow:0 0 40px #9ed8ff55,0 0 110px #6ba8ff25;animation:pulse 5s ease-in-out infinite,fl 7s ease-in-out infinite;position:relative;z-index:1}
-#home h1{font-size:clamp(2.2rem,min(11vw,15vh),4.4rem);margin:.15em 0 0;position:relative;z-index:1;background:linear-gradient(90deg,#9bdcff,#fff,#e9d5a2,#9bdcff);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 6s linear infinite}
-#home h2{font:400 clamp(.9rem,min(4.6vw,6vh),1.6rem)/1.2 Georgia,serif;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);margin:.2em 0;position:relative;z-index:1}
-#home .tg{color:var(--mut);font-style:italic;margin:.2em 0 .9em;font-size:clamp(.78rem,3vh,1rem);position:relative;z-index:1}
-#home .tp{font:600 .8rem system-ui,sans-serif;letter-spacing:.25em;text-transform:uppercase;animation:bl 1.4s ease-in-out infinite alternate;position:relative;z-index:1}
-#home .cs{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,620px);height:22vh}#home .cs rect{animation:wl 3s ease-in-out infinite alternate}
-#home .ff{position:absolute;bottom:-10px;color:var(--gold);opacity:0;animation:up linear infinite}
-#home .ss{position:absolute;top:10%;left:-10%;width:90px;height:2px;background:linear-gradient(90deg,transparent,#fff);opacity:0;animation:shoot 7s ease-in infinite}
-#home .ng{position:absolute;top:calc(8px + env(safe-area-inset-top,0px));right:12px;z-index:2}
-#home .rot{position:absolute;bottom:calc(8px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;font:600 .6rem system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);z-index:2;white-space:nowrap}#home .rot svg{width:26px;height:26px;animation:rt 3s ease-in-out infinite}
-@keyframes up{10%{opacity:.9}to{transform:translate(20px,-105vh);opacity:0}}@keyframes shoot{0%{transform:translate(0,0) rotate(25deg);opacity:0}3%{opacity:1}14%{transform:translate(115vw,48vh) rotate(25deg);opacity:0}100%{opacity:0}}@keyframes shim{to{background-position:300% 0}}@keyframes pulse{50%{box-shadow:0 0 70px #9ed8ffaa,0 0 160px #6ba8ff44}}@keyframes wl{to{opacity:.3}}@keyframes rt{0%,25%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
-@media(orientation:landscape) and (max-height:520px){.lv h2{font-size:1.1rem}.lv p{font-size:.7rem;margin:1px 0}.lv{padding:4px}#home .cs{height:16vh}}
-@media print{#sky,.hud,#box,#ch,#rt,#home,#toast{display:none!important}html,body{height:auto;overflow:visible;background:#fff}#app{display:block;height:auto;overflow:visible;max-width:none;padding:0}.art{display:block;height:auto!important;overflow:visible;border:0;background:none!important}.pg{max-width:none;height:auto;overflow:visible;background:#fff!important;color:#000;font-size:14pt}.dl{display:none}}
-.nm{position:absolute;top:-1px;left:14px;transform:translateY(-50%);background:#26406e;border:1px solid var(--blue);border-radius:8px;padding:0 10px;font:700 .66rem/22px system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#fff}
-#ar{position:absolute;right:12px;bottom:4px;color:var(--blue);font-style:normal;animation:bl 1s infinite alternate}
-.ch{display:grid;gap:8px;margin:10px 0 2px}
-.b{border:1px solid #a9d7ff69;background:linear-gradient(135deg,#273c66,#111c39);color:var(--ink);border-radius:12px;padding:12px 16px;min-height:46px;font:inherit;text-align:left;cursor:pointer}
-.b.p{background:linear-gradient(120deg,#b6e3ff,#dceaff);color:#111b34;border:0;font-weight:700;text-align:center}
-.b:active{transform:scale(.985)}.b:focus-visible,.sm:focus-visible,.st:focus-visible,.pin:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-input{width:100%;padding:13px;border-radius:10px;border:1px solid var(--line);background:#090f20;color:#fff;font:inherit}
-.pin{position:absolute;transform:translate(-50%,-50%);background:none;border:0;color:var(--ink);font-size:2rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.1;padding:6px}
-.pin small{font:600 .6rem system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-top:2px}
-#hero{position:absolute;font-size:1.6rem;transform:translate(-5%,-135%);transition:left .6s,top .6s;pointer-events:none;filter:drop-shadow(0 0 8px #fff8)}
-.st{position:absolute;background:none;border:0;color:#dff4ff;font-size:2rem;text-shadow:0 0 12px #8ed5ff;padding:8px;cursor:pointer;transform:translate(-50%,-50%)}
-.st small{display:block;font:600 .65rem system-ui,sans-serif;color:var(--mut)}.st.on,.st.found{color:var(--gold);text-shadow:0 0 16px var(--gold)}.st.bad{animation:sh .3s}
-.paper{flex:none;height:60vh;align-items:stretch;padding:8px}
-.pg{white-space:pre-line;text-align:left;background:linear-gradient(150deg,#d7e8f7,#b7cde8);color:#18213a;padding:20px;font-size:.98rem;line-height:1.75;border-radius:3px 12px 3px 12px;overflow:auto;width:100%}
-.lv{padding:16px;width:100%}.lv h2{font-weight:400;font-size:1.5rem;margin:0 0 4px;color:var(--gold)}.lv p{margin:3px 0;color:var(--ink);font:600 .85rem system-ui,sans-serif;letter-spacing:.08em}
-.cf{position:fixed;top:-20px;color:var(--gold);animation:fall 4s linear forwards;pointer-events:none;z-index:9}
-#toast{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:#1b2b4c;border:1px solid var(--line);padding:8px 14px;border-radius:10px;font:.85rem system-ui,sans-serif;opacity:0;pointer-events:none;transition:opacity .25s;z-index:20}#toast.on{opacity:1}
-@media(orientation:landscape) and (min-width:640px){#app{max-width:1280px;display:grid;grid-template-columns:.9fr 1.1fr;grid-template-rows:auto minmax(0,1fr);column-gap:18px;padding:6px max(18px,env(safe-area-inset-right)) 8px max(18px,env(safe-area-inset-left))}.hud{grid-column:1/-1}.art{grid-column:1;grid-row:2;min-height:0}#rt{grid-column:2;grid-row:2;min-height:0;display:flex;flex-direction:column;gap:8px;overflow-y:auto;padding-top:14px}.box{margin-top:0;min-height:0;flex:none}#tx{max-height:42vh}.ch{margin:0;gap:6px}.b{padding:7px 14px;min-height:38px;font-size:15.5px}.paper{height:auto}.pg{max-width:780px;margin:0 auto}#app.wide .art{grid-column:1/-1;grid-row:2}#app.wide #rt{grid-column:1/-1;grid-row:3;padding-top:0}}
-@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important;transition:none!important}}
-.art .sym{position:relative;z-index:2}
-.stg{position:absolute;inset:0;pointer-events:none;overflow:hidden;animation:sgin 1.2s both}
-.stg i{position:absolute;display:block}
-@keyframes sgin{from{opacity:0}}
-.beam{top:-10%;left:30%;width:40%;height:120%;background:linear-gradient(#bfe0ff55,transparent 80%);transform-origin:50% 0;filter:blur(6px);animation:sway 9s ease-in-out infinite alternate}
-@keyframes sway{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
-.mote{bottom:-6px;width:3px;height:3px;border-radius:50%;background:var(--c,#dff0ff);box-shadow:0 0 6px var(--c,#dff0ff);opacity:0;animation:mote linear infinite}
-.gar .mote{--c:#ffe9a8}.off .mote{--c:#ffd890}.lab .mote{--c:#9ff5dc}
-@keyframes mote{10%{opacity:.8}to{transform:translate(18px,-60vh);opacity:0}}
-.rd{top:-20px;width:1.5px;height:14px;background:linear-gradient(transparent,#9fdcff);opacity:.4;animation:rain linear infinite}
-.s-heavy .rd{opacity:1;filter:brightness(1.7)}
-@keyframes rain{to{transform:translateY(100vh)}}
-.pt{top:-14px;font-size:13px;animation:pet linear infinite}
-@keyframes pet{to{transform:translate(40px,100vh) rotate(360deg)}}
-.ring{left:50%;top:50%;width:75%;aspect-ratio:1;border:1px dashed #9bdcff44;border-radius:50%;transform:translate(-50%,-50%);animation:rg 40s linear infinite}
-@keyframes rg{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.cdl{width:70px;height:70px;border-radius:50%;background:radial-gradient(#ffd89080,transparent 70%);animation:flk 1.6s ease-in-out infinite alternate}
-@keyframes flk{from{opacity:.4;transform:scale(.85)}to{opacity:1;transform:scale(1.15)}}
-.pls{left:50%;top:50%;width:40%;aspect-ratio:1;border-radius:50%;border:2px solid #6fe0c066;animation:pls 3.6s ease-out infinite}
-@keyframes pls{from{transform:translate(-50%,-50%) scale(.3);opacity:1}to{transform:translate(-50%,-50%) scale(2.4);opacity:0}}
-.fl{inset:0;background:#e8f4ff;opacity:0}.s-f .fl{animation:flsh .9s}
-@keyframes flsh{20%{opacity:.7}to{opacity:0}}
-.wv{top:0;bottom:0;left:-40%;width:40%;background:linear-gradient(90deg,transparent,#9bdcff55,transparent);opacity:0}.s-w .wv{animation:wvm 1.6s ease-in-out}
-@keyframes wvm{from{opacity:1;transform:none}to{opacity:1;transform:translateX(350%)}}
-.ss2{top:12%;left:-10%;width:90px;height:2px;background:linear-gradient(90deg,transparent,#fff);opacity:0}.s-ss .ss2{animation:ssh 1.2s ease-in}
-@keyframes ssh{from{transform:translate(0,0) rotate(25deg);opacity:1}to{transform:translate(520px,240px) rotate(25deg);opacity:0}}
-.av{position:absolute;bottom:6px;font-size:1.7rem;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .5s,filter .4s}
-.av span{display:block}.av.m{left:12%}.av.a{right:12%}.av.l{left:calc(50% - 14px)}
-.av.in{opacity:.45;transform:none;filter:grayscale(.6)}
-.av.sp{opacity:1;transform:scale(1.25);filter:drop-shadow(0 0 10px #9bdcff)}.av.a.sp{filter:drop-shadow(0 0 10px #e9d5a2)}
-.s-t .av.sp span{animation:tk .28s ease-in-out infinite alternate}
-@keyframes tk{to{transform:translateY(-5px) rotate(4deg)}}
-.pe{font-size:1.3rem;animation:pe 1.8s ease-out forwards}
-@keyframes pe{to{transform:translateY(-70px) scale(1.4);opacity:0}}
-.cr{bottom:4px;left:-12%;font-size:1.4rem;animation:crn 5s linear forwards}
-@keyframes crn{to{left:110%}}
-</style></head><body>
-<div id="sky" aria-hidden="true"></div><div id="tint" aria-hidden="true"></div><div id="app"></div><div id="toast" role="status"></div>
+:root{
+ --ink:#292319;--paper:#e9d9b4;--paper-light:#f0e4c7;--paper-dark:#d8c49a;
+ --red:#8f2b20;--blue:#354d58;--olive:#60613c;--muted:#655a45;--line:#342d2180;
+ --serif:"Noto Serif Bengali","Nirmala UI",serif;--sans:"Noto Sans Bengali","Nirmala UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{background:#86795e;scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:16px/1.72 var(--serif);
+ background:radial-gradient(ellipse at 15% 15%,#b9aa86 0,transparent 42%),linear-gradient(135deg,#81745a,#a99a75 50%,#75684f)}
+button,input{font:inherit}button{touch-action:manipulation}
+.sheet{width:min(1460px,calc(100% - 24px));margin:16px auto;background-color:var(--paper);
+ background-image:radial-gradient(#5d4b2a18 .7px,transparent 1.2px),repeating-linear-gradient(0deg,#fff0 0 4px,#6f58200a 4px 5px);
+ background-size:5px 5px,100% 6px;padding:clamp(12px,2vw,26px);box-shadow:0 0 0 1px #382d1d99,0 14px 42px #20190f66;position:relative}
+.sheet:before,.sheet:after{content:"";position:absolute;pointer-events:none;inset:6px;border:1px solid #7b694540}
+.mast-top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;border-bottom:3px double var(--ink);padding-bottom:7px;font:700 .7rem/1.5 var(--sans)}
+.mast{text-align:center;border-bottom:6px double var(--ink);padding:9px 0 11px;position:relative}
+.mast h1{font:900 clamp(3rem,10vw,6.3rem)/1.02 var(--serif);margin:0;letter-spacing:-.045em;text-shadow:1px 1px 0 #fff4}
+.mast .tagline{font:700 .9rem var(--serif);color:var(--muted);margin-top:5px}
+.edition{font:800 .7rem var(--sans);letter-spacing:.035em;margin-top:8px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.edition span{border:1px solid var(--ink);padding:2px 7px;background:#d8c59b}
+.ticker{margin:6px 0 13px;background:var(--ink);color:var(--paper-light);overflow:hidden;white-space:nowrap;font:700 .8rem var(--sans);padding:6px 0;border-top:2px solid var(--red);border-bottom:2px solid var(--red)}
+.ticker span{display:inline-block;padding-left:100%;animation:marquee 48s linear infinite}@keyframes marquee{to{transform:translateX(-100%)}}
+.lead{border-bottom:5px double var(--ink);padding:0 0 15px;margin-bottom:14px}
+.kicker{display:inline-block;background:var(--red);color:#fff6e6;padding:3px 10px;font:800 .7rem var(--sans);letter-spacing:.07em;transform:rotate(-.7deg)}
+.lead h2{font:900 clamp(1.8rem,5.5vw,3.45rem)/1.18 var(--serif);margin:9px 0 5px}
+.lead h3{font:700 clamp(.98rem,2.3vw,1.25rem)/1.55 var(--serif);margin:0 0 8px;color:#463b2a}
+.byline{font:italic .72rem var(--sans);color:var(--muted);margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:7px}
+.lead-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(210px,.75fr);gap:17px;align-items:start}
+p{margin:.55em 0;text-align:justify}
+/* Bengali grapheme-safe typography: deliberately no ::first-letter drop cap. */
+.lead-copy p{margin:.62em 0;line-height:1.78}
+.hero-card{border:3px double var(--ink);background:var(--paper-dark);padding:8px;align-self:start}
+.hero-art{min-height:190px;display:grid;place-items:center;text-align:center;border:1px solid var(--line);background:repeating-linear-gradient(135deg,#30271612 0 3px,transparent 3px 7px),#d1bd91}
+.hero-art .emoji{font-size:4.8rem;filter:grayscale(1);line-height:1.2}
+.hero-caption{font:800 .88rem/1.5 var(--sans);text-align:center;background:var(--ink);color:var(--paper-light);padding:8px;margin-top:7px}
+.hero-card small{display:block;font:italic .67rem var(--sans);text-align:center;margin-top:5px;color:var(--muted)}
+.headline-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:12px 0 2px}
+.headline-strip div{border:1px solid var(--ink);padding:7px 9px;background:#ddcca6;font:700 .77rem/1.5 var(--sans)}
+.headline-strip b{display:block;color:var(--red);font-size:.68rem}
+.paper-grid{
+ display:block;
+ column-count:4;
+ column-gap:15px;
+ column-rule:1px solid #342d2128;
+ column-fill:balance;
+}
+.paper-grid>.section{
+ display:inline-block;
+ width:100%;
+ vertical-align:top;
+ margin:0 0 14px;
+ break-inside:avoid;
+ -webkit-column-break-inside:avoid;
+}
+.paper-grid>.coming,.paper-grid>.wide-ad{
+ display:block;
+ column-span:all;
+ margin:13px 0 15px;
+ break-inside:avoid;
+}
+.paper-grid>.wide-ad{display:grid;grid-template-columns:1fr auto;align-items:center}
+/* The lead report is a broad front-page feature, not just another small column. */
+.lead-copy{
+ column-count:2;
+ column-gap:20px;
+ column-rule:1px solid #342d2130;
+ column-fill:balance;
+}
+.lead-copy>p,.lead-copy>.inline-ad,.lead-copy>.inline-meme,.lead-copy>.inline-note{
+ break-inside:avoid;
+ -webkit-column-break-inside:avoid;
+}
+.inline-ad{
+ border:3px double var(--red);
+ background:#d8c69d;
+ padding:8px 10px;
+ margin:8px 0 11px;
+ text-align:center;
+ font:700 .8rem/1.6 var(--sans);
+}
+.inline-ad strong{display:block;color:var(--red);font:900 1rem/1.4 var(--serif);margin-bottom:3px}
+.inline-ad small{display:block;color:var(--muted);font:italic .65rem/1.5 var(--sans);margin-top:4px}
+.inline-meme{border:2px solid var(--ink);background:#d4c49e;margin:8px 0 11px;}
+.inline-meme .art{font-size:2.5rem;text-align:center;padding:8px;filter:grayscale(1)}
+.inline-meme .line{background:var(--ink);color:var(--paper-light);font:800 .78rem/1.5 var(--sans);padding:7px;text-align:center}
+.inline-note{border-left:5px solid var(--blue);background:#dfd0aa;padding:8px 10px;margin:8px 0 11px;font:700 .8rem/1.65 var(--sans)}
+.section{min-width:0;border:1px solid var(--line);padding:10px 11px;background:#f2e6c9a8;box-shadow:2px 2px 0 #6c58301a;break-inside:avoid}
+.section h2{font:900 1.08rem/1.4 var(--serif);border-top:3px solid var(--ink);padding-top:5px;margin:0 0 7px}
+.section h2 small{display:block;font:italic .68rem/1.5 var(--sans);font-weight:500;color:var(--muted)}
+.section p{font-size:.92rem;line-height:1.7}
+.item{padding:0 0 7px;margin:0 0 7px;border-bottom:1px dotted var(--line);font-size:.88rem;line-height:1.65}
+.item:last-child{border:0;margin:0;padding:0}.item b{font-weight:900;color:#342819}
+.box{border:2px solid var(--ink);background:#e1d0a9;padding:10px 12px}
+.box.dark{background:var(--ink);color:var(--paper-light);border-color:var(--ink)}.box.dark h2{border-color:var(--paper-light);color:var(--paper-light)}.box.dark .item b{color:#f3d9a4}
+.ad{background:#d7c497;border:4px double var(--red);padding:10px;text-align:center;position:relative}
+.ad:before{content:"বিজ্ঞাপন";position:absolute;top:-10px;left:8px;padding:0 5px;background:var(--paper);font:800 .58rem var(--sans);color:var(--red)}
+.ad h2{font:900 1.08rem/1.4 var(--serif);color:var(--red);border:0;margin:2px 0 5px;padding:0}
+.ad p{text-align:center;font-size:.84rem;margin:.4em 0}.ad .fine{font:italic .65rem/1.5 var(--sans);color:#55482f}
+.ad .price{font:900 1rem var(--sans);color:var(--red);display:block;margin:5px 0}
+.wide-ad{grid-column:span 2;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;text-align:left;background:#d3c29a}
+.wide-ad p{text-align:left}.wide-ad .seal{font-size:2.5rem;filter:grayscale(1)}
+.meme{padding:0;background:#d1c19a;border:2px solid var(--ink);overflow:hidden}
+.meme .visual{padding:13px;text-align:center;font-size:3.2rem;filter:grayscale(1)}
+.meme .caption{background:var(--ink);color:var(--paper-light);font:800 .84rem/1.5 var(--sans);padding:8px;text-align:center}
+.meme .source{font:italic .64rem var(--sans);padding:4px 8px;text-align:center}
+.two{display:grid;grid-template-columns:1fr 1fr}.two>div{text-align:center;padding:7px;font:600 .77rem/1.5 var(--sans)}.two>div+div{border-left:2px solid var(--ink)}
+.two strong{display:block;font:900 .67rem var(--sans);letter-spacing:.06em}.two .big{font-size:2.35rem;display:block}
+.poem{border:4px double var(--ink);padding:12px;text-align:center;background:#e2d2aa}
+.poem h2{font:900 1.12rem var(--serif);margin:0 0 7px;border:0;padding:0}.poem p{text-align:center;line-height:1.95;margin:.17em 0;font-size:.86rem}
+.literature{background:#dfcda4;border-left:6px solid var(--blue);padding:11px 13px}
+.literature .label{font:800 .65rem var(--sans);color:var(--red);letter-spacing:.05em}.literature h2{font:900 1.05rem var(--serif);margin:3px 0 7px;border:0;padding:0}
+.literature p{font-style:italic;font-size:.87rem}
+.stamp{display:inline-block;border:3px double var(--red);color:var(--red);font:900 .73rem var(--sans);padding:3px 7px;transform:rotate(-3deg)}
+.wanted{border:4px double var(--red);padding:10px;text-align:center;background:#e2cfaa}
+.wanted h2{font:900 1.25rem var(--serif);color:var(--red);margin:3px 0;border:0;padding:0}
+.wanted .portrait{font-size:4rem;filter:grayscale(1);margin:1px}.wanted p{text-align:center;font-size:.85rem}
+.wanted .details{text-align:left;border-top:1px dashed var(--red);padding-top:7px;font:700 .76rem/1.7 var(--sans)}
+.coming{background:#354d58;color:#f4e6c2;border:5px double #f4e6c2;outline:2px solid #354d58;padding:12px;text-align:center;grid-column:span 2}
+.coming .huge{font:900 clamp(1.4rem,3vw,2.2rem)/1.35 var(--serif);color:#ffe5a5;text-shadow:2px 2px #1c2a30}
+.coming p{text-align:center;font-size:.85rem}.coming .sub{font:700 .7rem var(--sans);color:#e9d7ad}
+.badge{display:inline-block;padding:2px 7px;background:var(--red);color:white;font:800 .62rem var(--sans)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}.stats div{border:1px solid var(--line);padding:6px;text-align:center;background:#e4d3ac;font:700 .72rem var(--sans)}.stats b{display:block;font-size:1.15rem;color:var(--red)}
+.riddle input{width:min(100%,320px);padding:8px;border:2px solid var(--ink);background:#f6edda;color:var(--ink);font:600 .86rem var(--sans)}
+.riddle label{display:block;font-weight:800;margin:8px 0 4px;font-size:.88rem}
+.btn{border:2px solid var(--ink);background:var(--paper-light);color:var(--ink);padding:8px 11px;min-height:40px;font:800 .78rem var(--sans);box-shadow:3px 3px 0 var(--ink);cursor:pointer;margin:3px}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}.btn.primary{background:var(--red);color:#fff5e6}
+.btn:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:3px}.controls{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.status{font:700 .78rem/1.6 var(--sans);min-height:2.2em;margin-top:8px}.progress{height:16px;border:2px solid var(--ink);background:#f5ecd9;margin:7px 0}.progress i{display:block;width:0;height:100%;background:var(--olive);transition:width .3s}
+.secret{display:none;border:4px double var(--red);padding:12px;margin:12px 0;background:#f0dfb9}.secret.show{display:block;animation:reveal .5s ease}@keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.secret h2{font:900 1.3rem var(--serif);color:var(--red);text-align:center;margin:0;border:0;padding:0}
+.footer{border-top:6px double var(--ink);margin-top:14px;padding:9px 0 0;text-align:center;font:italic .7rem/1.6 var(--sans);color:var(--muted)}
+#toast{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:92vw;background:var(--ink);color:var(--paper-light);padding:9px 14px;font:700 .8rem var(--sans);opacity:0;pointer-events:none;transition:opacity .2s;z-index:30;text-align:center}
+#toast.show{opacity:1}#blackout{position:fixed;inset:0;background:#090909;color:#f4d66f;display:none;z-index:40;place-items:center;text-align:center;padding:20px;font-family:var(--serif)}
+#blackout.show{display:grid}#blackout strong{font-size:2.4rem}#blackout p{text-align:center}
+.secret-link{border-bottom:1px dashed currentColor;cursor:pointer}
+@media(max-width:1180px){.paper-grid{column-count:3}}
+@media(max-width:900px){.paper-grid{column-count:2}}
+@media(max-width:620px){
+ .sheet{width:calc(100% - 10px);margin:5px auto;padding:11px}
+ .lead-grid{grid-template-columns:1fr}
+ .lead-copy{column-count:1}
+ .hero-art{min-height:125px}
+ .paper-grid{column-count:1;column-gap:0;column-rule:0}
+ .coming,.wide-ad{column-span:none}
+ .wide-ad{grid-template-columns:1fr}
+ .headline-strip{grid-template-columns:1fr}
+ .mast-top{font-size:.62rem}
+ .section{padding:9px}
+ .mast h1{font-size:3.2rem}
+}
+/* On a phone turned sideways, use two compact newspaper columns instead of a long single strip. */
+@media(orientation:landscape) and (max-height:560px) and (max-width:1000px){
+ .sheet{width:calc(100% - 10px);margin:5px auto;padding:9px}
+ .paper-grid{column-count:2;column-gap:12px}
+ .lead-grid{grid-template-columns:minmax(0,2fr) minmax(155px,.85fr);gap:10px}
+ .lead-copy{column-count:2;column-gap:13px}
+ .hero-art{min-height:100px}
+ .hero-art .emoji{font-size:3rem}
+ .mast h1{font-size:2.8rem}
+ .ticker{margin:4px 0 9px}
+ .section{padding:8px;margin-bottom:10px}
+ .item,.section p{font-size:.8rem;line-height:1.55}
+ .coming .huge{font-size:1.25rem}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+.paper-grid{display:none!important}
+.pg{display:block}
+.pg .row{display:grid;align-items:start;margin:0 0 16px;padding-bottom:16px;border-bottom:3px double var(--ink)}
+.pg .row.go{align-items:stretch}
+.pg .row.a4{grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr)}
+.pg .row.a3{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+.pg .row.a2{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.pg .row.nb{grid-template-columns:repeat(var(--n,2),minmax(0,1fr))}
+.pg .col{display:flex;flex-direction:column;gap:14px;min-width:0;padding:0 10px}
+.pg .col:first-child{padding-left:0}.pg .col:last-child{padding-right:0}
+.pg .col+.col{border-left:1px solid #342d2155}
+.pg .col>*{margin:0!important}
+.pg .col>.grow{flex:1 1 auto}
+.pg .col>.ad.grow{display:flex;flex-direction:column;justify-content:center}
+.pg .lead{border:0;padding:0;margin:0}
+.pg.c1 .lead-copy,.pg.c2 .lead-copy,.pg.c3 .lead-copy{column-count:1}
+.pg .lead-copy p{font-size:var(--lf,1rem);line-height:1.7}
+.pg .lead-copy>.section,.pg .lead-copy>.hero-card{margin:12px 0}
+.pg.c4 .lead h2{font-size:clamp(1.7rem,2.5vw,2.9rem)}
+.pg.c2 .lead h2,.pg.c3 .lead h2{font-size:clamp(1.45rem,3.4vw,2.3rem)}
+.pg.c1 .lead h2{font-size:clamp(1.5rem,7vw,2.2rem)}
+.pg.c1 .headline-strip,.pg.c2 .headline-strip{grid-template-columns:1fr}
+.pg>.coming,.pg>.wide-ad{margin:0 0 16px}
+.pg>.wide-ad{display:grid;grid-template-columns:1fr auto;align-items:center}
+.pg.c1>.wide-ad,.pg.c2>.wide-ad{grid-template-columns:1fr}
+.pg.c1>*{margin-bottom:14px}
+</style>
+</head>
+<body>
+<main class="sheet">
+ <div class="mast-top"><span id="dateLine">তারিখ প্রস্তুত হচ্ছে…</span><span>দৈনিক একই খবর · কারণ সাংবাদিক দুর্নীতিগ্রস্থ </span><span>মূল্য: অসীম ধৈর্য ও একটি কিডনি</span></div>
+ <header class="mast">
+  <h1 id="masthead">দৈনিক ধৈর্য</h1>
+  <div class="tagline">“অপেক্ষা করুন—অপেক্ষারও একদিন সংবাদমূল্য হবে।”</div>
+  <div class="edition"><span>বিশেষ অপেক্ষা সংখ্যা</span><span>প্রথম বর্ষ · সংখ্যা ০০১</span><span>প্রকাশকাল: ডেভেলপারের ইচ্ছাধীন</span></div>
+ </header>
+ <div class="ticker" aria-label="সংবাদ শিরোনাম"><span>🚨 জরুরি সংবাদ: অ্যাপ আসছে, খুব শিগগিরই · বিলাশী আবারও প্রবেশদ্বারে · নোয়াখালীর দুই প্রান্তে একই প্রশ্ন—“অ্যাপ আইসে?” · ডেভেলপারকে সর্বশেষ দেখা গেছে “আসিতেসে” বলতে · তদন্ত কমিটির তদন্ত কমিটি গঠনের প্রস্তাব বিবেচনাধীন · পেঁয়াজের দাম শুনে পেঁয়াজ নিজেই কাঁদছে · লোডিং বার ৯৯ শতাংশে, আত্মবিশ্বাস ১০০ শতাংশে, কাজের অগ্রগতি অজ্ঞাত</span></div>
+
+ <section class="lead">
+  <span class="kicker">বিশেষ প্রতিবেদন · জাতীয় অপেক্ষা সংকট</span>
+  <h2>অ্যাপ খুলতে গিয়ে আবারও আটকে গেলেন বিলাশী: নোয়াখালীর দুই প্রান্তে উত্তেজনা, ডেভেলপার বলছেন—“হইতেছে, আরেকটু!”</h2>
+  <h3>একই জেলার দুই বাসিন্দা, একজন অ্যাপ খুলতে চান; অন্যজন অ্যাপ বানাতে চান। মাঝখানে আটকে আছে শুধু অ্যাপটি—এবং কয়েকটি অসমাপ্ত ফাইল।</h3>
+  <div class="byline">নিজস্ব প্রতিবেদক · প্রযুক্তি, আঞ্চলিক কূটনীতি, ধৈর্য ও অজুহাত বিষয়ক বিশেষ ডেস্ক</div>
+  <div class="lead-grid">
+   <div class="lead-copy">
+    <p>নোয়াখালীর সুপরিচিত ধৈর্যপরীক্ষা কেন্দ্র—অর্থাৎ একটি মোবাইল স্ক্রিনের সামনে—গতকাল আবারও দেখা গেল বিলাশীকে। উদ্দেশ্য ছিল বহু প্রতীক্ষিত অ্যাপটিতে প্রবেশ করা। তিনি যথারীতি অ্যাপের আইকনে চাপ দিলেন। আইকনটি নড়ল, স্ক্রিন এক মুহূর্তের জন্য ভাবল, তারপর কিছুই ঘটল না। প্রযুক্তি বিশ্লেষকেরা বলছেন, এটি কোনো সাধারণ ব্যর্থতা নয়; এটি “নীরব ডিজিটাল অপমান”।
+    </p>
+    <p>প্রত্যক্ষদর্শীর ভাষ্য অনুযায়ী, বিলাশী প্রথমে শান্ত ছিলেন। দ্বিতীয়বার চাপার পর ভ্রু সামান্য কুঁচকায়। তৃতীয়বারে তিনি ফোনের দিকে এমনভাবে তাকান, যেন ফোনটি তাঁর কাছে ব্যক্তিগতভাবে ক্ষমা চাইবে। চতুর্থবারে তিনি ডেভেলপারকে বার্তা পাঠান: “অ্যাপটা কি এখনো হয় নাই?”</p>
+    <p>ওপাশ থেকে উত্তর আসে: “হইতেছে।” এই একটি শব্দের পর নোয়াখালীর আবহাওয়া অফিসে অস্বাভাবিক চাপ অনুভূত হয়। কারণ “হইতেছে” শব্দটির কোনো নির্দিষ্ট সময়সীমা নেই। এটি পাঁচ মিনিটও হতে পারে, পাঁচ দিনও হতে পারে, আবার এমন এক কাল্পনিক ভবিষ্যৎও হতে পারে যেখানে মানুষ মঙ্গলগ্রহে গিয়ে বাজার করে ফিরে এসেছে।</p>
+    <div class="inline-ad"><strong>বিজ্ঞাপন: ডেডলাইন ধোয়ার সাবান</strong>কাজ জমে পাহাড়? ডেডলাইন কাছে? আমাদের সাবান ব্যবহার করুন—কাজ শেষ হবে কি না জানি না, তবে অজুহাতের দাগ চকচকে পরিষ্কার হবে!<small>বিশেষ অফার: আপনি ভোদাই হলে একটি সাবান ফ্রি।</small></div>
+    <p>বিলাশী জানতে চান, “কতটুকু হইছে?” ডেভেলপার বলেন, “অনেকটুকু।” প্রশ্ন আসে, “দেখান।” জবাব: “এখনো দেখানোর মতো হয় নাই।” এই পর্যায়ে উপস্থিত এক চা-দোকানি মন্তব্য করেন, “চা বানাইতে পানি লাগে, চিনি লাগে, চা-পাতা লাগে। এই অ্যাপ বানাইতে কী লাগে? শুধু ‘আসিতেসে’?” দোকানির বক্তব্যে জনতা হাততালি দিলেও ডেভেলপার পক্ষ থেকে কোনো প্রতিক্রিয়া পাওয়া যায়নি।</p>
+    <p>সূত্র জানায়, ডেভেলপারও নোয়াখালীর মানুষ। ফলে ঘটনাটি এখন আর নিছক প্রযুক্তিগত সমস্যা নয়; এটি একই জেলার দুই নাগরিকের মধ্যে এক ঐতিহাসিক ধৈর্য-দ্বৈরথ। একদিকে বিলাশীর প্রশ্ন—“কবে খুলব?” অন্যদিকে ডেভেলপারের উত্তর—“আইবো, আইবো।” স্থানীয় ভাষাবিদেরা বলছেন, নোয়াখালীর “আইবো” শব্দটি আশাবাদ, প্রতিশ্রুতি ও সময়ক্ষেপণের এক বহুমাত্রিক প্রকাশ।</p>
+    <p>ডেভেলপারের দাবি, অ্যাপের নকশা, রং, বোতাম, অভ্যন্তরীণ ব্যবস্থা, ভবিষ্যৎ উন্নয়ন এবং সম্ভাব্য মহাজাগতিক প্রভাব নিয়ে তিনি গভীরভাবে চিন্তা করছেন। তবে সাংবাদিকেরা জানতে চান, “এই চিন্তাগুলোর কোনোটি কি ফাইলে লেখা হয়েছে?” প্রশ্ন শুনে তিনি কিছুক্ষণ নীরব থেকে বলেন, “আগে মাথায় গুছাই, পরে কোডে গুছামু।”</p>
+    <div class="inline-meme"><div class="art">🧑‍💻☕📱</div><div class="line">ডেভেলপার: “আজ কোড লিখব।”<br>চা: “আগে আমারে শেষ করেন।”<br>বিলাশী: “তোমরা দুইজনেই আগে শেষ হও!”</div></div>
+    <p>এদিকে বিলাশী অ্যাপের প্রবেশপথে অপেক্ষা করতে করতে নিজেই একটি অনানুষ্ঠানিক গবেষণা শুরু করেছেন। তাঁর পর্যবেক্ষণ: অ্যাপের আইকনে যতবার চাপ দেওয়া হয়, ডেভেলপারের আত্মবিশ্বাস তত বাড়ে; কিন্তু অ্যাপের দৃশ্যমান অগ্রগতি একই জায়গায় থাকে। গবেষণাটির নাম দেওয়া হয়েছে “চাপ বাড়ে, অ্যাপ নড়ে না”।</p>
+    <div class="inline-note">সংবাদদাতার বিশেষ নোট: “অ্যাপ আসছে” কথাটি পত্রিকার এই সংখ্যায় মোট ১৭ বার উল্লেখ করা হয়েছে। পাঠকের ধৈর্যের স্বার্থে পরবর্তী ১৭ বার ছোট অক্ষরে ছাপা হলো।</div>
+    <p>সরকারি প্রতিক্রিয়ায় ধৈর্য ও ডিজিটাল উন্নয়ন মন্ত্রণালয় জানিয়েছে, “উক্ত অ্যাপের নির্মাণকার্য যথাসময়ে সম্পন্ন হইবে বলিয়া আমরা দৃঢ়ভাবে আশাবাদী।” পরে এক কর্মকর্তা স্বীকার করেন, ‘যথাসময়’ বলতে কোন তারিখ বোঝানো হয়েছে, সে বিষয়ে মন্ত্রণালয়ের সঙ্গে ডেভেলপারের এখনো যোগাযোগ হয়নি।</p>
+    <p>পাড়ার চায়ের দোকানে তখন গোল বৈঠক। এক চাচা কইলেন, “আমাগো সময় এক ডাকে সব হইতো।” পাশের ভাতিজা কইলো, “চাচা, আপনের সময় তো ডাকই আছিল না।” দুইজনে এরপর ৪০ মিনিট ধইরা চা খাইলেন; সমাধান হয় নাই, তবে চিনি শেষ।</p>
+<p>গণমানুষের দাবিতে একটা গণশুনানিও হইছে। সভাপতি কইলেন, “আমরা সবাই অপেক্ষার ভাই।” শ্রোতারা জিগাইলো, “অ্যাপটা কই?” সভাপতি কইলেন, “সেইডা পরের সভায় আলোচনা হইবো।” পরের সভার তারিখ ঠিক করতে একটা কমিটি গঠিত হইছে; কমিটির প্রথম সিদ্ধান্ত—আরেকটা কমিটি।</p>
+<div class="inline-ad"><strong>সবুর ক্যাপসুল</strong>দিনে তিনবার, ভাত খাওনের আগে ও পরে ও মাঝখানে। ডেভেলপাররে খাওয়াইলে বেশি কাজ করে।<small>*ফলাফল ডেভেলপারের মুড ও চায়ের গরমের উপর নির্ভরশীল।</small></div>
+<p>বিশেষজ্ঞ মতামত: এক নামী “অপেক্ষাবিদ” কইছেন, “অপেক্ষা করা আসলে একটা শিল্প; গান গাওনের মতো, তবে কাউরে শুনাইতে হয় না।” তাঁর সাক্ষাৎকারের ফি ছিল দুই কাপ চা ও এক প্লেট সিঙ্গারা। সিঙ্গারা আইসাই নাই বইলা বক্তব্য অসমাপ্ত।</p>
+<p>মনোবিজ্ঞানীরা কইছেন, “খুব শিগগির” শুনলে মগজে একধরনের চিনচিনে আনন্দ হয়, যা তিন মিনিট পর হারাইয়া যায়। এই ঘটনারে চিকিৎসাশাস্ত্রে বলা হয় “প্রতিশ্রুতি-হ্যাংওভার”। লক্ষণ: বারবার ফোন দেখা, কিছু না পাইয়া আবার দেখা।</p>
+<div class="inline-note">সংবাদদাতার মন্তব্য: “আমরা তিনবার জিগাইছি ‘কখন’। উত্তর পাইছি তিনবারই ‘আসিতেসে’। ভাষাবিদরা বলছেন, এইডা নাকি একটা নতুন কালের ক্রিয়া: অনির্দিষ্ট ভবিষ্যৎ-বর্তমান।”</div>
+<p>আইনজীবীরা কইছেন, অ্যাপ না খুললে মামলা করা যায় কি না তাঁরা ভাবতাছেন। তবে আদালত সপ্তাহে একদিন বসে, আর ওইদিন ডেভেলপার “আসিতেসে” কইয়া হাজির হইবো না বইলা আগাম জামিন নিয়া রাখছে।</p>
+<p>পাড়ার এক ছোট ভাই (বয়স ১১) কইছে, “আপা, অ্যাপ হয় নাই তো কী হইছে? আমারে ফোনটা দেন, আমি বানাইয়া দেই।” পরে জানা গেছে, সে “বানাইয়া দেওয়া” বলতে সে “গেম খেলা” বুঝাইছে।</p>
+<p>সর্বশেষ খবরে জানা গেছে, বিলাশী আপাতত অপেক্ষা চালিয়ে যাবেন। তবে তিনি স্পষ্ট করে বলেছেন, “অ্যাপ খুললে আগে ঢুকমু, পরে রিভিউ দিমু। আর না খুললে রিভিউও দিমু, ইতিহাসও লিখমু, ডেভেলপার এর গলা টিপে।”</p>
+   </div>
+   <aside class="hero-card"><div class="hero-art"><div><div class="emoji">📱⏳</div><b>অপেক্ষার জাতীয় সংকট</b></div></div><div class="hero-caption">“অ্যাপ আসছে”—এই আশ্বাসে আরও একটি দিন পার।</div><small>ছবি: প্রতীকী · অ্যাপের বাস্তব স্ক্রিনশট এখনো গোপন (কারণ এপ-ই নাই)</small><hr><div style="font:800 .76rem var(--sans);text-align:center">ঘটনাস্থল: নোয়াখালী · সময়: অনির্দিষ্ট · ধৈর্য: পরীক্ষাধীন</div></aside>
+  </div>
+  <div class="headline-strip"><div><b>শেষ মুহূর্তের খবর</b>ডেভেলপার বলেছেন, “কাজ প্রায় শেষ।” ‘প্রায়’ শব্দের ব্যাখ্যা চেয়ে চিঠি পাঠানো হয়েছে।</div><div><b>জনমত</b>৭ জন অপেক্ষা করছেন, ৩ জন জানেন না কীসের অপেক্ষা, ১ জন শুধু চা খেতে এসেছেন, বাকিরা পাবনা পলাতক।</div><div><b>আবহাওয়া</b>আজও অ্যাপের আকাশে মেঘলা ভাব; বৃষ্টি অনিশ্চিত।</div></div>
+ </section>
+
+ <div class="paper-grid">
+  <section class="section box">
+   <h2>সংক্ষেপে: দেশের হালচাল <small>খবর ছোট, বিপদ বড়, ব্যাখ্যা আরও বড়</small></h2>
+   <div class="item"><b>বিদ্যুৎ:</b> ছয় ঘণ্টা বিদ্যুৎ ছিল না। কর্তৃপক্ষ জানায়, বিদ্যুৎ সাময়িকভাবে আত্মঅনুসন্ধানে গিয়েছে। ফিরে এলে নিজেই জানাবে।</div>
+   <div class="item"><b>যানজট:</b> এক ব্যক্তি জীবনে প্রথমবার সময়মতো গন্তব্যে পৌঁছেছেন। তাঁকে সন্দেহভাজন হিসেবে জিজ্ঞাসাবাদ করছে যানজট গবেষণা কমিটি।</div>
+   <div class="item"><b>পেঁয়াজ:</b> দাম এখন মহাকাশ ছুঁই, পেঁয়াজ শুধু এখন নভচারীদের হাতের নাগালে।</div>
+   <div class="item"><b>সড়ক:</b> সোমবার রাস্তা উদ্বোধন, বৃহস্পতিবার বৃষ্টি সেখানে নদী উদ্বোধন করেছে। কাদা দুই অনুষ্ঠানেরই প্রধান অতিথি।</div>
+   <div class="item"><b>ইন্টারনেট:</b> গতি এত ধীর যে কচ্ছপ প্রতিবাদ করে বলেছে, “আমার নাম নিয়ে আর অপপ্রচার করবেন না।”</div>
+   <div class="item"><b>পরীক্ষা:</b> প্রশ্নপত্র দেখে এক শিক্ষার্থীর মস্তিস্ক পালিয়েছে। শিক্ষার্থী এখনো বেহুঁশ।”</div>
+   <div class="item"><b>চা:</b> চায়ের দাম বাড়ায় এক কাপ চা এখন পারিবারিক সম্পদ হিসেবে উইলে অন্তর্ভুক্তির প্রস্তাব পেয়েছে।</div>
+   <div class="item"><b>অ্যাপ:</b> অ্যাপের খবর জানতে চাইলে ডেভেলপার বলেন, “খবর ভালো।” অ্যাপ কোথায় জানতে চাইলে বলেন, “খবরটা এতও ভালো না।”</div>
+  </section>
+
+  <section class="section meme">
+   <div class="two"><div><strong>বিলাশীর প্রত্যাশা</strong><span class="big">🚪✨</span>দরজা খুলবে, আলো জ্বলবে, অ্যাপ বলবে—স্বাগতম!</div><div><strong>বাস্তবতা</strong><span class="big">🔒🐢</span>স্ক্রিন চুপ। ডেভেলপার ব্যস্ত। কচ্ছপও বিরক্ত।</div></div>
+   <div class="caption">বিলাশী: “অ্যাপ খুলবা নাকি আমি নিজেই একটা অ্যাপ বানাই?”</div><div class="source">মিম বিভাগ · অনুভূতি শতভাগ আসল, দৃশ্য সম্পূর্ণ কাল্পনিক</div>
+  </section>
+
+  <section class="section coming">
+   <span class="badge">বিশেষ ঘোষণা · প্রথম পাতার অঙ্গীকার</span>
+   <div class="huge">অ্যাপ আসছে… খুব শিগগিরই!</div>
+   <p>হ্যাঁ, পাঠকবৃন্দ, আপনারা ঠিকই পড়েছেন। অ্যাপ আসছে। একদিন আসবেই। ক্যালেন্ডারের তারিখ, ঋতুচক্র, এমনকি পৃথিবীর কক্ষপথ বদলালেও এই আশ্বাস অটুট থাকবে।</p>
+   <div class="sub">“শিগগিরই” শব্দের সংজ্ঞা ডেভেলপারের ব্যক্তিগত হেফাজতে সংরক্ষিত।</div>
+  </section>
+
+  <section class="section box">
+   <h2>বিজ্ঞান: আজব তত্ত্ব বিভাগ <small>গবেষণা করেনি কেউ, দাবি করছেন সবাই</small></h2>
+   <div class="item"><b>হরমোন-ভাগ্য মহাতত্ত্ব:</b> এক অজ্ঞাতনামা যুবকের দাবি, পৃথিবীর সব ঘটনা ঘটে হরমোন ও ভাগ্যের কারণে। পরীক্ষায় নম্বর কম? হরমোন। বৃষ্টি হলো? ভাগ্য। বিয়ে হচ্ছে না? সেটা কিন্তু বাবা-মায়ের দোষ। গবেষককে জিজ্ঞেস করা হলে তিনি বলেন, “আমারও মনে হয় হরমোন।”</div>
+   <div class="item"><b>নোয়াখালী মহাকর্ষ সূত্র:</b> নোয়াখালীর মানুষ একবার “আইতেছি” বললে দূরত্ব সংকুচিত হয় না; বরং অপেক্ষমাণ ব্যক্তির ধৈর্য প্রসারিত হয়।</div>
+   <div class="item"><b>রিফ্রেশ কোয়ান্টাম তত্ত্ব:</b> অ্যাপকে যতবার দেখা হয়, অ্যাপ ততবার অদৃশ্য হওয়ার সম্ভাবনা বেছে নেয়। পর্যবেক্ষকই এখানে প্রধান বাধা।</div>
+   <div class="item"><b>ডেভেলপার-অনিশ্চয়তা নীতি:</b> ডেভেলপার একই সময়ে কাজের মধ্যে আছেন এবং কাজ শুরু করার প্রস্তুতিতে আছেন। কোন অবস্থায় আছেন, তা জিজ্ঞেস করলে অবস্থাটি বদলে যায়।</div>
+   <div class="item"><b>পাঁচ মিনিটের আপেক্ষিকতা:</b> সাধারণ মানুষের পাঁচ মিনিট = ৩০০ সেকেন্ড। ডেভেলপারের পাঁচ মিনিট = “একটু দাঁড়াও, আগে চা খাই” থেকে পরবর্তী সূর্যোদয়।</div>
+   <div class="item"><b>হরলিক্স-উচ্চতা সূত্র:</b> জারের তলা যত কাছে আসে, “আরেকটু খেলেই বড় হব” এই বিশ্বাস তত শক্তিশালী হয়।</div>
+   <div class="item"><b>মশা-সমবায় তত্ত্ব:</b> মশারা রাতে দলবদ্ধভাবে আক্রমণ করে, কারণ তাদেরও গ্রুপ প্রজেক্ট জমা দেওয়ার ডেডলাইন আছে।</div>
+   <div class="item"><b>চা-নির্ভর সৃজনশীলতা:</b> এক কাপ চায়ে ধারণা জন্মায়, দুই কাপে পরিকল্পনা, তিন কাপে নতুন পরিকল্পনা; কোড লেখার সময় এলে চা শেষ।</div>
+   <div class="item"><b>লোডিং-বার মনোবিজ্ঞান:</b> ৯৯ শতাংশে আটকে থাকা বার মানুষের আশা, হতাশা ও আত্মসম্মানকে একই সঙ্গে ধরে রাখে।</div>
+   <div class="item"><b>ঘুম-স্মৃতি প্রভাব:</b> ঘুমাতে গেলেই সব জরুরি কাজ মনে পড়ে। সকালে উঠলে মনে হয়, “কালকে এত কী ভাবছিলাম?”</div>
+  </section>
+
+  <section class="section ad">
+   <h2>নতুন পণ্য: ধৈর্য পাউডার</h2><b>এক চিমটি নিন, আরেকটু অপেক্ষা করুন!</b>
+   <p>ডেভেলপারের “হচ্ছে” শুনে মাথা গরম? ধৈর্য পাউডার মিশিয়ে খান। ফলাফল: অপেক্ষার সময় দীর্ঘ মনে হবে না—কারণ আপনি সময়ের হিসাবই ভুলে যাবেন।</p>
+   <span class="price">দাম: ৯৯৯ টাকা অথবা ৯৯৯টি দীর্ঘশ্বাস</span>
+   <div class="fine">পার্শ্বপ্রতিক্রিয়া: “কবে হবে?” প্রশ্নটি করতে ভুলে যেতে পারেন। কোনো চিকিৎসাগত দাবি করা হচ্ছে না।</div>
+  </section>
+
+  <section class="section box dark">
+   <h2>সম্পাদকীয়: ধৈর্য ধরুন, কিন্তু কতক্ষণ? <small>গম্ভীর মুখে অতি জরুরি অগম্ভীর বিশ্লেষণ</small></h2>
+   <p>মানবসভ্যতা বহু অপেক্ষার সাক্ষী। মানুষ বৃষ্টির জন্য অপেক্ষা করেছে, ট্রেনের জন্য অপেক্ষা করেছে, প্রেমিকার জন্য অপেক্ষা করেছে। কেউ কেউ প্রিয় মানুষের “অনলাইনে আছি” দেখেও উত্তর পায়নি। কিন্তু একটি অ্যাপের জন্য অপেক্ষা—এ এক নতুন অধ্যায়।</p>
+   <p>আমরা ডেভেলপারকে দোষ দিতে চাই না। তিনি মানুষ। তাঁরও ঘুম, ক্ষুধা, চা, নেটওয়ার্ক সমস্যা এবং হঠাৎ করে টয়লেটে যাওয়ার তাগিদ থাকতে পারে। তবে ফাইলটি খুলতে তাঁর যে এত মানসিক প্রস্তুতি লাগে, তা মনোবিজ্ঞানীদের নতুন গবেষণার বিষয় হওয়া উচিত।</p>
+   <p>অতএব, বিলাশীকে বলছি—ধৈর্য ধরুন। আর ডেভেলপারকে বলছি—ধৈর্যকে এত পরীক্ষা করবেন না; একসময় পরীক্ষকও প্রশ্নপত্র ছিঁড়ে ফেলতে পারেন।</p>
+  </section>
+
+  <section class="section literature">
+   <div class="label">সাহিত্যপাতা · ক্ষুদ্র গদ্য · বাস্তবের সঙ্গে মিল কাকতালীয়</div>
+   <h2>অপেক্ষার বারান্দায় এক ডেভেলপার</h2>
+   <p>সন্ধ্যা নামে। আকাশে পাখিরা ঘরে ফেরে। চায়ের কাপে শেষ চুমুক পড়ে। শুধু ডেভেলপারের কোড এডিটরে কার্সরটি জ্বলতে থাকে—একটি ক্ষুদ্র প্রদীপের মতো, যার আলোয় কোনো কাজ দৃশ্যমান হয় না।</p>
+   <p>দূরে বিলাশী প্রশ্ন করে, “কাজ কত দূর?”</p><p>ডেভেলপার জানালার বাইরে তাকিয়ে বলেন, “দূরত্ব আসলে আপেক্ষিক।”</p>
+   <p>বিলাশী দীর্ঘশ্বাস ফেলে। ইতিহাসে এই প্রথম কোনো অ্যাপের অগ্রগতিকে দর্শনের শাখা হিসেবে স্বীকৃতি দেওয়ার দাবি ওঠে। রাত বাড়ে। কম্পিউটার ঘুমায় না। ডেভেলপারও ঘুমান না—কারণ তিনি এখনো সিদ্ধান্ত নেননি, কম্পিউটারটি চালু করবেন কি না।</p>
+   <p>হঠাৎ ফোনে বার্তা আসে: “অ্যাপ কবে?” ডেভেলপার উত্তর লেখেন: “খুব শিগগিরই।” তারপর নিজেই শব্দটির দিকে তাকিয়ে ভাবেন—এত সুন্দর শব্দ, অথচ এর কোনো ক্যালেন্ডার-সংজ্ঞা নেই!</p>
+  </section>
+
+  <section class="section poem">
+   <h2>কবিতা: “চাইতেছি মহাকাব্য”</h2>
+   <p>বলেছিলে, “হবে”—বিশ্বাসে কাটল দিন,</p><p>কোডের খাতায় জমল ধুলো, বাড়ল অপেক্ষার প্রহর।</p>
+   <p>বিলাশী বলে, “খুলবে কবে?”—ডেভেলপার কয়, “আইবো,”</p><p>এই “আইবো”-র শেষ ঠিকানা কোন ক্যালেন্ডারে খুঁজবো?</p>
+   <p>রাত পেরিয়ে ভোর হলো, মোরগ দিল ডাক,</p><p>অ্যাপের খবর জানতে গিয়ে চা-দোকানে ভিড়।</p>
+   <p>লোডিং বারে নিরানব্বই, শেষ এক ভাগ নাই,</p><p>ডেভেলপার কয়, “চিন্তা কইরো না, কাজ চলিতেসে ভাই!”</p>
+   <p>বিলাশী বলে, “হুনেন ভাই, কথা কম, কাজ করেন,”</p><p>ডেভেলপার কয়, “এইবার সত্যি”—তারপর রিলস দেখেন।</p>
+   <p>তবু আশা বেঁচে থাকে, মনটা করে ঢং,</p><p>অ্যাপটি যেদিন খুলবে, বাজবে বিজয় উল্লাস!</p>
+   <div class="fine">রচয়িতা: অপেক্ষমাণ পাঠকসমাজ · ছন্দে ভুল দেখলে আপনার চোখে সমস্যা।</div>
+  </section>
+
+  <section class="section wanted">
+   <span class="stamp">বিশেষ তদন্ত প্রতিবেদন</span><h2>WANTED · নিখোঁজ নন, ব্যস্ত ডেভেলপার</h2><div class="portrait">🕵️‍♂️💻</div>
+   <p><b>সর্বশেষ উক্তি:</b> “আসিতেসে… হইতেছে… আরেকটু!”</p>
+   <div class="details">পরিচয়: নোয়াখালীর স্বঘোষিত অ্যাপ নির্মাতা<br>শেষ অবস্থান: কোড এডিটরের আশপাশে, চায়ের কাপের নাগালে<br>বিশেষ দক্ষতা: কাজ শুরুর আগে পরিকল্পনা; পরিকল্পনার আগে চা; চায়ের পরে বিশ্রাম<br>শনাক্তকরণ চিহ্ন: “আসিতেসে” বাক্যটির প্রতি অস্বাভাবিক অনুরাগ<br>অভিযোগ: একটি অ্যাপকে দীর্ঘদিন “আসিতেসে” অবস্থায় রাখা।</div>
+   <p><b>পুরস্কার:</b> এক কাপ চা, দুইটি বিস্কুট এবং বিলাশীর পক্ষ থেকে দুই বালতি ধনেপাতা।</p>
+  </section>
+
+  <section class="section box">
+   <h2>সংক্ষেপে: নোয়াখালী ডেস্ক <small>এক জেলার দুই প্রান্ত, একই রকম জেদ</small></h2>
+   <div class="item"><b>বিলাশীর বক্তব্য:</b> “হুনেন, অ্যাপ খুলুম কবে? আইকন দেইখা আর কত দিন মন ভরামু?”</div>
+   <div class="item"><b>ডেভেলপারের জবাব:</b> “আরে অইবো অইবো, এতো তাড়া কিয়ের? কাম তো চলতাছে!”</div>
+   <div class="item"><b>স্থানীয় প্রতিক্রিয়া:</b> চায়ের দোকানে এক চাচা বলেছেন, “আমার মুরগিও ডিম পাড়ার আগে এত ঘোষণা দেয় না।”</div>
+   <div class="item"><b>ভাষাবিদদের পর্যবেক্ষণ:</b> “আইতেছি” মানেই যে বক্তা রওনা হয়েছেন, এমন কোনো প্রমাণ পাওয়া যায়নি।</div>
+   <div class="item"><b>সমঝোতা প্রস্তাব:</b> বিলাশী অ্যাপ খুলবেন; ডেভেলপার চা খাবেন—তবে দুটো কাজ একই দিনে সম্পন্ন করার সুপারিশ করা হয়েছে।</div>
+  </section>
+
+  <section class="section ad">
+   <h2>বিশেষ অফার: অদৃশ্য অ্যাপ ইনস্টিটিউট</h2><b>ভর্তি চলছে! ক্লাস হবে অ্যাপের ভেতরে।</b>
+   <p>অ্যাপ এখনো তৈরি হয়নি? কোনো সমস্যা নেই। আমাদের কোর্সে ভর্তি হলে অ্যাপ আসার আগেই অ্যাপ ব্যবহারের স্বপ্ন দেখতে শিখবেন।</p>
+   <span class="price">প্রথম ক্লাস: “খুব শিগগিরই”</span><div class="fine">ক্লাসের তারিখ, সময় ও অবস্থান—সবই রহস্যময়।</div>
+  </section>
+
+  <section class="section box">
+   <h2>চাকরির বিজ্ঞপ্তি <small>যোগ্য প্রার্থী চাই, ধৈর্য থাকলে অগ্রাধিকার</small></h2>
+   <div class="item"><b>পদ: অপেক্ষা-পর্যবেক্ষক</b><br>যোগ্যতা: প্রতিদিন “আরেকটু” শুনেও শান্ত থাকা; লোডিং বার দেখে আবেগ নিয়ন্ত্রণ; ডেভেলপারের “আসিতেসে” কথার অর্থ নিয়ে অতিরিক্ত গবেষণা না করা।</div>
+   <div class="item"><b>পদ: বোতাম-চাপা বিশেষজ্ঞ</b><br>দায়িত্ব: অ্যাপ না খুললেও নিয়মিত বোতাম চাপা। অভিজ্ঞতা: অন্তত ৪৭ বার রিফ্রেশ।</div>
+   <div class="item"><b>বেতন:</b> মাসে একবার আশ্বাস। উৎসব ভাতা: “শিগগিরই”। ছুটি: অ্যাপ প্রকাশের পর।</div>
+   <div class="item"><b>আবেদনের শেষ তারিখ:</b> অ্যাপ প্রকাশের আগের দিন। তারিখ জানতে ডেভেলপারকে জিজ্ঞাসা করে বিব্রত করবেন না।</div>
+  </section>
+
+  <section class="section meme">
+   <div class="visual">🐢⌨️☕</div><div class="caption">ডেভেলপার: “আজকে অনেক কাজ করব।”<br>চা: “আগে আমারে শেষ করেন।”</div><div class="source">দিনের মোটিভেশনাল পোস্ট · কাজ শুরু হওয়ার আগেই পোস্টটি ভাইরাল</div>
+  </section>
+
+  <section class="section box">
+   <h2>আরও কিছু বৈজ্ঞানিক আবিষ্কার <small>নোবেল কমিটি এখনো ফোন ধরেনি</small></h2>
+   <div class="item"><b>বালিশ-চিন্তা প্রভাব:</b> বিছানায় যাওয়ার পর মাথায় ১৭টি নতুন ফিচার আসে। সকালে উঠে একটির নামও মনে থাকে না।</div>
+   <div class="item"><b>মোবাইল-চার্জের দ্বৈততা:</b> ২০% চার্জে ফোন সারাদিন চলে; ৮০% চার্জে জরুরি সময়ে হঠাৎ ১% হয়ে যায়।</div>
+   <div class="item"><b>মশার ন্যাভিগেশন:</b> ঘরে আলো বন্ধ করলেই মশা মানুষের কানে নির্ভুলভাবে পৌঁছে যায়।</div>
+   <div class="item"><b>বাঙালি সময়-প্রসারণ:</b> “পাঁচ মিনিটে আসছি” কথাটির সঙ্গে ঘড়ির সময়ের কোনো বাধ্যতামূলক সম্পর্ক নেই।</div>
+   <div class="item"><b>পরীক্ষার আগের স্মৃতিশক্তি:</b> পড়ার সময় কিছু মনে থাকে না; পরীক্ষা শেষ হলে সব উত্তর একসঙ্গে মনে পড়ে।</div>
+   <div class="item"><b>চপ-সিঙ্গারা মহাকর্ষ:</b> প্লেটে শেষ সিঙ্গারাটি থাকলে সবার হাত একই সময়ে তার দিকে আকৃষ্ট হয়।</div>
+  </section>
+
+  <section class="section ad wide-ad">
+   <div><h2>ডেভেলপার খুঁজছেন? আমরা খুঁজে দিতে পারি!</h2><p>আপনার ডেভেলপার কি “চাইতেছি” বলে দিনের পর দিন উধাও? আমাদের কাছে আছে বিশেষ ট্র্যাকিং সেবা: শেষ দেখা চায়ের কাপ, কোড এডিটর ও অসমাপ্ত ট্যাবের অবস্থান বিশ্লেষণ।</p><span class="price">প্রথম অনুসন্ধান ফ্রি · ফলাফল অনিশ্চিত</span><div class="fine">সেবা পেতে ডেভেলপারের নিজের কাছেই যোগাযোগ করুন। আমরা তাঁকে খুঁজে পাইনি।</div></div><div class="seal">🔎</div>
+  </section>
+
+  <section class="section box">
+   <h2>রাশিফল <small>গ্রহ-নক্ষত্র নয়, ডেভেলপারের মেজাজনির্ভর</small></h2>
+   <div class="item"><b>মেষ:</b> আজ অ্যাপের খবর জানতে চাইবেন। উত্তর আগের মতোই—“হচ্ছে।” আপনার ধৈর্য পরীক্ষায় ২ নম্বর বাড়বে।</div>
+   <div class="item"><b>বৃষ:</b> নতুন কিছু শুরু করবেন না। ডেভেলপার ইতিমধ্যে যথেষ্ট কিছু শুরু করে শেষ করেননি।</div>
+   <div class="item"><b>মিথুন:</b> একই প্রশ্ন দুবার করবেন না। প্রথমবারও উত্তর পাননি—দ্বিতীয়বারও নাও পেতে পারেন।</div>
+   <div class="item"><b>কর্কট:</b> আবেগপ্রবণ হবেন না। লোডিং বার আপনার ব্যক্তিগত শত্রু নয়; যদিও সন্দেহ যথেষ্ট জোরালো।</div>
+   <div class="item"><b>সিংহ:</b> আত্মবিশ্বাস তুঙ্গে থাকবে। আজ অ্যাপ খুলবেই বলে ঘোষণা দেবেন; অ্যাপ বিষয়টি জানে না।</div>
+   <div class="item"><b>কন্যা:</b> খুঁটিনাটি ধরার অভ্যাস ভালো। তবে ডেভেলপারের অজুহাতে ব্যাকরণ খুঁজতে যাবেন না।</div>
+   <div class="item"><b>তুলা:</b> অপেক্ষা করবেন, নাকি অপেক্ষার ওপর প্রতিবেদন লিখবেন—সিদ্ধান্ত নিতে গিয়ে দিন শেষ হবে।</div>
+   <div class="item"><b>বৃশ্চিক:</b> আজ রহস্যের সমাধান হবে। তবে রহস্যটি কী, তা পরে জানানো হবে।</div>
+   <div class="item"><b>ধনু:</b> দূরে কোথাও যাওয়ার পরিকল্পনা করুন। অ্যাপের প্রকাশের তারিখও সম্ভবত দূরে।</div>
+   <div class="item"><b>মকর:</b> ডেভেলপারকে কাজের কথা মনে করিয়ে দেওয়া শুভ। তবে বার্তার শেষে “প্লিজ” লিখলে ফল দ্বিগুণ হবে—এমন প্রমাণ নেই।</div>
+   <div class="item"><b>কুম্ভ:</b> নতুন ফিচারের আইডিয়া আসবে। দয়া করে আরেকটি ফিচার যোগ করার আগে বর্তমান অ্যাপটি শেষ হতে দিন।</div>
+   <div class="item"><b>মীন:</b> স্বপ্নে অ্যাপ খুলতে পারে। জেগে উঠে বাস্তবতা যাচাই করুন।</div>
+   <div class="item"><b>শুভ সংখ্যা:</b> ৯৯। শুভ রং: লোডিং বারের ধূসর। শুভ বাক্য: “খুব শিগগিরই”।</div>
+  </section>
+
+  <section class="section box">
+   <h2>পাঠকের চিঠি <small>সম্পাদক সমীপে · অভিযোগ শুনে আমরা আরও ধৈর্যশীল হই</small></h2>
+   <div class="item">“সম্পাদক মহোদয়, আমি প্রতিদিন অ্যাপের অপেক্ষায় থাকি। অপেক্ষা করতে করতে এখন ঘড়ির কাঁটাকেও সন্দেহ হয়।” — <i>অপেক্ষমাণ, ফেনী</i><br><b>সম্পাদক:</b> ঘড়ির দোষ নেই। সময়মতো চলার চেষ্টা করাই তার অপরাধ।</div>
+   <div class="item">“ডেভেলপার কি সত্যিই কাজ করছেন?” — <i>একজন সংশয়বাদী পাঠক</i><br><b>সম্পাদক:</b> প্রশ্নটি যথেষ্ট গুরুত্বপূর্ণ। উত্তরটি তদন্তাধীন।</div>
+   <div class="item">“আমি অ্যাপের নাম প্রস্তাব করতে চাই: ‘আরেকটু’।” — <i>নাম প্রকাশে অনিচ্ছুক</i><br><b>সম্পাদক:</b> নামটি বিবেচনাধীন। নাম চূড়ান্ত করতে আরও কিছু শতাব্দী লাগতে পারে।</div>
+   <div class="item">“অ্যাপ কবে আসবে? আমার বিড়ালও অপেক্ষা করতে করতে ঘুমিয়ে গেছে।” — <i>একজন বিড়ালপ্রেমী</i><br><b>সম্পাদক:</b> বিড়ালকে আমাদের পক্ষ থেকে শুভেচ্ছা। সে অন্তত বিশ্রাম নিতে পেরেছে।</div>
+  </section>
+
+  <section class="section poem">
+   <h2>দুই লাইনের মহাকাব্য</h2>
+   <p>অ্যাপের আশায় রাত জাগি, চোখে ঘুমের ছাপ—</p><p>ডেভেলপার ঘুমায় নিশ্চিন্তে, বলে—“কালকে দেবো, বাপ!”</p>
+   <hr style="border:0;border-top:1px dashed var(--line);margin:8px 0">
+   <p>আসিতেসে আর হইতেছে—দুই ভাই পাশাপাশি,</p><p>মাঝখানে বসে কাঁদে শুধু আমাদের বিলাশী।</p>
+   <div class="fine">কাব্য-পরামর্শক: চায়ের দোকানের বেঞ্চ</div>
+  </section>
+
+  <section class="section box">
+   <h2>সংক্ষেপে: আন্তর্জাতিক সংবাদ <small>বিশ্বও অপেক্ষায়, যদিও জানে না কিসের</small></h2>
+   <div class="item"><b>মঙ্গলগ্রহ:</b> মঙ্গলবাসীরা পৃথিবীর অ্যাপের অপেক্ষার খবর শুনে নিজেদের গ্রহে দ্রুততর ইন্টারনেট স্থাপনের সিদ্ধান্ত নিয়েছে।</div>
+   <div class="item"><b>চাঁদ:</b> চাঁদের এক গর্তে Wi-Fi পাওয়া গেছে বলে গুজব। বিজ্ঞানীরা বলছেন, আগে পাসওয়ার্ড জানা দরকার।</div>
+   <div class="item"><b>জাতিসংঘ:</b> “খুব শিগগিরই” শব্দটির আন্তর্জাতিক সংজ্ঞা তৈরির প্রস্তাব উঠেছে। ডেভেলপার পর্যবেক্ষক হিসেবে আমন্ত্রিত।</div>
+   <div class="item"><b>নোবেল:</b> সংগীতে “নোবেল” পেয়েছেন পাবনা পলাতক রবীন্দ্রনাথ জ্যাকসন।</div>
+  </section>
+
+  <section class="section ad">
+   <h2>বিশেষ ছাড়: অজুহাত ক্লাউড স্টোরেজ</h2><b>সব অজুহাত এক জায়গায় রাখুন!</b>
+   <p>“নেট ছিল না”, “মাথা ব্যথা”, “কালকে করব”, “শেষের একটু বাকি”—সব অজুহাতের নিরাপদ সংরক্ষণ।</p>
+   <span class="price">প্রথম ৯৯টি অজুহাত ফ্রি</span><div class="fine">স্টোরেজ পূর্ণ হলে নতুন অজুহাত নিজে তৈরি করুন।</div>
+  </section>
+
+  <section class="section wanted">
+   <span class="stamp">বিশেষ ঘোষণা</span><h2>সাক্ষী চাই!</h2><div class="portrait">📸🧾</div>
+   <p>কেউ কি ডেভেলপারকে বাস্তবে কোড লিখতে দেখেছেন? দেখে থাকলে তারিখ, সময়, স্থান ও অন্তত দুইজন সাক্ষীর নামসহ সম্পাদকীয় দপ্তরে জানান।</p>
+   <p><b>সাক্ষীর নিরাপত্তা:</b> নিশ্চিত করা সম্ভব নয়; ডেভেলপার খবর পেলে আপনাকে এক কাপ চায়ে চুবিয়ে মারবেন।</p>
+  </section>
+
+  <section class="section box">
+   <h2>সংক্ষেপে: পরিবার ও আত্মীয়সভা <small>পরামর্শ বিনামূল্যে, অনুসরণ বাধ্যতামূলক নয়</small></h2>
+   <div class="item"><b>মামার গবেষণা:</b> “আমাদের সময়ে আমরা মোবাইল ছাড়াই বড় হয়েছি।” মামাকে জিজ্ঞেস করা হলে তিনি বলেন, “তবে তখন মোবাইল ছিল না।” বিজ্ঞানীরা যুক্তির গভীরতায় বাকরুদ্ধ।</div>
+   <div class="item"><b>খালার আপডেট:</b> পরিবারের সবাই কী করছে, তা জানার জন্য কোনো অ্যাপ লাগে না। একটি ফোনকলই যথেষ্ট; সঙ্গে তিনটি অনুসারী প্রশ্ন ফ্রি।</div>
+   <div class="item"><b>আম্মার প্রযুক্তি:</b> Wi-Fi কাজ না করলে প্রথম নির্দেশ—রাউটার বন্ধ করে চালু করো। দ্বিতীয় নির্দেশ—রাউটারের পাশে দাঁড়িয়ে ভালো মানুষ হও।</div>
+   <div class="item"><b>পারিবারিক সিদ্ধান্ত:</b> ঘরে অতিথি এলে সবাই ব্যস্ত; অতিথি চলে গেলে সবাই জানতে চায়, “চা খাওয়ানো হলো?”</div>
+  </section>
+
+  <section class="section ad">
+   <h2>বিজ্ঞাপন: আত্মীয়-পরামর্শ সাবস্ক্রিপশন</h2><b>আপনার জীবন নিয়ে সিদ্ধান্ত নিতে ক্লান্ত?</b>
+   <p>আমাদের আত্মীয়েরা আপনার হয়ে সিদ্ধান্ত নেবেন—কী পড়বেন, কী খাবেন, কখন ঘুমাবেন, এমনকি কাকে বিয়ে করবেন।</p>
+   <span class="price">প্রথম পরামর্শ ফ্রি, পরেরগুলোও ফ্রি</span>
+   <div class="fine">পরামর্শ না মানলে মন খারাপের দায় গ্রাহকের।</div>
+  </section>
+
+  <section class="section box">
+   <h2>শিক্ষা সংবাদ: পরীক্ষা, সিলেবাস ও কান্না <small>কলমের সঙ্গে শিক্ষার্থীর গোপন বৈঠক</small></h2>
+   <div class="item"><b>সিলেবাস:</b> পরীক্ষার আগের রাতে সিলেবাস দেখে এক শিক্ষার্থী জানতে চেয়েছে, “এটা কি পুরো বছরের, নাকি পুরো জীবনের?”</div>
+   <div class="item"><b>কলম ধর্মঘট:</b> পরীক্ষার হলে ঢোকার পর কলম লিখতে অস্বীকার করেছে। কলমের বক্তব্য, “বাড়িতে তো আমাকে শুধু ঘোরানো হয়েছে, লেখা শেখানো হয়নি।”</div>
+   <div class="item"><b>গ্রুপ স্টাডি:</b> পাঁচজন পড়তে বসে। একজন পড়ে, দুজন খাবার আনে, একজন ঘুমায়, আরেকজন বলে—“আজকে productive ছিলাম।”</div>
+   <div class="item"><b>রেজাল্ট:</b> নম্বর কম আসায় শিক্ষার্থী দায় দিয়েছে প্রশ্নের, প্রশ্ন দায় দিয়েছে সিলেবাসের, সিলেবাস দায় দিয়েছে বোর্ডের। দায়ী ব্যক্তি এখনো পলাতক।</div>
+   <div class="item"><b>নতুন আবিষ্কার:</b> বই খুললেই ঘুম আসে—এটি ঘুমের সমস্যা নয়, বইয়ের কালিতে ঘুমের ওষুধ মিশানোর ফল।</div>
+  </section>
+
+  <section class="section meme">
+   <div class="visual">📚😵‍💫☕</div>
+   <div class="caption">পরীক্ষার আগের রাত: “সব পড়ে ফেলব।”<br>পরীক্ষার সকালে: “প্রশ্নপত্রে বাংলা নাই কেন?”</div>
+   <div class="source">শিক্ষা ডেস্ক · সেদিন ইংলিশ পরীক্ষা ছিলো</div>
+  </section>
+
+  <section class="section box">
+   <h2>সংক্ষেপে: খাবার অর্থনীতি <small>পেটের সঙ্গে পকেটের সম্পর্ক ক্রমেই জটিল</small></h2>
+   <div class="item"><b>বিরিয়ানি:</b> প্লেটে আলু পাওয়া গেলে গ্রাহক প্রথমে অবাক হন, পরে নিজের ভাগ্যকে ধন্যবাদ দেন। মাংস পাওয়া গেলে সেটি জাতীয় সম্পদ হিসেবে সংরক্ষণের দাবি ওঠে।</div>
+   <div class="item"><b>সিঙ্গারা:</b> সিঙ্গারার ভেতরে আলু বেশি, বাইরে ময়দা বেশি—তবু দাম এমন যে খাওয়ার আগে ব্যাংক ব্যালান্স দেখা হচ্ছে।</div>
+   <div class="item"><b>চা-দোকান:</b> এক কাপ চায়ের সঙ্গে তিন ঘণ্টার আলোচনা ফ্রি। আলোচনার বিষয়: দেশ, বিশ্ব, ক্রিকেট, পাশের বাড়ির ভাবী এবং ডেভেলপারের অ্যাপ।</div>
+   <div class="item"><b>ফুচকা:</b> ফুচকার পানি ঝাল হলে চোখে পানি আসে; দাম বেশি হলে আত্মায় পানি আসে।</div>
+   <div class="item"><b>শেষ খবর:</b> ফ্রিজে রাখা কেকের শেষ টুকরো কে খেয়েছে, তা জানতে পরিবারে বিচার বিভাগীয় তদন্ত শুরু।</div>
+  </section>
+
+  <section class="section ad">
+   <h2>বিজ্ঞাপন: ফুচকা ফাইন্যান্স</h2><b>আজ খান, কাল চিন্তা করুন!</b>
+   <p>পকেটে টাকা কম? সমস্যা নেই। আমাদের কাল্পনিক ঋণে ফুচকা খান। সুদ হিসেবে আপনার একটি চোখ দিলেই যথেষ্ট।</p>
+   <span class="price">প্রতি প্লেটে আবেগ ১০০%</span>
+   <div class="fine">এটি বাস্তব আর্থিক প্রতিষ্ঠান নয়। দয়া করে ঋণ চাইবেন না।</div>
+  </section>
+
+  <section class="section box">
+   <h2>প্রযুক্তি আদালত <small>অভিযুক্ত: Wi-Fi, চার্জার ও ডেভেলপারের প্রতিশ্রুতি</small></h2>
+   <div class="item"><b>মামলা ০০১:</b> Wi-Fi পাসওয়ার্ড ভুল দেওয়ার অভিযোগে রাউটারকে জেরা করা হয়। রাউটার বলেছে, “আমি তো শুধু সিগন্যাল দিই, পারিবারিক গোপন কথা জানি না।”</div>
+   <div class="item"><b>মামলা ০০২:</b> চার্জার দাবি করেছে, ফোন ১% থাকা অবস্থায় সবাই তাকে খোঁজে; ১০০% হলে কেউ তার দিকে তাকায় না।</div>
+   <div class="item"><b>মামলা ০০৩:</b> স্ক্রিনশটকে সাক্ষী করা হয়েছে। কিন্তু স্ক্রিনশট বলেছে, “আমি শুধু যা দেখেছি তাই রেখেছি, কে কী বলেছে জানি না।”</div>
+   <div class="item"><b>রায়:</b> সব অভিযুক্তকে আপাতত ছেড়ে দেওয়া হয়েছে। ডেভেলপারকে হাজির হতে বলা হলেও তিনি “চাইতেছি” বলে সময় চেয়েছেন।</div>
+  </section>
+
+  <section class="section box">
+   <h2>যানবাহন ডেস্ক: রিকশা, বাস ও ভাড়া <small>গন্তব্যে পৌঁছানোর আগে দরদামেই অর্ধেক যাত্রা</small></h2>
+   <div class="item"><b>রিকশা:</b> যাত্রী বললেন, “ভাই, ওই মোড়ে যাব।” চালক বললেন, “যাব, তবে ভাড়া শুনে আপনার মোড় বদলে যেতে পারে।”</div>
+   <div class="item"><b>বাস:</b> বাসের হেলপার বললেন “সামনে জায়গা আছে।” যাত্রীরা সামনে তাকিয়ে দেখলেন—সামনে শুধু ভবিষ্যৎ।</div>
+   <div class="item"><b>ট্রাফিক:</b> জ্যামে আটকে থাকা এক ব্যক্তি পাশের বাসের যাত্রীর সঙ্গে বন্ধুত্ব করে ফেলেছেন। বাস ছাড়ার পর তাঁদের আর দেখা হয়নি; বন্ধুত্ব এখন দূরপাল্লার।</div>
+   <div class="item"><b>গবেষণা:</b> যানজটে সময় থেমে যায় না; শুধু মানুষের জীবনের লক্ষ্য বদলে যায়।</div>
+  </section>
+
+  <section class="section box">
+   <h2>ঘুম ও অ্যালার্ম গবেষণা <small>বিছানার সঙ্গে মানুষের চিরন্তন দ্বন্দ্ব</small></h2>
+   <div class="item"><b>প্রথম অ্যালার্ম:</b> মানুষ শোনে, বন্ধ করে, আবার ঘুমায়।</div>
+   <div class="item"><b>দ্বিতীয় অ্যালার্ম:</b> মানুষ অ্যালার্মকে বিশ্বাসঘাতক মনে করে।</div>
+   <div class="item"><b>তৃতীয় অ্যালার্ম:</b> মানুষ ফোনকে বালিশের নিচে রেখে বলে, “আর দুই মিনিট।”</div>
+   <div class="item"><b>বৈজ্ঞানিক সিদ্ধান্ত:</b> দুই মিনিটের ঘুমের দৈর্ঘ্য ঘড়ি দিয়ে মাপা যায় না; এটি কেবল বিছানা ও বিবেকের যৌথ চুক্তি।</div>
+  </section>
+
+  <section class="section ad">
+   <h2>বিজ্ঞাপন: অ্যালার্ম অনুবাদক</h2><b>“উঠুন” কথাটিকে “আর পাঁচ মিনিট” বানিয়ে দেয়!</b>
+   <p>অ্যালার্ম বাজলে মন খারাপ? আমাদের অ্যাপ (এটিও এখনো নির্মাণাধীন) অ্যালার্মকে মিষ্টি ঘুমপাড়ানি সুরে অনুবাদ করবে।</p>
+   <span class="price">প্রকাশ: খুব শিগগিরই</span>
+   <div class="fine">এই বিজ্ঞাপনও ডেভেলপার-অনুমোদনের অপেক্ষায়।</div>
+  </section>
+
+  <section class="section box">
+   <h2>সামাজিক মাধ্যম পর্যবেক্ষণ <small>অনলাইন উপস্থিতি ও বাস্তব জীবনের অনুপস্থিতি</small></h2>
+   <div class="item"><b>স্ট্যাটাস:</b> “ব্যস্ত আছি” লিখে এক ব্যক্তি চার ঘণ্টা ধরে প্রেমিকার স্টোরি দেখেছেন। গবেষকেরা একে বলেন—নির্বাচিত ব্যস্ততা।</div>
+   <div class="item"><b>গ্রুপ চ্যাট:</b> কেউ গুরুত্বপূর্ণ বার্তা দিলে ২৩ জন দেখে, ০ জন উত্তর দেয়। পরে একজন শুধু “হুম” লিখে আলোচনার সমাপ্তি ঘোষণা করেন।</div>
+   <div class="item"><b>ভয়েস মেসেজ:</b> ৪ মিনিট ৩২ সেকেন্ডের ভয়েস নোট শুনে শ্রোতা জানতে পারেন, মূল কথা ছিল “আচ্ছা, ঠিক আছে।”</div>
+   <div class="item"><b>ডেভেলপার আপডেট:</b> “কাজ চলছে” পোস্টে ১২টি লাইক পড়েছে। কেউ অগ্রগতির প্রমাণ চাইলে পোস্টটি নীরবে সরিয়ে নেওয়া হয়।</div>
+  </section>
+
+  <section class="section box">
+   <h2>কমিটি সংবাদ: কমিটির ওপর কমিটি <small>সমস্যা সমাধান না হলেও সভা নিয়মিত</small></h2>
+   <div class="item"><b>প্রথম কমিটি:</b> অ্যাপ দেরি হওয়ার কারণ খুঁজবে।</div>
+   <div class="item"><b>দ্বিতীয় কমিটি:</b> প্রথম কমিটি কেন সময়মতো কারণ খুঁজে পেল না, তা খুঁজবে।</div>
+   <div class="item"><b>তৃতীয় কমিটি:</b> দ্বিতীয় কমিটি গঠনের বৈধতা পরীক্ষা করবে।</div>
+   <div class="item"><b>চূড়ান্ত সিদ্ধান্ত:</b> বিষয়টি নিয়ে আরেকটি সভা ডাকার সিদ্ধান্ত সর্বসম্মতিক্রমে গৃহীত হয়েছে। সভার তারিখ পরে জানানো হবে—খুব শিগগিরই।</div>
+  </section>
+
+  <section class="section meme">
+   <div class="visual">📊📉🧑‍💻</div>
+   <div class="caption">ডেভেলপারের অগ্রগতি: মানসিকভাবে ১০০%<br>বাস্তবে: “ফাইলটা কোথায় রেখেছি?”</div>
+   <div class="source">অর্থনীতি ও প্রযুক্তি ডেস্কের যৌথ গ্রাফিক</div>
+  </section>
+
+  <section class="section box">
+   <h2>নোয়াখালী ভাষা গবেষণা কেন্দ্র <small>একই শব্দ, বহু অর্থ—বিশেষত সময়ের ব্যাপারে</small></h2>
+   <div class="item"><b>“আইতেছি”:</b> বক্তা আসছেন—এমন সম্ভাবনা আছে। তবে অবস্থান, যানবাহন ও রওনা দেওয়ার সময় অজানা।</div>
+   <div class="item"><b>“অইবো”:</b> ভবিষ্যৎ সম্পর্কে আশাবাদী ঘোষণা; কবে হবে, তা আলাদা গবেষণার বিষয়।</div>
+   <div class="item"><b>“দেহি”:</b> বিষয়টি দেখা হবে। দেখা শেষে কী করা হবে, তা এখনো নির্ধারিত নয়।</div>
+   <div class="item"><b>“কইলাম তো”:</b> বক্তা মনে করেন বিষয়টি ইতিমধ্যে যথেষ্টবার বলা হয়েছে; শ্রোতা মনে করেন তিনি প্রথমবার শুনছেন।</div>
+   <div class="item"><b>ভাষাবিদদের উপসংহার:</b> নোয়াখালীর কথোপকথনে সময় একটি নমনীয় ধারণা; বিশেষ করে ডেভেলপারের ক্ষেত্রে।</div>
+  </section>
+
+  <section class="section box riddle" id="game">
+   <h2>খেলাঘর: গোপন সংবাদ উদ্ধার <small>মাথা খাটান, তবে ডেভেলপারের মাথায় চাপ দেবেন না</small></h2>
+   <p>সংবাদপত্রের ভেতরে একটি গোপন সংবাদ লুকানো আছে। ধাঁধার উত্তর দিলে সেটি প্রকাশিত হবে।</p>
+   <label for="answer">ধাঁধা: যে জিনিসটি সবাই খুলতে চায়, কিন্তু তার চাবি কারও হাতে নেই—সেটি কী?</label>
+   <input id="answer" type="text" autocomplete="off" placeholder="উত্তর লিখুন…">
+   <div class="controls"><button class="btn primary" id="solve">উত্তর জমা দিন</button><button class="btn" id="hint">ইঙ্গিত চাই</button></div>
+   <div class="status" id="gameStatus" aria-live="polite">অবস্থা: গোপন সংবাদ তালাবদ্ধ।</div>
+   <div class="secret" id="secret" aria-live="polite"><h2>🚨 গোপন সংবাদ: অ্যাপের শুভাগমন আসন্ন!</h2><p style="text-align:center">বিশ্বস্ত সূত্রে জানা গেছে, এই সংবাদপত্রের শেষ অধ্যায়ে অপেক্ষার অবসান ঘটানোর ঘোষণা সংরক্ষিত আছে। যেদিন ডেভেলপার সত্যিই বলবেন “হয়ে গেছে”—সেদিনই খুলবে আসল অ্যাপের দরজা।</p><p style="text-align:center"><b>এই মুহূর্তে অ্যাপ নির্মাণাধীন। “খুব শিগগিরই” কথাটি বহাল থাকল।</b></p></div>
+  </section>
+
+  <section class="section box">
+   <h2>পাঠকসেবা: দৈনিক ধৈর্য ইন্টারঅ্যাকটিভ ডেস্ক <small>বাস্তব ফলাফলের কোনো নিশ্চয়তা নেই</small></h2>
+   <div style="font:800 .72rem var(--sans);display:flex;justify-content:space-between"><span>কাল্পনিক বড়ত্ব</span><span id="percent">০%</span></div>
+   <div class="progress"><i id="fill"></i></div>
+   <div class="controls"><button class="btn primary" id="drink">🥛 এক চামচ হরলিক্স</button><button class="btn" id="ask">📨 ডেভেলপারকে জিজ্ঞাসা</button><button class="btn" id="enter">▶ অ্যাপে প্রবেশের চেষ্টা</button><button class="btn" id="blackoutBtn">⚡ লোডশেডিং</button><button class="btn" id="soundBtn" aria-pressed="false">🔇 শব্দ: বন্ধ</button></div>
+   <div class="status" id="out" aria-live="polite">বড়ত্ব ০%। নাস্তা শুরু করুন।</div>
+   <div class="fine">শব্দ চালু করলে শুধু বোতাম চাপার ছোট্ট টোন শোনা যাবে। কোনো শব্দ স্বয়ংক্রিয়ভাবে বাজবে না।</div>
+  </section>
+
+  <section class="section box">
+   <h2>আজকের পরিসংখ্যান <small>ডেটা সংগ্রহ: অনুমান, আবেগ ও চায়ের কাপ</small></h2>
+   <div class="stats"><div><b>৯৯%</b>ডেভেলপারের আত্মবিশ্বাস</div><div><b>০.৯%</b>দৃশ্যমান অগ্রগতি (অনুমান)</div><div><b>৪৭</b>বিলাশীর রিফ্রেশ</div><div><b>∞</b>“আরেকটু”র মেয়াদ</div></div>
+   <p style="font-size:.72rem;color:var(--muted)">*পরিসংখ্যানগুলো ব্যঙ্গাত্মক; কোনো বাস্তব প্রকল্প-পরিমাপ নয়।</p>
+  </section>
+ </div>
+
+ <footer class="footer">মুদ্রণ ও প্রকাশনা: গোপন প্রেস, অজানা ঠিকানা · সম্পাদক: অপেক্ষমাণ পাঠকসমাজ · প্রতিবেদক: চায়ের দোকানের বেঞ্চ<br>এই পত্রিকার সব সংবাদ কল্পিত ব্যঙ্গ, বন্ধুত্বপূর্ণ খুনসুটি ও বিনোদনের উদ্দেশ্যে রচিত। বাস্তব সংবাদ হিসেবে গ্রহণ করবেন না।<br><b>পরবর্তী সংখ্যা:</b> অ্যাপের অগ্রগতির ওপর নির্ভরশীল। অর্থাৎ, অপেক্ষা অব্যাহত থাকছে।</footer>
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="blackout" role="dialog" aria-modal="true" aria-label="লোডশেডিং"><div><strong>কারেন্ট নাই!</strong><p>বিদ্যুৎ নিজের ঠিকানা খুঁজে পেলে ফিরে আসবে। ততক্ষণ মোমবাতির আলোয় অ্যাপের স্বপ্ন দেখুন।</p><button class="btn" id="restore">আবার আলো জ্বালান</button></div></div>
 <script>
-(()=>{"use strict";
-const $=s=>document.querySelector(s),K="eutopia18_v2",TOTAL=18,RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
-/* ✏️ EDIT: the message inside the little chest */
-const GIFT="Happy birthday, Anuva. This chest holds one more surprise — ask Mahmud for it.";
-/* ✏️ EDIT: the reward for finding every secret */
-const WISH="ONE (1) ROYAL WISH, redeemable any time. Terms and conditions are suspiciously vague.";
-const def=()=>({node:"lib",items:[],found:[],line:"",st:"",done:false,began:false,at:"lib",g:0,gs:0,mute:false,all:false,moon:false,t:0,fin:0});
-let S=load(),au=null,mu=null,tm=null,tt=null,lines=[],li=0,typing=false,full="",cb=null,nc=0;
-function load(){try{return{...def(),...JSON.parse(localStorage.getItem(K))}}catch(e){return def()}}
-function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
-const has=k=>S.found.includes(k)||S.items.includes(k);
-function ac(){try{au=au||new(window.AudioContext||window.webkitAudioContext)();au.resume()}catch(e){}}
-function tone(f,t=0,d=.4,v=.04){if(S.mute||!au)return;try{const n=au.currentTime+t,o=au.createOscillator(),g=au.createGain();o.frequency.value=f;g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(Math.min(v*3,.25),n+.04);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.connect(g);g.connect(au.destination);o.start(n);o.stop(n+d+.05)}catch(e){}}
-const P=[262,294,330,392,440,523];
-function music(){clearInterval(mu);mu=setInterval(()=>{tone(P[Math.random()*6|0]/2,0,2.2,.025);if(Math.random()<.5)tone(P[Math.random()*6|0],.7,1.6,.018)},2300)}
-document.addEventListener("pointerdown",()=>{if(!au){ac();music()}});
-function toast(m){const e=$("#toast");e.textContent=m;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),2300)}
-for(let i=0;i<60;i++){const s=document.createElement("i");s.className="sd";s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${-Math.random()*4}s;animation-duration:${2.5+Math.random()*4}s`;$("#sky").appendChild(s)}
-for(let i=0;i<9;i++){const f=document.createElement("i");f.className="fy";f.style.cssText=`left:${Math.random()*100}%;animation-duration:${14+Math.random()*14}s;animation-delay:${-Math.random()*20}s`;$("#sky").appendChild(f)}
-[["4s",11],["13s",17]].forEach(([d,t])=>{const s=document.createElement("i");s.className="sh";s.style.cssText=`animation-delay:${d};animation-duration:${t}s`;$("#sky").appendChild(s)});
-$("#app").innerHTML=`<div class="hud"><span><b id="tm" hidden></b><span id="loc"></span></span><span><span id="hs"></span> <button class="sm" id="bm" aria-label="Toggle sound"></button></span></div><div id="art" class="art"></div><div id="rt"><div id="box" class="box"><div class="nm" id="nm"></div><div id="tx"></div><i id="ar">▼</i></div><div id="ch" class="ch"></div></div>`;
-const ch=$("#ch");
-function hud(){$("#hs").textContent=(S.l?"🧸 ":"")+(has("okey")?"🔑 ":"")+(has("lantern")?"🏮 ":"")+(has("key")?"🗝️ ":"")+"✦ "+S.found.length+"/"+TOTAL;$("#bm").textContent=S.mute?"🔇":"🔊"}
-$("#bm").onclick=()=>{S.mute=!S.mute;save();hud()};
-function art(bg,sym){const a=$("#art");a.className="art "+bg;a.innerHTML=sym?`<span class="sym" aria-hidden="true">${sym}</span>`:"";$("#tint").dataset.t=bg;$("#box").hidden=false;$("#app").classList.remove("wide","mp");hud();return a}
-function end(){clearTimeout(tm);$("#tx").textContent=full;typing=false;if(li>=lines.length){const c=cb;cb=null;if(c)c()}else $("#ar").style.opacity=1}
-function nxt(){if(li>=lines.length)return;const[w,t]=lines[li++],n=$("#nm");n.textContent=w;n.style.display=w?"":"none";n.classList.toggle("pl",w==="Anuva");n.classList.toggle("lb",w==="Labiba");$("#tx").classList.toggle("nar",!w);full=emo(t);typing=true;$("#ar").style.opacity=0;clearTimeout(tm);if(RM){end();return}let i=0;const cs=Array.from(full);const tick=()=>{i++;$("#tx").textContent=cs.slice(0,i).join("")+"▌";if(i>=cs.length){end();return}const c=cs[i-1];if(i%3===0)tone(820+Math.random()*160,0,.04,.008);tm=setTimeout(tick,/[.!?…”]/.test(c)?340:/[,;:—]/.test(c)?170:36)};tick()}
-function say(L,c){lines=L;li=0;cb=c||null;nxt()}
-$("#box").onclick=()=>{if(typing)end();else nxt()};
-function btn(t,f,p){const b=document.createElement("button");b.className="b"+(p?" p":"");b.textContent=t;b.onclick=f;ch.appendChild(b)}
-function find(id){if(has(id))return;S.found.push(id);save();hud();tone(660,0,.3);tone(880,.1,.3);tone(1174,.2,.4);if(S.found.length>=TOTAL&&!S.all){S.all=true;S.fin=S.t;save();tone(1046,.5,1);toast("✦ Every secret found! Something has appeared on the map…")}else toast("✦ Secret discovered! "+S.found.length+"/"+TOTAL)}
-let last=Date.now(),run=false,tc=0;
-function tmFmt(ms){const s=Math.floor((ms||0)/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),c=s%60,p=x=>String(x).padStart(2,"0");return(h?h+":"+p(m):p(m))+":"+p(c)}
-function tmShow(){$("#tm").textContent="☾ "+tmFmt(S.all?S.fin:S.t)}
-function tmSync(){const h=["lvl","stars","letter","post"].includes(S.node),e=$("#tm");run=!!S.began&&!h&&!S.all;e.hidden=h;e.classList.toggle("fin",!!S.all);tmShow()}
-setInterval(()=>{const n=Date.now();if(S.all)run=false;if(run)S.t=(S.t||0)+Math.min(n-last,2000);last=n;if(!$("#tm").hidden)tmShow();if(run&&++tc%10===0)save()},500);
-function show(id){(F[id]||scene)(id);tmSync()}
-const BM={t:"Back to the map",next:"map"};
-function scene(id){const n=N[id];S.node=id;save();art(n.bg,n.sym);$("#loc").textContent=n.loc;ch.innerHTML="";say(typeof n.L==="function"?n.L():n.L,()=>choices(n))}
-function choices(n){ch.innerHTML="";const cs=(typeof n.c==="function"?n.c():n.c)||[];if(!cs.length){btn("Continue ▸",()=>show(n.next),1);return}cs.filter(c=>!c.if||c.if()).forEach(c=>btn(c.t,()=>pick(c,n)))}
-function pick(c,n){tone(520,0,.2);if(c.p)return puz(c.p,n);if(c.s)find(c.s);if(c.item&&!has(c.item))S.items.push(c.item);if(c.g)S.g=1;if(c.f)S[c.f]=1;if(c.st)S.st=c.st;save();hud();ch.innerHTML="";
-const go=()=>c.next?show(c.next):choices(n),R=c.r?[["Anuva",c.r]]:c.t[0]==="“"?[["Anuva",c.t]]:[];let L=typeof c.say==="function"?c.say():c.say;L=L?R.concat(L):R.length?R:null;
-if(L)say(L,()=>{ch.innerHTML="";btn("Continue ▸",go,1)});else go()}
-const EM=[[/blush|crush|face is pink|looks better with you/i,"😳"],[/sword|duel|guard|patrol/i,"⚔️"],[/teapot/i,"☕"],[/chocolate/i,"🍫"],[/(^| )cats?( |[.,!?”’])|purr|treat/i,"🐈"],[/ key/i,"🗝️"],[/birthday/i,"🎂"],[/villainess/,"😒"],[/Terrifying|dramatic/,"😬"],[/Rude|Funny|Insulting|Of course|Naturally|Honestly/,"😏"],[/should have|part is on me/,"😔"],[/tell him/,"🤫"],[/paperwork|administration|records/,"📜"],[/found every single|Welcome to freedom/,"🎉"],[/rain/i,"🌧️"],[/flower|petal|garden/i,"🌸"],[/telescope|star|sky|moon/i,"✨"],[/book|page|prophecy/i,"📖"],[/quiet|silence/,"🤫"]];
-function emo(t){if(/\p{Extended_Pictographic}/u.test(t))return t;for(const[r,e]of EM)if(r.test(t))return t+" "+e;return t}
-const M="Mahmud";const BL=[["","A faint impression appears beneath the paper: a constellation with many possible paths. The page was never empty. It was waiting for a choice."]];
-const N={
-lib:{bg:"lib",sym:"📖",loc:"The Royal Library",next:"prophecy",L:[["","A cold silver light spills across the floor. You blink, and a tall figure in a dark cloak is standing where there was only shadow a moment ago."],[M,"“Your Highness! Thank the stars. Welcome home. The kingdom needs you. Right now, preferably.”"],["Anuva","“…I’m sorry. Who are you?”"],[M,"“…Who am I?”"],["","He looks like a man who just tripped over a step that wasn’t there."],[M,"“Of course. Of course you don’t know me. Nobody told you anything. Let me fix that. I’m Mahmud, Royal Advisor of Eutopia. Official title. Unofficial title: the person who has been searching for you all night.”"],["Anuva","“Eutopia? Royal what? Is this some kind of prank?”"],[M,"“I wish. The kingdom has a problem, and it involves you, this library, and a very old book.”"],["","The Royal Library has been silent for three hundred years. Tonight, every book on its tallest shelf opens at once."],["","A silver book floats above a table. Its cover bears a star with one point missing."],[M,"“Welcome to the part of the evening where the kingdom’s ancient secrets become your problem. I’d offer tea, but the teapot has developed prophetic abilities and is being difficult.”"],["Anuva","“Did the library open itself, or did you do something and you’re pretending you didn’t?”"],[M,"“Me? Never. Though I’ll admit the room looks better with you in it. For the prophecy’s sake, of course.”"],["Anuva","“…Focus, Mahmud.”"],["","She suddenly finds the nearest bookshelf fascinating. It is a very good bookshelf to stare at when your face is warm."]],
- c:[{t:"Inspect the silver book",s:"book",say:[["","Inside the flap, someone has written: “A book may remember a thousand endings. It cannot choose one for you.”"]],next:"prophecy"},{t:"Question Mahmud",r:"“Why do I get the feeling you know more about this book than you’re saying?”",say:[[M,"“Suspicious of me already? Excellent instincts. Historically, those are rare here.”"]],next:"prophecy"},{t:"Investigate the shelves",say:[["","One book is filed under ROYAL HISTORY, another under WEATHER, a third under PERSONAL GRUDGES."],[M,"“A temporary organizational system.”"]],next:"prophecy"}]},
-prophecy:{bg:"lib",sym:"✧",loc:"The Royal Library",next:"map",L:[["","The book opens by itself."],["The Book of Fate","“WHEN THE EIGHTEENTH MOON RISES OVER EUTOPIA, THE STAR THAT GUARDS ITS DESTINY SHALL DISAPPEAR.”"],["The Book of Fate","“THE BOOK OF FATE SHALL TURN TO A PAGE NO HAND HAS WRITTEN.”"],["Anuva","“A page no hand has written? That’s either poetic or a typo.”"],["","Mahmud goes unusually quiet. A trail of silver dust leads out of the library, toward the Moon Garden."],["Anuva","“You’re never quiet. That’s what worries me. Come on, the dust is leaving without us.”"]],c:[]},
-lib2:{bg:"lib",sym:"📚",loc:"The Royal Library",L:()=>[["",S.done?"The Book of Fate now records possibilities instead of commands. Its margins are full of blank space.":"The silver book rests on its stand, the star with one missing point still on its cover."]],
- c:[{t:"Inspect the silver book",if:()=>!has("book"),s:"book",say:[["","Inside the flap, someone has written: “A book may remember a thousand endings. It cannot choose one for you.”"]]},{t:"Reread the prophecy",say:[["","“WHEN THE EIGHTEENTH MOON RISES OVER EUTOPIA, THE STAR THAT GUARDS ITS DESTINY SHALL DISAPPEAR.”"]]},{t:"Fix the messy shelves",if:()=>!has("shelves"),p:"shelves"},{t:"Read the shelf labels",say:[["","One book is filed under ROYAL HISTORY, another under WEATHER, a third under PERSONAL GRUDGES."]]},BM]},
-garden:{bg:"gar",sym:"❀",loc:"The Moon Garden",L:()=>S.gs?[["","The moonflowers glow gently. The silver cat watches from the fountain, judging everyone."]]:(S.gs=1,[["","The Moon Garden glows beneath a pale blue sky. Flowers open as you pass, revealing tiny silver symbols. Rain begins to fall, though there are no clouds."],[M,"“Enchanted rain. Excellent. The weather has joined the conspiracy.”"],["Anuva","“Rain without clouds. Honestly, the most reasonable thing to happen tonight.”"],[M,"“You’re getting soaked. Take my cloak. Purely for kingdom-protection reasons, you understand.”"],["Anuva","“I don’t need your… fine. Give it here.”"],["","It smells like cedar and old ink. She pulls the collar up higher than strictly necessary."]]),
- c:[{t:"Study the flowers and the rain",r:"“The rain is doing something to these symbols. Look at the petals.”",s:"rain",g:1,say:[["","The rain strikes the petals and silver letters appear."],["","“The Star of Destiny does not belong to the crown. It belongs to the one who can choose.”"],[M,"“The old stories call that figure the villainess. The stories are very fond of deciding who people are before meeting them.”"],["Anuva","“Villainess. Funny. Nobody asked whether I wanted the part.”"],["","He doesn’t explain why he sounds angry. On the fountain, a line glimmers: “ON THE EIGHTEENTH BIRTHDAY OF THE CHOSEN STAR, THE OLD STORY SHALL END.” Tonight."],["Anuva","“Tonight is my eighteenth birthday. Mahmud… is this about me?”"],[M,"“I was hoping the book would develop a sense of tact before this part.”"],["","The symbols point toward the Observatory on the hill. A heavy silver lock seals its gate."],[M,"“Only one person in this castle has a key to every door. Unfortunately, she’s guarding your tower and taking it extremely seriously.”"],["Anuva","“Labiba.”"],["","Her little sister’s tower room now glows on the map."]],next:"map"},
- {t:"Follow the little silver cat",next:"cat"},{t:"Pick the glowing moonflower",if:()=>!has("lantern"),s:"flower",item:"lantern",say:[["","The flower folds itself into a tiny silver lantern. It may reveal something when the sky grows dark enough."]]},BM]},
-cat:{bg:"gar",sym:"🐈",loc:"The Moon Garden",L:[["","A small silver-eyed cat sits by the fountain. It looks at you, then at Mahmud, then pointedly at a tiny dish."],[M,"“The unofficial guardian of the garden. It once stole a royal decree and slept on it.”"],["Anuva","“A thief and a cat. I respect it enormously.”"]],
- c:()=>[{t:"Offer a chocolate square",say:[["","The cat sniffs it, turns away in profound disappointment, and sits on Mahmud’s cloak."],[M,"“Excellent. You’ve offended a magical creature and damaged my uniform.”"],["Anuva","“In my defense, nobody told me cats have standards.”"]],next:"garden"},{t:"Offer a proper cat treat",if:()=>!has("key"),s:"cat",item:"key",say:[["","The cat accepts, purrs, and nudges a tiny silver key toward you."],[M,"“I’ve fed that creature for six years. It has never given me anything except financial ruin.”"],["Anuva","“Six years of treats, and it likes me in six minutes. Some of us just have charisma.”"]],next:"garden"},{t:"Leave the cat in peace",next:"garden"}]},
-office:{bg:"off",sym:"🕯️",loc:"The Advisor’s Office",L:[["","A desk buried under papers, annotated books, and one suspiciously large tin of chocolate. In the corner sits a small locked chest."],[M,"“This office is a carefully managed system. Mostly.”"]],
- c:[{t:"Read the notes on the desk",s:"notes",say:[["","“Anuva will question the obvious clue first.”"],["Anuva","“Rude. Accurate, but rude.”"],["","“Do not use the phrase ‘destiny and hormones’ unless prepared for consequences.”"],["","“The point is to give her a choice, not another role to perform.”"],["","At the bottom, in different handwriting: “I hope she likes the story.”"],["Anuva","“I do, you know. Don’t tell him I said that.”"]]},
- {t:"Inspect the chocolate tin",s:"choc",say:[["","A handwritten note: “Emergency chocolate. For royal emergencies only.” Beneath it, smaller: “All emergencies qualify.”"],["Anuva","“All emergencies qualify. I’m adopting that as policy.”"]]},
- {t:"Open the little chest",if:()=>has("key")&&!has("chest"),p:"chest"},{t:"Look at the chest again",if:()=>has("chest"),say:()=>[["","The open chest holds a tiny glowing star and a folded note."],[M,GIFT]]},{t:"Try the little chest",if:()=>!has("key"),say:()=>has("key")?(find("chest"),[["","The silver key turns. Inside rests a tiny glowing star and a folded note."],["Anuva","“Mahmud… what did you put in here?”"],[M,GIFT]]):[["","The chest is locked, its keyhole shaped for something small and silver. Perhaps the garden’s guardian knows more."],["Anuva","“A key this small? I know exactly which cat to bribe.”"]]},BM]},
-obs:{bg:"obs",sym:"☾",loc:"The Royal Observatory",L:()=>S.done?[["","The great telescope now shows thousands of stars. None claims to be the only path forward."]]:[["","The telescope points at an empty patch of sky. The brightest star above Eutopia has vanished, and the night looks strangely unfinished."],["","The Book of Fate rests on a pedestal, its final page blank."],[M,"“The telescope has been stuck for days. Naturally, it waited for you.”"],["Anuva","“Of course it did. Does anything in this kingdom not love an audience?”"],["Labiba","“Stay close to me, big sis. If the sky falls, it has to go through me first.”"],["","Mahmud reaches past Anuva to adjust the telescope ring. His hand brushes hers. He pulls away a moment too late. Neither of them mentions it."],...(has("lantern")?[["Anuva","“Labi, hold the lantern. It glows brighter near you.”"],["Labiba","“Of course it does. Even magic respects the Royal Sister Patrol.”"]]:[])],
- c:()=>S.done?[{t:"Visit the constellation",next:"stars"},{t:"Inspect the blank page",if:()=>!has("blank"),s:"blank",say:BL},BM]:[{t:"Align the star-lights",next:"game"},{t:"Inspect the blank page",if:()=>!has("blank"),s:"blank",say:[["","A faint impression appears beneath the paper: a constellation with many possible paths. The page was never empty. It was waiting for a choice."]]},{t:"Confront Mahmud",r:"“Mahmud. You knew about this, didn’t you?”",next:"conf"},BM]},
-conf:{bg:"obs",sym:"☾",loc:"The Royal Observatory",L:[["Anuva","“Well? I’m listening.”"],[M,"“Yes. I knew the prophecy was about you.”"],["Anuva","“…About me.”"],[M,"“The court wanted to prepare you for the role they’d already chosen. Their villainess. Their savior. Their convenient answer. I kept the truth from you because I wanted you to choose before the kingdom could tell you who to become.”"],["Anuva","“Their villainess. Their savior. Funny, nobody asked which one I’d like to be.”"],[M,"“I should have trusted you with it sooner. That part is on me.”"],["","For once, he doesn’t try to make the silence funny."],["Labiba","“I’m staying right here, big sis. If you need me, just say the word. And if he makes you cry, I duel him.”"]],
- c:[{t:"“You should have told me.”",st:"hurt",say:[[M,"“Yes. I should have. I thought keeping the court away from you was the same as giving you freedom. It wasn’t. I know the difference now.”"],["","He doesn’t ask you to forgive him. He simply waits."]],next:"fin"},
- {t:"“You don’t get to choose for me either.”",st:"free",say:[[M,"“No. I don’t.”"],[M,"“The court doesn’t get to write your life. Neither does the prophecy. And neither do I.”"],["","For the first time all evening, he almost smiles."]],next:"fin"},
- {t:"“Then why did you stay?”",st:"why",say:[[M,"“Because you deserved the chance to choose. And because, for all your talent for turning a quiet evening into an international incident, I wanted to be here when you did.”"],[M,"“Don’t make me repeat that. I have a reputation to maintain.”"]],next:"fin"},
- {t:"Stay quiet for a moment",st:"calm",say:[["","Neither of you speaks. The stars keep shining. The kingdom does not collapse because you take a moment to think."]],next:"fin"}]},
-labroom:{bg:'lab',sym:'🧸',loc:'Labiba’s Room',L:()=>S.lb?[['','Labiba’s tower room: wooden swords on the walls, a blanket fort, and a castle map covered in tiny stickers marking every danger she has defeated.'],['Labiba','“If anything bothers you, big sis, tell me. I’ll handle it.”']]:[['','The tower door is blocked by a chair, a broom, and one very determined guard with a wooden sword. A sign reads: “ROYAL SISTER PATROL. HALT.”'],['Labiba','“Halt! State your name and your intentions!”'],['Anuva','“Labi, it’s me.”'],['Labiba','“Big sis?! You’re late! I’ve been guarding this door for hours. Nothing got past me. Not even a moth.”'],['Labiba','“Wait. Is that Mahmud behind you? What are his intentions?”']],
- c:()=>S.lb?[{t:'Try the secret knock panel',if:()=>!has('pillow'),p:'knock'},{t:'Open the locked diary',if:()=>!has('diary'),p:'diary'},{t:'Reread the diary',if:()=>has('diary'),say:PZ.diary.win},BM]:[{t:'“Reporting for duty, Captain Labiba.”',say:[['Labiba','“At ease, soldier.”'],['','She salutes, then drops the sword and hugs you anyway.']],f:'lb',next:'labin'},{t:'Hug her',say:[['Labiba','“You were gone so long I almost came looking. With the sword.”'],['Anuva','“I know. I missed you too.”']],f:'lb',next:'labin'},{t:'“Mahmud, tell her you come in peace.”',say:[[M,'“I come in peace.”'],['Labiba','“State your intentions toward my sister.”'],[M,'“…Strictly professional.”'],['Labiba','“Hm. Your ears are red.”']]},BM]},
-labin:{bg:'lab',sym:'🧸',loc:'Labiba’s Room',L:[['','Inside: a blanket fort, a wall of wooden swords, and a castle map covered in tiny stickers.'],['Labiba','“Report, big sis. Who do I need to fight?”'],['Anuva','“The Book of Fate opened. A star is missing, and the prophecy mentions my birthday.”'],['Labiba','“Then the prophecy is messing with my sister. I’ll deal with it personally.”'],[M,'“Evening, Labiba. Apologies for the dramatic entrance.”'],['Labiba','“Mahmud. Why is your face red?”'],[M,'“It’s warm. This tower has no ventilation.”'],['Anuva','“It’s the blankets. Everything’s warm in here.”'],['Labiba','“Mhm. I’m watching you two.”'],['Anuva','“Labi. The Observatory key. Please.”'],['Labiba','“Of course. I keep every key in the castle. A guard has to be prepared.”']],
- c:[{t:'“I’ll need it. Will you come with me?”',say:[['Labiba','“Try and stop me.”']],item:'okey',f:'l',next:'labgo'},{t:'“Thanks, Labi. I’m a little scared.”',say:[['Labiba','“Then I’m going first. Nobody scares my sister while I’m around.”'],['','She squeezes your hand and doesn’t let go for the next three corridors.']],item:'okey',f:'l',next:'labgo'},{t:'“Give me the key, or I tickle you.”',say:[['Labiba','“You wouldn’t dare!”'],['','The key arrives after four seconds of heroic laughing, from both of you.']],item:'okey',f:'l',next:'labgo'}]},
-labgo:{bg:'lab',sym:'🧸',loc:'Labiba’s Room',next:'map',L:[['','✦ Labiba joins your party! ✦'],['Labiba','“Stay behind me, big sis. I’ll take the front.”'],['Labiba','“And you, Mahmud. Walk on her other side. If something jumps out, you’re the shield.”'],[M,'“I’m honored. And slightly concerned.”'],['Anuva','“Let’s go before she challenges the staircase.”']],c:[]},
-post:{bg:"lib",sym:"⌘",loc:"The Royal Library",next:"map",L:[["Royal Clerk","“Your Highness, the Book of Fate has been rewritten. Seventeen royal ceremonies, three diplomatic appointments, and next Thursday’s weather were all determined by the old prophecy. They are no longer guaranteed.”"],[M,"“Wonderful. Anuva has liberated the kingdom from destiny.”"],[M,"“And condemned me to administration.”"],["Anuva","“Welcome to freedom. Enjoy your paperwork.”"],["Labiba","“Also, for the record, everyone knows Mahmud likes Anuva, and Anuva likes Mahmud. I approve. Conditionally. Make her cry and I duel you.”"],["Anuva","“LABIBA.”"],[M,"“…I’ll go get more paperwork.”"],["","Neither of them looks at the other. Both of them are smiling at the floor."],["","The story ends. Eutopia remains. The stars are no longer instructions. They are possibilities."],["","A little corner of Eutopia, made by Mahmud for Anuva. ✦"]],c:[]}
-};
-Object.keys(N).forEach(k=>N[k].id=k);
-const LOC={lib:{x:50,y:20,e:"📚",n:"Library",node:"lib2"},gar:{x:82,y:42,e:"🌸",n:"Garden",node:"garden"},obs:{x:30,y:77,e:"🔭",n:"Observatory",node:"obs"},off:{x:18,y:42,e:"🕯️",n:"Office",node:"office"},moon:{x:50,y:52,e:"🌕",n:"The Moon",node:"moon"},lab:{x:70,y:77,e:"🧸",n:"Labiba",node:"labroom"}};const lk=k=>k==="obs"?!S.l:k==="lab"?!S.g:k==="off"?!S.done:false;const SL={pillow:"lab",diary:"lab",book:"lib",shelves:"lib",rain:"gar",flower:"gar",cat:"gar",blank:"obs",notes:"off",choc:"off",chest:"off",hers:"obs",chaos:"obs",destiny:"obs",talks:"obs",bilashi:"obs",flirt:"obs",future:"obs"};const left=k=>Object.keys(SL).filter(s=>SL[s]===k&&!has(s)).length;
-const quest=()=>!S.g?"Quest: Follow the silver dust to the Moon Garden. Tap a place on the map to travel.":!S.l?"Quest: The Observatory gate is locked. Find Labiba. She keeps every key.":!S.done?"Quest: The Observatory is open. Find the missing star.":S.moon?"You found everything Eutopia hid. Happy birthday, Anuva.":S.all?"Every secret is found. Something glows at the center of the map…":"The story is told. Wander Eutopia. A ✦ marks places still hiding secrets ("+S.found.length+"/"+TOTAL+").";
-function confetti(n){if(RM)return;for(let i=0;i<n;i++){const s=document.createElement("span");s.className="cf";s.textContent=i%3?"✦":"✧";s.style.cssText=`left:${Math.random()*100}%;animation-delay:${Math.random()*1.5}s;animation-duration:${3+Math.random()*3}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),7000)}}
-function dl(){try{const h="<!DOCTYPE html><meta charset=utf-8><title>A letter for Anuva</title><body style=\"font:18px/1.8 Georgia,serif;max-width:640px;margin:40px auto;padding:0 20px;white-space:pre-line;color:#222\">"+LETTER.replace(/</g,"&lt;")+"</body>";const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download="Letter_for_Anuva.html";document.body.appendChild(a);a.click();a.remove();toast("Letter downloaded ✉️")}catch(e){toast("Download isn’t available here. Try Print / PDF.")}}
-function home(){const h=document.createElement("div");h.id="home";h.tabIndex=0;h.setAttribute("role","button");h.setAttribute("aria-label","Tap to begin");let f="";for(let i=0;i<14;i++)f+=`<i class="ff" style="left:${Math.random()*100}%;animation-duration:${6+Math.random()*7}s;animation-delay:${-Math.random()*10}s;font-size:${8+Math.random()*10}px">✦</i>`;
- h.innerHTML=`<i class="ss"></i><i class="ss" style="top:32%;animation-delay:3.5s"></i>${f}<div class="mn"></div><h1>Eutopia</h1><h2>The Eighteenth Moon</h2><p class="tg">A Forgotten Star. An Unwritten Fate.</p><div class="tp">${S.began?"Tap to continue":"Tap to begin"}</div><svg class="cs" viewBox="0 0 371 100" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><path fill="#0d1634" d="M0 100V72h26V52l7-12 7 12v20h22V38l10-20 10 20v34h26V58h30V30l14-24 14 24v28h30V44l9-12 9 12v28h24V54l7-10 7 10v18h18V62h30V46l9-14 9 14v26h28V100z"/><rect x="146" y="46" width="5" height="9" rx="2" fill="#ffe9a8"/><rect x="156" y="46" width="5" height="9" rx="2" fill="#ffe9a8"/><rect x="69" y="52" width="4" height="8" rx="2" fill="#ffe9a8"/><rect x="205" y="56" width="4" height="8" rx="2" fill="#ffe9a8"/><rect x="332" y="54" width="4" height="8" rx="2" fill="#ffe9a8"/></svg><div class="rot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg><span>Best in landscape</span></div>${S.began?'<button class="sm ng">New game</button>':""}`;
- const go=()=>{ac();h.classList.add("out");setTimeout(()=>h.remove(),650);if(S.began)show(S.node);else{S.began=true;save();show("lib")}};
- h.onclick=go;h.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")go()};
- const ng=h.querySelector(".ng");if(ng)ng.onclick=e=>{e.stopPropagation();if(ng.dataset.s){const m=S.mute;S=def();S.mute=m;save();hud();go()}else{ng.dataset.s=1;ng.textContent="Tap again to erase progress"}};
- document.body.appendChild(h)}
-const PZ={
-shelves:{s:'shelves',type:'order',q:[['','Four books lie out of place. A note in the margin reads: “The Moon is last. The Rain sits directly after the Star. The Sun is never first.”']],items:['☀️ Sun','🌧️ Rain','🌙 Moon','⭐ Star'],ans:['⭐ Star','🌧️ Rain','☀️ Sun','🌙 Moon'],win:[['','The books slide into place and a hidden shelf clicks open. Inside lies a dusty scroll: “Libraries keep secrets. Patience keeps them longer.”'],['Anuva','“Mahmud, do you hide things in books on purpose?”'],[M,'“Only the important ones.”']]},
-diary:{s:'diary',type:'text',q:[['','Labiba’s diary has a brass lock. A note on the cover: “Password: my favorite word. I write everything one letter ahead.”']],code:'CSBWF',ans:['brave'],hint:'Move every letter back by one. C becomes B.',win:[['','The lock clicks. Inside, in Labiba’s handwriting: “Day 412. Guarded big sis from a moth. Cried with her at the sad part of the story. Laughed at Mahmud’s terrible jokes. Do not tell him I like them.”'],['Anuva','“…Ha. Noted.”']]},
-chest:{s:'chest',type:'text',q:[['','The silver key turns, but the chest isn’t finished with you. A tiny voice whispers a riddle.']],code:'“The more of me you take, the more you leave behind. What am I?”',ans:['footsteps','footstep','steps','step'],hint:'Think about walking.',win:[['','The chest clicks open. Inside rests a tiny glowing star and a folded note.'],['Anuva','“Mahmud… what did you put in here?”'],[M,GIFT]]},
-knock:{s:'pillow',type:'simon',q:[['','A hidden panel beside the fort glows with four lanterns. A tag reads: “Secret knock. Watch first. Repeat after.”']],win:[['','The panel swings open. Inside is a tiny wooden sign: “HOME OF THE BRAVEST GUARD. (AND HER BIG SISTER.)”'],['Labiba','“That was classified.”']]}};
-function puz(id,n){const P=PZ[id],a=art(n.bg,'');ch.innerHTML='';const w=document.createElement('div');w.className='pz';a.appendChild(w);
-const win=()=>{tone(784,0,.4);tone(988,.15,.4);tone(1318,.3,.6);find(P.s);art(n.bg,n.sym);ch.innerHTML='';say(P.win,()=>btn('Continue ▸',()=>choices(n),1))};
-say(P.q);
-if(P.type==='order'){let sel=[];const r=document.createElement('div'),o=document.createElement('div');r.className='row';o.style.cssText='color:var(--gold);font-size:.85rem;text-align:center';const u=()=>{o.textContent=sel.length?sel.join(' › '):'Tap the books in order, left to right'};
-[...P.items].sort(()=>Math.random()-.5).forEach(t=>{const b=document.createElement('button');b.className='b pzb';b.textContent=t;b.onclick=()=>{sel.push(t);b.disabled=true;tone(480+sel.length*90,0,.2);u();if(sel.length===P.ans.length){if(sel.join()===P.ans.join())win();else{toast('Not quite. The shelf resets.');sel=[];r.querySelectorAll('button').forEach(x=>x.disabled=false);u()}}};r.appendChild(b)});w.append(r,o);u()}
-else if(P.type==='text'){const d=document.createElement('div');d.className='code'+(P.code.length>10?' sm':'');d.textContent=P.code;w.appendChild(d);const i=document.createElement('input');i.placeholder='Your answer';i.setAttribute('aria-label','Answer');ch.appendChild(i);btn('Try it',()=>{if(P.ans.includes(i.value.trim().toLowerCase()))win();else{toast('The lock stays shut.');tone(200,0,.3)}},1);btn('Hint',()=>toast(P.hint))}
-else{const seq=Array.from({length:5},()=>Math.random()*4|0);let k=0,lock=true;const g=document.createElement('div');g.className='row';const bs=['🔴','🟡','🟢','🔵'].map((c,i)=>{const b=document.createElement('button');b.className='st2';b.textContent=c;b.onclick=()=>{if(lock)return;fl(i);if(i===seq[k]){if(++k===seq.length)win()}else{lock=true;toast('Wrong knock. Watch again.');setTimeout(play,900)}};g.appendChild(b);return b});
-const fl=i=>{tone(330+i*110,0,.3);bs[i].classList.add('on');setTimeout(()=>bs[i].classList.remove('on'),350)};
-const play=()=>{lock=true;k=0;seq.forEach((s,j)=>setTimeout(()=>fl(s),700+j*650));setTimeout(()=>{lock=false;toast('Your turn')},700+seq.length*650)};
-w.appendChild(g);btn('Watch again',play);play()}
-btn('Leave it for now',()=>{art(n.bg,n.sym);choices(n)})}
-function fade(f){const d=document.createElement("div");d.style.cssText="position:fixed;inset:0;z-index:30;pointer-events:none;opacity:0;transition:opacity 1.6s;background:radial-gradient(circle,#fff8e0,#9bdcff 40%,#0a1127 85%)";document.body.appendChild(d);requestAnimationFrame(()=>requestAnimationFrame(()=>d.style.opacity=1));setTimeout(()=>{f();d.style.opacity=0;setTimeout(()=>d.remove(),1700)},RM?0:1800)}
-function fw(n){if(RM)return;const C=["#ffe9a8","#9bdcff","#ffb3d9","#fff"];for(let b=0;b<n;b++)setTimeout(()=>{if(!$(".lv"))return;const x=10+Math.random()*80,y=10+Math.random()*45,c=C[b%4];tone(900+Math.random()*500,0,.2,.02);for(let i=0;i<16;i++){const p=document.createElement("i"),a=i/16*6.283,r=60+Math.random()*50;p.className="fwp";p.style.cssText=`left:${x}vw;top:${y}vh;background:${c};box-shadow:0 0 6px ${c};--dx:${Math.cos(a)*r}px;--dy:${Math.sin(a)*r}px`;document.body.appendChild(p);setTimeout(()=>p.remove(),1500)}},500+b*650)}
-const F={
-moon(){S.node="moon";S.moon=true;save();const a=art("obs","🌕");$("#loc").textContent="The Eighteenth Moon";ch.innerHTML="";tone(523,0,.5);tone(659,.2,.5);tone(784,.4,.5);tone(1046,.6,1);confetti(40);
- say([["","The moon above Eutopia brightens. Every secret you found rises from the map and settles into its glow."],[M,"“I hid them in places you’d walk past. I told myself you’d find two, maybe three.”"],[M,"“Of course you found every single one. You notice everything. It’s one of the most annoying things about you.”"],["Anuva","“You hid eighteen secrets and expected me to find two? Insulting.”"],[M,"“So. The kingdom owes you a reward, and I am, regrettably, the kingdom.”"]],()=>{a.innerHTML=`<div class="lv"><h2>✦ ROYAL DECREE ✦</h2><p>ANUVA · KEEPER OF EVERY SECRET</p><p>COMPLETED IN ☾ ${tmFmt(S.fin||S.t)}</p><p style="color:var(--gold)">${WISH}</p><p style="color:var(--mut);font-weight:400">(Screenshot this and show Mahmud.)</p></div>`;confetti(30);$("#box").hidden=true;$("#app").classList.add("wide");btn("Back to the map ▸",()=>show("map"),1)})},
-title(){art("map","");$("#loc").textContent="";const a=$("#art");a.innerHTML=`<div><div class="moon"></div><h1>Eutopia:<br>The Eighteenth Moon</h1><p class="mu">A Forgotten Star. An Unwritten Fate.</p></div>`;ch.innerHTML="";
- say([["","To the one person the prophecy forgot to explain."],[M,"“Before you ask, no, I did not write the prophecy. I have terrible handwriting and excellent alibis.”"]],()=>{
- if(S.began){btn("▶ Continue",()=>{ac();show(S.node)},1);btn("New game",function(){if(nc++){const m=S.mute;S=def();S.mute=m;S.began=true;save();show("lib")}else{this.textContent="Tap again — this erases your progress";}})}
- else btn("▶ Press Start",()=>{ac();S.began=true;save();show("lib")},1)})},
-map(){S.node="map";save();const a=art("map","");$("#app").classList.add("mp");$("#loc").textContent="Eutopia";ch.innerHTML="";
- a.innerHTML='<svg class="pent" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 20L82 42L70 77L30 77L18 42Z M50 20L70 77L18 42L82 42L30 77Z"/></svg>'+Object.entries(LOC).filter(([k])=>k!=="moon"||S.all).map(([k,l])=>`<button class="pin" data-k="${k}" aria-label="${l.n}">${lk(k)?"🔒":l.e}<small>${l.n}${S.done&&left(k)?" ✦"+left(k):""}</small></button>`.replace('class="pin"',`class="pin" style="left:${l.x}%;top:${l.y}%"`)).join("")+`<span id="hero" style="left:${LOC[S.at].x}%;top:${LOC[S.at].y}%">🧝‍♀️</span>`;
- a.querySelectorAll(".pin").forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(lk(k)){toast(k==="obs"?"The gate is sealed by a silver lock. Someone in the castle keeps every key…":k==="off"?"The Advisor’s door is sealed. It opens once the story is told.":"Follow the silver dust to the Moon Garden first.");return}S.at=k;const h=$("#hero");h.style.left=LOC[k].x+"%";h.style.top=LOC[k].y+"%";tone(440,0,.15);setTimeout(()=>show(LOC[k].node),RM?0:650)});
- say([["",quest()]])},
-game(){S.node="obs";const a=art("obs","");$("#app").classList.add("mp");ch.innerHTML="";let k=1;
- say([["","Five lights flicker in the telescope’s lens. Tap them in the order the sky once shone: 1 to 5."]]);
- [[16,28],[42,14],[56,50],[78,24],[84,68]].forEach((p,i)=>{const b=document.createElement("button");b.className="st";b.style.cssText=`left:${p[0]}%;top:${p[1]}%`;b.innerHTML=`✧<small>${i+1}</small>`;b.onclick=()=>{if(i+1===k){b.classList.add("on");tone(400+k*90,0,.4);if(++k>5)win()}else{k=1;a.querySelectorAll(".st").forEach(x=>x.classList.remove("on"));b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),300);toast("The lights fade. Begin again at 1.")}};a.appendChild(b)});
- btn("Skip puzzle",win);
- function win(){tone(784,0,.5);ch.innerHTML="";a.innerHTML=`<span class="sym">✦</span>`;const L=[["","The telescope turns. Thousands of faint points appear where the Star of Destiny once shone — not one fixed path, but many."],["Anuva","“It isn’t missing. It’s just undecided.”"],["Labiba","“Undecided? Then we decide it. Together. Right, big sis?”"]];if(has("lantern"))L.push(["","Your moonflower lantern flares silver and drifts up to join them. The Book of Fate opens to its blank final page."]);else L.push(["","The Book of Fate opens to its blank final page."]);say(L,()=>btn("Face Mahmud ▸",()=>show("conf"),1))}},
-fin(){S.node="fin";save();art("obs","✦");ch.innerHTML="";
- say([["","Beyond the window, thousands of stars shine without telling anyone where to go."],["The Book of Fate","The old prophecy glows on the page: the court’s expectations, the word villainess, the fear of the unknown. But a blank page is not a threat. It is an invitation."],["Anuva","“A blank page. Terrifying. Exciting. Mostly terrifying.”"],[M,"“I can’t make this choice for you. Write whatever you like, Your Highness.”"],["Anuva","“Fine. Don’t look. I’m about to be dramatic.”"]],()=>{ch.innerHTML=`<input id="in" maxlength="120" placeholder="Write the first line of the new prophecy…" autocomplete="off" aria-label="Your line">`;btn("Write it into the stars ✦",()=>{const v=$("#in").value.trim();ch.innerHTML="";S.line=v||"Let the stars suggest, but never command.";save();toast("Your words rise into the stars…");[392,494,587,784].forEach((f,i)=>tone(f,i*.25,.9,.03));fade(()=>show("lvl"))},1)})},
-lvl(){S.done=true;S.node="lvl";save();const a=art("obs","");$("#box").hidden=true;$("#app").classList.add("wide");ch.innerHTML="";tone(523,0,.4);tone(659,.15,.4);tone(784,.3,.4);tone(1046,.45,.8);
- a.innerHTML=`<div class="rays"></div><div class="lv"><h2>✦ LEVEL UP! ✦</h2><p>ANUVA · LV 17 → LV 18</p><div class="bars"><div class="bar">CHAOS 99<i style="--w:99%"></i></div><div class="bar">SARCASM 87<i style="--w:87%"></i></div><div class="bar">HEART 100<i style="--w:100%"></i></div><div class="bar">DESTINY &amp; HORMONES MAX<i style="--w:100%"></i></div></div><p style="color:var(--gold)">NEW TITLE: REWRITER OF PROPHECIES</p><p style="color:var(--mut);font-weight:400">(Screenshot this one.)</p></div>`;
- if(!RM)for(let i=0;i<26;i++){const s=document.createElement("span");s.className="cf";s.textContent="✦";s.style.cssText=`left:${Math.random()*100}%;animation-delay:${Math.random()*1.5}s;animation-duration:${3+Math.random()*3}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),7000)}
- {const q=document.createElement("p");q.className="ln";q.textContent="Your prophecy: “"+S.line+"”";const l=a.querySelector(".lv");l.insertBefore(q,l.querySelector(".bars"))}fw(9);btn("Look up ▸",()=>show("stars"),1)},
-stars(){S.node="stars";save();const a=art("obs","");$("#app").classList.add("mp");ch.innerHTML="";
- const D=[["hers",14,22,M,"Your line, written in the stars: “"+S.line+"”"],["chaos",40,12,"","Royal record #17: Anuva has challenged common sense to a duel. Common sense has requested a transfer."],["destiny",70,22,"","“It’s all about destiny and hormones.” A phrase that made at least one royal advisor reconsider his career."],["talks",84,50,"","Some of the best conversations start late at night and somehow end up about absolutely nothing. They still matter."],["bilashi",20,60,"","“Bilashi.” Some names become special because of who you give them to."],["flirt",50,50,M,"“You make a remarkably ordinary night difficult to forget.” … “A factual observation. Don’t make it weird.”"],["future",72,80,"","Eighteen isn’t a deadline for becoming a finished person. It’s another page, and you’re allowed to write it slowly."]];
- D.forEach(d=>{const b=document.createElement("button");b.className="st"+(has(d[0])?" found":"");b.style.cssText=`left:${d[1]}%;top:${d[2]}%`;b.textContent=has(d[0])?"✦":"✧";b.setAttribute("aria-label","Star message");b.onclick=()=>{find(d[0]);b.className="st found";b.textContent="✦";say([[d[3],d[4]]])};a.appendChild(b)});
- say([["The new inscription","“Let the stars suggest, but never command. Let the pages remember, but never bind. And let every soul become more than the ending written for them.”"],["","Tap the stars to find their messages. Then read the letter waiting for you."]]);
- btn("Read the birthday letter ✉",()=>show("letter"),1)},
-letter(){S.node="letter";save();const a=art("paper","");$("#box").hidden=true;$("#app").classList.add("wide");ch.innerHTML="";const p=document.createElement("div");p.className="pg";p.textContent=LETTER;const d=document.createElement("div");d.className="dl";d.innerHTML="<button>⬇ Download</button><button>🖨 Print / PDF</button>";d.children[0].onclick=dl;d.children[1].onclick=()=>{try{window.print()}catch(e){toast("Open the file in a browser to print.")}};p.appendChild(d);a.innerHTML="";a.appendChild(p);btn("Continue ▸",()=>show("post"),1)}
-};
-const LETTER=`Dear Anuva,
-
-Congratulations. You have officially survived seventeen years of questionable decisions, dramatic plot twists, and the occasional disagreement with basic probability. The kingdom is impressed. I am exhausted, but impressed.
-
-Jokes aside, there is a lot more to you than the chaos everyone sees first. You care about people in the little things: what you notice, what you remember, the room you make for someone else’s feelings even when you have plenty of your own. You can be dramatic, delusional, and able to turn an ordinary conversation into an event requiring witnesses. You are also thoughtful, funny, and far more caring than you give yourself credit for.
-
-Somewhere between the late-night conversations, ridiculous arguments, mutual roasting, and the legendary scientific theory that everything is about “destiny and hormones,” you became someone whose conversations I genuinely value. Even when it’s complete nonsense. Especially then. And yes, Bilashi, that includes when you’re being spectacularly unreasonable. Don’t look so pleased with yourself. This is a limited-time royal compliment.
-
-Now you’re eighteen, and everyone will act as if you should behave like an old woman or something like that. You don’t have to. You’re allowed to change your mind, start again, take the long way around, outgrow what no longer fits, and write a future that looks nothing like the one people expected. Never let anyone convince you that your story is already decided. Not a prophecy, your destiny, not the world. Destiny is something you wrote yourself. God just knew what you are going to write.
-
-You owe me no response. This is a gift, not a question. But still I'll wait.
-
-you know, I've a weird desire of waiting for things that will never be mine :)
-
-Happy eighteenth birthday, Anuva.
-
-
-
-Warmly (but don’t tell anyone),
-Mahmud
-Royal Advisor of Eutopia`;
-/* ---- animated stage ---- */
-let stg=null;
-const R=(a,b)=>a+Math.random()*(b-a),SP={Mahmud:"m",Anuva:"a",Labiba:"l"};
-function stage(bg){
- const n=(c,k,f,t="")=>Array.from({length:k},()=>`<i class="${c}" style="${f()}">${t}</i>`).join(""),
- lf=(a,b)=>`left:${R(0,100)}%;animation-duration:${R(a,b)}s;animation-delay:${-R(0,b)}s`;
- const h=({
-  lib:`<i class="beam"></i><i class="beam" style="left:4%;width:24%;opacity:.5;animation-delay:-4s"></i>`+n("mote",14,()=>lf(6,13)),
-  gar:n("rd",26,()=>lf(.7,1.3))+n("pt",7,()=>lf(7,12),"🌸")+n("mote",8,()=>lf(8,14)),
-  obs:`<i class="ring"></i><i class="ring" style="width:45%;animation-direction:reverse"></i>`+n("mote",12,()=>lf(8,15)),
-  off:`<i class="cdl" style="left:14%;bottom:12%"></i><i class="cdl" style="right:14%;bottom:20%;animation-delay:-.7s"></i>`+n("mote",8,()=>lf(7,12)),
-  lab:`<i class="pls"></i><i class="pls" style="animation-delay:-1.8s"></i>`+n("mote",10,()=>lf(7,12))
- })[bg]||"";
- return `<div class="stg">${h}<i class="fl"></i><i class="wv"></i><i class="ss2"></i><div class="av m" data-k="m"><span>🧙‍♂️</span></div><div class="av a" data-k="a"><span>🧝‍♀️</span></div><div class="av l" data-k="l"><span>👧</span></div></div>`}
-function pop(e,el,x,y){const s=stg;if(!s||RM)return;const r=s.getBoundingClientRect(),q=el&&el.getBoundingClientRect(),i=document.createElement("i");i.className="pe";i.textContent=e;i.style.left=(q?q.left-r.left+q.width/2-10:(x??r.width/2))+"px";i.style.top=(q?q.top-r.top-8:(y??r.height/2))+"px";s.appendChild(i);setTimeout(()=>i.remove(),1900)}
-function burst(a){for(let i=0;i<6;i++)setTimeout(()=>{if(stg)pop(a[i%a.length],null,R(20,80)*stg.clientWidth/100,R(15,70)*stg.clientHeight/100)},i*120)}
-function kick(c){const s=stg;if(!s||RM)return;s.classList.remove(c);void s.offsetWidth;s.classList.add(c);setTimeout(()=>s.classList.remove(c),4000)}
-function catRun(){const s=stg;if(!s||RM)return;const c=document.createElement("i");c.className="cr";c.textContent="🐈";s.appendChild(c);setTimeout(()=>c.remove(),5200)}
-const FX=[[/silver light|blink/i,()=>kick("s-f")],[/opens|floats|shelf/i,()=>kick("s-w")],[/rain/i,()=>kick("s-heavy")],[/prophecy|WHEN THE|EIGHTEENTH|silver dust/i,()=>burst(["ᚠ","ᛟ","ᛉ","☾","✧"])],[/telescope|star|sky|moon/i,()=>kick("s-ss")],[/glow|lantern|flare|key/i,()=>burst(["✦","✧"])],[/cat/i,catRun],[/pink|warm|brushes|smil/i,()=>pop("💗")]];
-function react([w,t]){
- const k=SP[w];
- stg.querySelectorAll(".av").forEach(e=>{if(e.dataset.k===k)e.classList.add("in");e.classList.toggle("sp",e.dataset.k===k)});
- stg.classList.toggle("s-t",!!k&&typing);
- const el=k&&stg.querySelector(`.av[data-k="${k}"]`),m=emo(t).match(/\p{Extended_Pictographic}/u);
- if(m)pop(m[0],el||null);
- if(w==="The Book of Fate"||w==="The new inscription"){kick("s-w");burst(["✧","ᚠ","☾"]);return}
- for(const[r,f]of FX)if(r.test(t)){f();break}}
-const _art=art;art=function(bg,sym){const a=_art(bg,sym);if(sym&&bg!=="map"&&bg!=="paper"){a.insertAdjacentHTML("afterbegin",stage(bg));stg=a.querySelector(".stg")}else stg=null;return a};
-const _nxt=nxt;nxt=function(){const ok=li<lines.length;_nxt();if(ok&&stg)react(lines[li-1])};
-const _end=end;end=function(){if(stg)stg.classList.remove("s-t");_end()};
-/* ---- end animated stage ---- */
-hud();home();
+(()=>{
+ const $=s=>document.querySelector(s),toastEl=$("#toast");let toastTimer,blackoutTimer=null,audioEnabled=false,audioContext=null,progress=0,askIndex=0,enterIndex=0;
+ const bn=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+ const toast=message=>{toastEl.textContent=message;toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),2700)};
+ $("#dateLine").textContent=new Date().toLocaleDateString("bn-BD",{weekday:"long",day:"numeric",month:"long",year:"numeric"})+" · ঢাকা-নোয়াখালী যৌথ সংস্করণ";
+ const enterMessages=["প্রবেশ নিষেধ। অ্যাপ বলেছে, ‘আরেকটু অপেক্ষা করেন।’","৪০৩: ডেভেলপারের অনুমতি এখনো মেলেনি।","আপনার আগ্রহ প্রশংসনীয়; অ্যাপের প্রস্তুতি ততটা নয়।","দরজায় কড়া নাড়ুন। ভেতর থেকে কোডের শব্দ শোনা যাচ্ছে কি না, নিশ্চিত নই।","বোতামটি কাজ করেছে। অ্যাপটি এখনো করেনি।"];
+ $("#enter").addEventListener("click",()=>{toast(enterMessages[enterIndex++%enterMessages.length]);beep(440,.07)});
+ const askMessages=["ডেভেলপার: ‘চাইতেছি।’—এই বক্তব্যের মেয়াদ অনির্দিষ্ট।","ডেভেলপার চায়ের বিরতিতে আছেন। বিরতির শেষ তারিখ জানা যায়নি।","বার্তা দেখা হয়েছে। উত্তরটি সম্ভবত ভবিষ্যৎ কোনো সভ্যতায় আসবে।","টাইপ করছেন… থেমে গেলেন। ইতিহাস আবারও নীরব।","ডেভেলপার: ‘অইবো অইবো।’ সম্পাদক: ‘কবে অইবো?’ উত্তর: নীরবতা।"];
+ $("#ask").addEventListener("click",()=>{$("#out").textContent=askMessages[askIndex++%askMessages.length];beep(560,.08)});
+ $("#drink").addEventListener("click",()=>{if(progress>=100){$("#out").textContent="কাল্পনিক বড়ত্ব ১০০%। কিন্তু অ্যাপের অনুমতি এখনো ০%।";return}progress=Math.min(100,progress+10);$("#fill").style.width=progress+"%";$("#percent").textContent=bn(progress)+"%";const messages=["এক চামচ গেল। উচ্চতা অপরিবর্তিত, আত্মবিশ্বাস সামান্য বৃদ্ধি।","বুদ্ধি +২, অপেক্ষার অভিজ্ঞতা +১০।","চেহারায় পরিণত ভাব এসেছে—সম্ভবত আলো কম।","বিশেষজ্ঞরা বলছেন, ফলাফল এখনো গবেষণাধীন।"];$("#out").textContent=progress===100?"বড়ত্ব ১০০%! এখন অ্যাপের দরজায় যান—দরজা এখনো বন্ধ।":messages[Math.floor(Math.random()*messages.length)];beep(660,.06)});
+ const blackout=$("#blackout");function restorePower(){blackout.classList.remove("show");if(blackoutTimer){clearTimeout(blackoutTimer);blackoutTimer=null}toast("বিদ্যুৎ ফিরেছে। কেন ফিরেছে, তা তদন্তাধীন।")}
+ $("#blackoutBtn").addEventListener("click",()=>{blackout.classList.add("show");if(blackoutTimer)clearTimeout(blackoutTimer);blackoutTimer=setTimeout(restorePower,3400)});$("#restore").addEventListener("click",restorePower);
+ $("#hint").addEventListener("click",()=>{$("#gameStatus").textContent="ইঙ্গিত: উত্তরটি এমন একটি জিনিস, যার জন্য এই পুরো সংবাদপত্র অপেক্ষা করছে।"});
+ $("#solve").addEventListener("click",()=>{const answer=$("#answer").value.trim().toLocaleLowerCase("bn"),accepted=["অ্যাপ","এপ","app","অ্যাপটি","অ্যাপটা"];if(accepted.includes(answer)){$("#secret").classList.add("show");$("#gameStatus").textContent="সঠিক! গোপন সংবাদ প্রকাশিত হয়েছে।";$("#secret").scrollIntoView({behavior:"smooth",block:"center"});beep(880,.15);toast("গোপন সংবাদ উন্মুক্ত!")}else{$("#gameStatus").textContent="উত্তরটি মেলেনি। আরেকবার ভাবুন—ইঙ্গিত চাইতে পারেন।";beep(220,.08)}});
+ $("#answer").addEventListener("keydown",e=>{if(e.key==="Enter")$("#solve").click()});
+ $("#soundBtn").addEventListener("click",()=>{audioEnabled=!audioEnabled;$("#soundBtn").textContent=audioEnabled?"🔊 শব্দ: চালু":"🔇 শব্দ: বন্ধ";$("#soundBtn").setAttribute("aria-pressed",String(audioEnabled));if(audioEnabled){beep(520,.09);toast("ছোট্ট শব্দ-প্রভাব চালু হয়েছে。")}else toast("শব্দ বন্ধ করা হয়েছে。")});
+ function beep(frequency,duration){if(!audioEnabled)return;try{const AudioCtx=window.AudioContext||window.webkitAudioContext;if(!AudioCtx)return;audioContext=audioContext||new AudioCtx();if(audioContext.state==="suspended")audioContext.resume();const oscillator=audioContext.createOscillator(),gain=audioContext.createGain();oscillator.frequency.value=frequency;oscillator.type="sine";gain.gain.setValueAtTime(.04,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+duration);oscillator.connect(gain);gain.connect(audioContext.destination);oscillator.start();oscillator.stop(audioContext.currentTime+duration)}catch(_){}}
+ // A tiny masthead easter egg: tap the newspaper title three times.
+ let mastTaps=0,mastTimer;$("#masthead").addEventListener("click",()=>{mastTaps++;clearTimeout(mastTimer);mastTimer=setTimeout(()=>mastTaps=0,1200);if(mastTaps>=3){mastTaps=0;toast("গোপন সম্পাদকীয়: ডেভেলপার, ফাইলটা সেভ করেন!")}});
 })();
-</script></body></html>
+</script>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),old=$(".paper-grid"),lead=$(".lead");
+if(!old||!lead)return;
+const lg=lead.querySelector(".lead-grid"),copy=lead.querySelector(".lead-copy"),hero=lead.querySelector(".hero-card"),strip=lead.querySelector(".headline-strip");
+if(lg){lead.insertBefore(copy,lg);lg.remove()}
+if(strip)lead.appendChild(strip);
+const kids=[...old.children],has=(e,c)=>e.classList.contains(c),
+coming=kids.filter(e=>has(e,"coming")),wides=kids.filter(e=>has(e,"wide-ad")),
+ads=kids.filter(e=>has(e,"ad")&&!has(e,"wide-ad")),
+norm=kids.filter(e=>!coming.includes(e)&&!wides.includes(e)&&!ads.includes(e));
+const FILL=[["ছোট খবর: ছাতা","বৃষ্টি হইবো কইয়া ছাতা নিয়া বাইর হইলাম; বৃষ্টি হয় নাই। ছাতা কইলো, “ভাই, আমারে আনলা ক্যান?”"],["ছোট খবর: চা","চায়ের কাপে তিন চামচ চিনি দিয়া এক নাগরিক ঘোষণা করছেন, “আমি ডায়েটে আছি।”"],["ছোট খবর: রিকশা","ভাড়া ৩০ টাকা চাইয়া রিকশাওয়ালা ৫০ টাকায় রাজি হইছেন। দরদাম শেষে দুইজনই জিতছেন, যাত্রী ছাড়া।"],["ছোট খবর: মোবাইল","ফোনের চার্জ ১% দেখাইয়া সবাইরে ভয় দেখাইছে, তারপর আরও দুই ঘণ্টা চলছে। ফোনও নাটক জানে।"],["ছোট খবর: ঘুম","অ্যালার্ম বাজছে ৫:৩০-এ। মানুষ উঠছে ৮:১৫-এ। অ্যালার্ম এখন কাউন্সেলিং চাইতাছে।"],["ছোট খবর: ডিম","ডিমের দাম নিয়া সংসদীয় কমিটি গঠিত। ডিম কইছে, “ভাঙনের আগে চিন্তা করেন।”"],["ছোট খবর: সিগন্যাল","লাল বাতি জ্বললে মানুষ ভাবে “শোভা”। সিগন্যাল এখন নিজের পদত্যাগপত্র লিখতাছে।"],["ছোট খবর: কলম","পরীক্ষার হলে কলম হারাইছে। পরীক্ষার্থী কয়, “কলম নাই, তাই লেখা হয় নাই।” কলম কয়, “আমি তো পকেটেই আছিলাম।”"],["ছোট খবর: ওয়াইফাই","পাসওয়ার্ড ‘12345678’ দেখাইয়া বাড়িওয়ালা কইছেন, “এইডা সুরক্ষিত।” হ্যাকাররা লজ্জায় ছুটিতে।"],["ছোট খবর: আইতাছি","“আইতাছি” কওনের আধা ঘণ্টা পরও যিনি বাড়ির সামনে, তিনি এখনো মোজা পরতাছেন।"]];
+const ADG=[["হারানো বিজ্ঞপ্তি","সবুর হারাইছে। শেষ দেখা লোডিং স্ক্রিনে। পাইলে ডেভেলপাররে দিবেন না।"],["চাই","একজন ডেভেলপার, যে “চাইতাছি”র বদলে “করছি” কয়।"],["বিক্রয়","এক জোড়া ধৈর্য (প্রায় নতুন)। আগের মালিক আর পারতাছে না।"],["সতর্কীকরণ","রিফ্রেশ বাটন বারবার চাপিলে বাটনের হাত ব্যথা অইতে পারে।"],["ভর্তি চলিতেছে","অপেক্ষা-বিদ্যালয়ে নতুন ব্যাচ। প্রথম পাঠ: কিছুই না করা।"],["ঘোষণা","আগামীকালের খবর আজকের মতোই। কষ্ট কইরা কাল আসিবেন না।"]];
+const mk=(c,t,x)=>{const e=document.createElement("section");e.className="section "+c;e.innerHTML=c==="ad"?`<h2>${t}</h2><p>${x}</p>`:`<h2>${t}</h2><div class="item">${x}</div>`;return e};
+const pg=document.createElement("div");old.after(pg);
+const H=e=>e.offsetHeight,short=cs=>cs.reduce((a,b)=>H(a)<=H(b)?a:b);
+let W0=0;
+function build(){
+ const y=scrollY,W=innerWidth,n=W>=1100?4:W>=800?3:W>=560?2:1;W0=W;
+ pg.className="pg c"+n;pg.innerHTML="";
+ let fi=0,ai=0;const bank=[...ads],q=[hero,...norm].filter(Boolean);
+ lead.style.setProperty("--lf","17.5px");
+ if(n===1){
+  pg.appendChild(lead);
+  const ks=[...copy.children];[2,5,8,11].forEach(i=>{if(q.length&&ks[i])copy.insertBefore(q.shift(),ks[i].nextSibling)});
+  coming.forEach(c=>pg.appendChild(c));
+  const half=Math.ceil(q.length/2);
+  q.forEach((e,i)=>{pg.appendChild(e);if((i+1)%4===0&&bank.length)pg.appendChild(bank.shift());if(i+1===half&&wides[0])pg.appendChild(wides[0])});
+  wides.forEach(w=>{if(w.parentNode!==pg)pg.appendChild(w)});bank.forEach(a=>pg.appendChild(a));
+ }else{
+  const cfg=n===4?["r","m","r"]:["m","r"],need=(n===4?2:1)+2*n,reserve=bank.splice(0,need),extra=bank.splice(0);
+  q.splice(Math.min(5,q.length),0,...extra);
+  const takeAd=()=>reserve.length?reserve.shift():mk("ad",...ADG[ai++%ADG.length]),takeFill=()=>fi<FILL.length?mk("box",...FILL[fi++]):null;
+  const mkrow=(cls,cols)=>{const r=document.createElement("div");r.className="row "+cls;const cs=cols.map(c=>{const d=document.createElement("div");d.className="col";r.appendChild(d);return d});pg.appendChild(r);return[r,cs]};
+  const fin=(r,cs)=>{r.classList.add("go");cs.forEach(c=>{if(c.lastElementChild)c.lastElementChild.classList.add("grow")})};
+  const bal=cs=>{for(let i=0;i<8;i++){const hs=cs.map(H),mx=Math.max(...hs),mn=Math.min(...hs);if(mx-mn<90)break;const c=cs[hs.indexOf(mn)],f=takeFill();if(!f)break;c.insertBefore(f,c.lastElementChild)}};
+  const[ra,ca]=mkrow("a"+n,cfg),mi=cfg.indexOf("m"),mc=ca[mi],rails=ca.filter((_,i)=>i!==mi);
+  mc.appendChild(lead);const T=H(mc);
+  while(q.length&&Math.min(...rails.map(H))<T-40)short(rails).appendChild(q.shift());
+  rails.forEach(c=>c.appendChild(takeAd()));
+  const tune=()=>{let lo=14,hi=23;const R=Math.max(...rails.map(H));for(let i=0;i<9;i++){const m=(lo+hi)/2;lead.style.setProperty("--lf",m+"px");H(mc)<R?lo=m:hi=m}lead.style.setProperty("--lf",lo+"px")};
+  tune();
+  for(let i=0;i<7;i++){const hs=ca.map(H),mx=Math.max(...hs),mn=Math.min(...hs);if(mx-mn<90)break;const k=hs.indexOf(mn),f=takeFill();if(!f)break;k===mi?ca[k].appendChild(f):ca[k].insertBefore(f,ca[k].lastElementChild);tune()}
+  fin(ra,ca);
+  coming.forEach(c=>pg.appendChild(c));
+  const sub=items=>{const[r,cs]=mkrow("nb",Array(n).fill(0));r.style.setProperty("--n",n);
+   const hs=new Map(),ord=new Map(items.map((x,i)=>[x,i]));
+   items.forEach(x=>cs[0].appendChild(x));items.forEach(x=>hs.set(x,H(x)));
+   const hh=cs.map(()=>0);[...items].sort((a,b)=>hs.get(b)-hs.get(a)).forEach(x=>{let m=0;hh.forEach((v,i)=>{if(v<hh[m])m=i});cs[m].appendChild(x);hh[m]+=hs.get(x)+14});
+   cs.forEach(c=>[...c.children].sort((a,b)=>ord.get(a)-ord.get(b)).forEach(x=>c.appendChild(x)));
+   cs.forEach(c=>c.appendChild(takeAd()));bal(cs);fin(r,cs)};
+  const parts=wides.length+1,per=Math.ceil(q.length/parts);
+  for(let p=0;p<parts;p++){const chunk=q.splice(0,p===parts-1?q.length:per);if(chunk.length)sub(chunk);if(wides[p])pg.appendChild(wides[p])}
+ }
+ scrollTo(0,y);
+}
+build();
+let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{if(innerWidth!==W0)build()},180)});
+addEventListener("orientationchange",()=>setTimeout(build,300));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(build);
+addEventListener("load",build);
+})();
+</script>
+</body>
+</html>
+ 
